@@ -19,8 +19,11 @@ class GridParameters(Subparameters):
         Which grid lines to affect.
     axis: GridAxis
         Which axis to draw grid lines for.
+    alpha: float
+        The alpha of the grid lines.
     """
 
     visible: bool = True
     which: GridWhich = GridWhich.MAJOR
     axis: GridAxis = GridAxis.BOTH
+    alpha: float = 1.0
