@@ -1,5 +1,7 @@
 from __future__ import annotations
+
 from enum import Enum
+
 
 class TableAxis(Enum):
     """
@@ -12,6 +14,7 @@ class TableAxis(Enum):
     COLUMN: str
         Column axis.
     """
+
     ROW = "row"
     COLUMN = "column"
 
@@ -25,4 +28,3 @@ class TableAxis(Enum):
                 return TableAxis.COLUMN
             case TableAxis.COLUMN:
                 return TableAxis.ROW
-

@@ -5,7 +5,7 @@ from __future__ import annotations
 from ...protocols import MakerCanvas
 from ...graph_axis import GraphAxis
 from ...utils import SubplotIndex
-from .parameters import TickParamsParameters
+from .parameters import GridParameters, TickParamsParameters
 
 
 class AxisMixin:
@@ -78,10 +78,30 @@ class AxisMixin:
         subplot = self.access_subplot(index=index)
         subplot.set_title(title)
 
+    def set_grid(
+        self: MakerCanvas,
+        index: SubplotIndex,
+        subparams: GridParameters = GridParameters(),
+    ) -> None:
+        """
+        Configure the grid on the subplot.
+
+        Wraps :meth:`matplotlib.axes.Axes.grid`.
+
+        Parameters
+        ----------
+        index: SubplotIndex
+            The index of the subplot.
+        subparams: GridParameters
+            Grid settings.
+        """
+        subplot = self.access_subplot(index=index)
+        subplot.grid(**subparams.to_dict)
+
     def delete_axis_label(
         self: MakerCanvas,
         index: SubplotIndex,
-        subparams: TickParamsParameters | None = None,
+        subparams: TickParamsParameters = TickParamsParameters(),
     ) -> None:
         """
         Delete the axis label on the subplot.
@@ -90,9 +110,8 @@ class AxisMixin:
         ----------
         index: SubplotIndex
             The index of the subplot.
-        subparams: TickParamsParameters | None = None
-            The subparameters for the tick params.
+        subparams: TickParamsParameters
+            Tick visibility for labels.
         """
-        subparams = subparams or TickParamsParameters()
         subplot = self.access_subplot(index=index)
         subplot.tick_params(**subparams.to_dict)

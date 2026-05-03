@@ -38,7 +38,7 @@ class DrawMixin:
         self: MakerCanvas,
         index: SubplotIndex | None = None,
         image: np.ndarray | None = None,
-        subparams: ColorbarParameters | None = None,
+        subparams: ColorbarParameters = ColorbarParameters(),
     ) -> None:
         """
         Add a colorbar to a subplot without drawing image data on that subplot.
@@ -51,10 +51,9 @@ class DrawMixin:
         image: np.ndarray | None = None
             The image data to determine the colorbar scale from.
             If None, vmin and vmax must be specified in subparams.
-        subparams: ColorbarParameters | None = None
+        subparams: ColorbarParameters
             The subparameters for the colorbar.
         """
-        subparams = subparams or ColorbarParameters()
         sm: ScalarMappable = subparams.create_scalar_mappable(image)
         ax: Axes = self.ax.flat[0] if index is None else self.access_subplot(index=index)
         divider: AxesDivider = make_axes_locatable(ax)
@@ -67,7 +66,7 @@ class DrawMixin:
         self: MakerCanvas,
         image: np.ndarray,
         index: SubplotIndex,
-        subparams: ImshowParameters | None = None,
+        subparams: ImshowParameters = ImshowParameters(),
     ) -> None:
         """
         Show the image on the subplot.
@@ -78,10 +77,9 @@ class DrawMixin:
             The image to show.
         index: SubplotIndex
             The index of the subplot.
-        subparams: ImshowParameters | None = None
+        subparams: ImshowParameters
             The subparameters for the imshow plot.
         """
-        subparams = subparams or ImshowParameters()
         subparams.__post_init__()
         subplot = self.access_subplot(index=index)
         subplot.imshow(image, **subparams.to_dict)
@@ -91,7 +89,7 @@ class DrawMixin:
         x: np.ndarray,
         y: np.ndarray,
         index: SubplotIndex,
-        subparams: PlotParameters | None = None,
+        subparams: PlotParameters = PlotParameters(),
     ) -> None:
         """
         Plot the data on the subplot.
@@ -104,10 +102,9 @@ class DrawMixin:
             The y values of the data.
         index: SubplotIndex
             The index of the subplot.
-        subparams: PlotParameters | None = None
+        subparams: PlotParameters
             The subparameters for the plot.
         """
-        subparams = subparams or PlotParameters()
         subplot = self.access_subplot(index=index)
         subplot.plot(x, y, **subparams.to_dict)
 
@@ -118,7 +115,7 @@ class DrawMixin:
         dx: float,
         dy: float,
         index: SubplotIndex,
-        subparams: ArrowParameters | None = None,
+        subparams: ArrowParameters = ArrowParameters(),
     ) -> None:
         """
         Draw an arrow from (x, y) to (x + dx, y + dy) on the subplot.
@@ -134,7 +131,6 @@ class DrawMixin:
         subparams
             Geometry and patch keyword arguments (width, head shape, color, etc.).
         """
-        subparams = subparams or ArrowParameters()
         subplot = self.access_subplot(index=index)
         subplot.arrow(x, y, dx, dy, **subparams.to_dict)
 
@@ -143,7 +139,7 @@ class DrawMixin:
         x: np.ndarray,
         y: np.ndarray,
         index: SubplotIndex,
-        subparams: ScatterParameters | None = None,
+        subparams: ScatterParameters = ScatterParameters(),
     ) -> None:
         """
         Scatter the data on the subplot.
@@ -156,17 +152,16 @@ class DrawMixin:
             The y values of the data.
         index: SubplotIndex
             The index of the subplot.
-        subparams: ScatterParameters | None = None
+        subparams: ScatterParameters
             The subparameters for the scatter plot.
         """
-        subparams = subparams or ScatterParameters()
         subplot = self.access_subplot(index=index)
         subplot.scatter(x=x, y=y, **subparams.to_dict)
 
     def legend(
         self: MakerCanvas,
         index: SubplotIndex,
-        subparams: LegendParameters | None = None,
+        subparams: LegendParameters = LegendParameters(),
     ) -> None:
         """
         Place a legend on the subplot.
@@ -175,10 +170,9 @@ class DrawMixin:
         ----------
         index: SubplotIndex
             The index of the subplot.
-        subparams: LegendParameters | None = None
+        subparams: LegendParameters
             The subparameters for the legend.
         """
-        subparams = subparams or LegendParameters()
         subplot = self.access_subplot(index=index)
         subplot.legend(**subparams.to_dict)
 
@@ -187,7 +181,7 @@ class DrawMixin:
         value: float,
         orientation: Orientation,
         index: SubplotIndex,
-        subparams: LineParameters | None = None,
+        subparams: LineParameters = LineParameters(),
     ) -> None:
         """
         Draw a line on the subplot.
@@ -200,10 +194,9 @@ class DrawMixin:
             The line orientation (vertical or horizontal).
         index: SubplotIndex
             The index of the subplot.
-        subparams: LineParameters | None = None
+        subparams: LineParameters
             The subparameters for line styling.
         """
-        subparams = subparams or LineParameters()
         subplot = self.access_subplot(index=index)
         draw = getattr(subplot, orientation.ax_line_attribute)
         match orientation:
@@ -218,7 +211,7 @@ class DrawMixin:
         xy: tuple[float, float],
         index: SubplotIndex,
         xytext: tuple[float, float] | None = None,
-        subparams: AnnotateParameters | None = None,
+        subparams: AnnotateParameters = AnnotateParameters(),
     ) -> None:
         """
         Annotate a point on the subplot with text.
@@ -236,7 +229,6 @@ class DrawMixin:
         subparams
             Coordinate systems, arrow properties, clipping, and text styling.
         """
-        subparams = subparams or AnnotateParameters()
         subplot = self.access_subplot(index=index)
         subplot.annotate(text, xy, xytext=xytext, **subparams.to_dict)
 
@@ -244,8 +236,8 @@ class DrawMixin:
         self: MakerCanvas,
         x: np.ndarray,
         index: SubplotIndex,
-        subparams: BarParameters | None = None,
-        ) -> None:
+        subparams: BarParameters = BarParameters(),
+    ) -> None:
         """
         Draw a bar plot on the subplot.
 
@@ -255,10 +247,9 @@ class DrawMixin:
             The x values of the bars.
         index: SubplotIndex
             The index of the subplot.
-        subparams: BarParameters | None = None
+        subparams: BarParameters
             The subparameters for the bar plot.
         """
-        subparams = subparams or BarParameters()
         subplot = self.access_subplot(index=index)
         subplot.bar(x, **subparams.to_dict)
 

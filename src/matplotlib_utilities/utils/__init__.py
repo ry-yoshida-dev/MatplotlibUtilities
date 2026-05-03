@@ -1,4 +1,7 @@
+from ..graph_axis import GraphAxis
+from .grid import GridAxis, GridWhich
 from .marker import Marker
+from .table_axis import TableAxis
 from .index import (
     SubplotIndex,
     SubplotNumber,
@@ -25,7 +28,11 @@ from .linestyle import Linestyle
 from .colorbar import ColorbarExtend, ColorbarSpacing
 
 __all__ = [
+    "GraphAxis",
+    "GridAxis",
+    "GridWhich",
     "Marker",
+    "TableAxis",
     "SubplotIndex",
     "SubplotNumber",
     "RowColumnIndex",

@@ -1,5 +1,4 @@
 
-from .table_axis import TableAxis
 from .parameter import GraphParameters
 from .maker import MatplotGraphMaker
 from .protocols import MakerCanvas
@@ -7,12 +6,18 @@ from .mixin.axis import AxisMixin
 from .mixin.draw import DrawMixin
 from .layout import GraphLayout
 from .utils import (
+    GraphAxis,
+    GridAxis,
+    GridWhich,
     RowColumnIndex,
     SubplotIndex,
     SubplotNumber,
+    TableAxis,
     )
-from .graph_axis import GraphAxis
-from .mixin.axis.parameters import TickParamsParameters
+from .mixin.axis.parameters import (
+    GridParameters,
+    TickParamsParameters,
+    )
 from .mixin.draw.parameters import (
     # Parameters (Draw)
     AnnotateParameters,
@@ -59,6 +64,9 @@ __all__ = [
     "ArrowParameters",
 
     # axis.parameters
+    "GridAxis",
+    "GridParameters",
+    "GridWhich",
     "TickParamsParameters",
 
     # Enums (imshow / colorbar / line styling, etc.)

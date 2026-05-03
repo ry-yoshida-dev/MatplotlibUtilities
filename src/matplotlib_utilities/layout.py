@@ -3,7 +3,7 @@ import math
 from dataclasses import dataclass
 from typing import Iterator
 
-from .table_axis import TableAxis
+from .utils import TableAxis
 
 @dataclass
 class GraphLayout:

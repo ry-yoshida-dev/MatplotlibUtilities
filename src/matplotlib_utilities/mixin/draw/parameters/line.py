@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 
 from ....subparameter import Subparameters
+from ....utils.color import MplColor
 from .base import ArtistParameters, LabelParameters, LineStyleParameters
 
 
@@ -16,9 +17,9 @@ class LineParameters(
 
     Attributes:
     ----------
-    # inherited from LineStyleParameters
     color: MplColor | None
-        The color of the line.
+        Line color (matplotlib ``color`` for ``axhline`` / ``axvline``).
+    # inherited from LineStyleParameters
     linewidth: float | None
         The width of the line.
     linestyle: Linestyle | None
@@ -34,3 +35,5 @@ class LineParameters(
     zorder: float | None
         The drawing order.
     """
+
+    color: MplColor | None = None

@@ -1,4 +1,8 @@
 from .mixin import AxisMixin
-from .parameters import TickParamsParameters
+from .parameters import GridParameters, TickParamsParameters
 
-__all__ = ["AxisMixin", "TickParamsParameters"]
+__all__ = [
+    "AxisMixin", 
+    "GridParameters", 
+    "TickParamsParameters"
+    ]

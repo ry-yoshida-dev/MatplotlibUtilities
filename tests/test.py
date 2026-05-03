@@ -19,7 +19,6 @@ from matplotlib_utilities import (
     MatplotGraphMaker,
     Orientation,
     ScatterParameters,
-    SubplotNumber,
     TableAxis,
 )
 
@@ -57,9 +56,9 @@ def build_demo_graph_maker() -> MatplotGraphMaker:
             fontsize=9,
         ),
     )
-    graph_maker.axis.set_label(
+    graph_maker.set_label(
         label="x",
-        index=SubplotNumber(number=0, row_index=0),
+        index=graph_maker.get_subplot_index_from_number(number=0),
         axis=GraphAxis.X,
     )
     index = graph_maker.get_subplot_index_from_number(number=1)
@@ -67,7 +66,6 @@ def build_demo_graph_maker() -> MatplotGraphMaker:
         index=index,
         x=x1,
         y=y1,
-        subparams=None,
     )
     graph_maker.line(
         value=0.5,

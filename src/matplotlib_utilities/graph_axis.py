@@ -1,5 +1,7 @@
 from __future__ import annotations
+
 from enum import Enum
+
 
 class GraphAxis(Enum):
     """
@@ -12,9 +14,10 @@ class GraphAxis(Enum):
     Y: str
         Y axis.
     """
+
     X = "x"
     Y = "y"
-    
+
     @property
     def label_set_attribute(self) -> str:
         """
@@ -30,7 +33,7 @@ class GraphAxis(Enum):
                 return "set_xlabel"
             case GraphAxis.Y:
                 return "set_ylabel"
-                
+
     @property
     def other_axis(self) -> GraphAxis:
         """
