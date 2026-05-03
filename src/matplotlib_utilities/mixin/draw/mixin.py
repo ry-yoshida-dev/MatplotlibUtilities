@@ -2,7 +2,12 @@
 
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 import numpy as np
+
+if TYPE_CHECKING:
+    from PIL.Image import Image as PILImage
 from matplotlib.axes import Axes
 from matplotlib.cm import ScalarMappable
 from matplotlib.colorbar import Colorbar
@@ -29,8 +34,8 @@ class DrawMixin:
     """
     Drawing API on the graph maker (for example maker.scatter(...)).
 
-    Concrete classes are expected to expose `fig`, `ax`, and
-    `access_subplot`, which this mixin uses to dispatch drawing calls
+    Concrete classes are expected to expose fig, ax, and
+    access_subplot, which this mixin uses to dispatch drawing calls
     (see matplotlib_utilities.protocols.MakerCanvas).
     """
 
@@ -64,7 +69,7 @@ class DrawMixin:
 
     def imshow(
         self: MakerCanvas,
-        image: np.ndarray,
+        image: np.ndarray | PILImage,
         index: SubplotIndex,
         subparams: ImshowParameters = ImshowParameters(),
     ) -> None:
@@ -73,8 +78,9 @@ class DrawMixin:
 
         Parameters
         ----------
-        image: np.ndarray
-            The image to show.
+        image: np.ndarray | PIL.Image.Image
+            Image data in a form Matplotlib accepts: a NumPy array (2-D grayscale
+            or 3-D RGB, channel-last) or a PIL Image.
         index: SubplotIndex
             The index of the subplot.
         subparams: ImshowParameters
