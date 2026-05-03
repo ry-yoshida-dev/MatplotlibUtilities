@@ -60,6 +60,24 @@ class AxisMixin:
         attribute = axis.limit_set_attribute
         getattr(subplot, attribute)(lower, upper)
 
+    def set_title(
+        self: MakerCanvas,
+        title: str,
+        index: SubplotIndex,
+    ) -> None:
+        """
+        Set the title on the subplot.
+
+        Parameters
+        ----------
+        title: str
+            The title text.
+        index: SubplotIndex
+            The index of the subplot.
+        """
+        subplot = self.access_subplot(index=index)
+        subplot.set_title(title)
+
     def delete_axis_label(
         self: MakerCanvas,
         index: SubplotIndex,
