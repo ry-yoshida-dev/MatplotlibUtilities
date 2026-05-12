@@ -2,6 +2,7 @@ from dataclasses import dataclass
 
 from ....subparameter import Subparameters
 from ....utils import ArrowShape
+from ....utils.color import MplColor
 from .base import ArtistParameters, ColorParameters, LabelParameters, LineStyleParameters
 
 
@@ -35,9 +36,11 @@ class ArrowParameters(
         Whether to start the head at zero.
     fill: bool | None
         Whether to fill the arrow.
-    # inherited from LineStyleParameters
     color: MplColor | None
-        The color of the arrow.
+        Shorthand that sets both face and edge color of the arrow patch
+        (matplotlib ``color`` for ``Axes.arrow``). Takes precedence over
+        ``facecolor`` / ``edgecolor`` when matplotlib resolves the artist.
+    # inherited from LineStyleParameters
     linewidth: float | None
         The width of the arrow line.
     linestyle: Linestyle | None
@@ -67,6 +70,7 @@ class ArrowParameters(
     overhang: float | None = None
     head_starts_at_zero: bool | None = None
     fill: bool | None = None
+    color: MplColor | None = None
 
     def __post_init__(self) -> None:
         """
