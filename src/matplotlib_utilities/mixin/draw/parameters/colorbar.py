@@ -1,5 +1,5 @@
 from dataclasses import dataclass, Field
-from typing import Any, Sequence
+from typing import Any, Protocol, Sequence
 
 import numpy as np
 from matplotlib.axes import Axes
@@ -7,11 +7,24 @@ from matplotlib.cm import ScalarMappable, get_cmap
 from matplotlib.colors import Normalize
 from matplotlib.ticker import Formatter
 from matplotlib.ticker import Locator
-from mpl_toolkits.axes_grid1.axes_divider import AxesDivider
 
 from ....subparameter import Subparameters
 from ....utils import ColorbarExtend, ColorbarSpacing, Location, Orientation
 from .base import ArtistParameters, CmapParameters, LabelParameters
+
+
+class _AxesDivider(Protocol):
+    """Structural type for :class:`mpl_toolkits.axes_grid1.axes_divider.AxesDivider`."""
+
+    def append_axes(
+        self,
+        position: str,
+        size: str,
+        pad: float | None = None,
+        *,
+        axes_class: type[Axes] | None = None,
+        **kwargs: Any,
+    ) -> Axes: ...
 
 
 @dataclass
@@ -158,14 +171,13 @@ class ColorbarParameters(
         sm.set_array([])
         return sm
 
-    def create_cax(self, divider: AxesDivider) -> Axes:
+    def create_cax(self, divider: _AxesDivider) -> Axes:
         """
         Append colorbar axes to divider and return the new Axes.
         """
         location = self.location.value if self.location is not None else Location.RIGHT.value
         pad = 0.05 if self.pad is None else self.pad
-        cax: Axes = divider.append_axes(location, f"{self.fraction * 100}%", pad)
-        return cax
+        return divider.append_axes(location, f"{self.fraction * 100}%", pad)
 
     def _to_dict_skip_field(self, field: Field[Any], value: Any) -> bool:
         return value == field.default
