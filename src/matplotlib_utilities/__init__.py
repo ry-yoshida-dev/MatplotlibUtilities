@@ -9,6 +9,7 @@ from .utils import (
     GraphAxis,
     GridAxis,
     GridWhich,
+    Marker,
     RowColumnIndex,
     SubplotIndex,
     SubplotNumber,
@@ -76,6 +77,7 @@ __all__ = [
 
     # Enums (imshow / colorbar / line styling, etc.)
     "Aspect",
+    "Marker",
     "Linestyle",
     "InterpolationMethod",
     "InterpolationStage",
