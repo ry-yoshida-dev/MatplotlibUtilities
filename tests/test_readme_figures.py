@@ -42,8 +42,8 @@ FIGURES_ROOT = DRAW_README / "readme_figures"
 
 UPDATE = os.environ.get("UPDATE_README_FIGURES") == "1"
 
-# Small figures for README embeds (default GraphParameters is 250 dpi / 5×3 in).
-README_GRAPH_PARAMETERS = GraphParameters(figsize=(2.8, 1.8), dpi=100, font_size=8)
+# README embeds: fixed canvas (400×250 px) matches width/height in mixin/draw/README.md.
+README_GRAPH_PARAMETERS = GraphParameters(figsize=(4.0, 2.5), dpi=100, font_size=9)
 README_FIGURE_SIZE = (
     int(README_GRAPH_PARAMETERS.figsize[0] * README_GRAPH_PARAMETERS.dpi),
     int(README_GRAPH_PARAMETERS.figsize[1] * README_GRAPH_PARAMETERS.dpi),
@@ -108,8 +108,10 @@ class TestUpdateReadmeFigures:
     def test_colorbar(self) -> None:
         maker = _maker()
         data = np.linspace(0, 1, 32 * 32).reshape(32, 32)
+        idx = _index(maker)
+        maker.imshow(image=data, index=idx, subparams=ImshowParameters())
         maker.set_colorbar(
-            index=_index(maker),
+            index=idx,
             image=data,
             subparams=ColorbarParameters(label="value"),
         )

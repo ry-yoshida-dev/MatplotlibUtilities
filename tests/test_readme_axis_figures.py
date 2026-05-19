@@ -33,7 +33,8 @@ FIGURES_ROOT = AXIS_README / "readme_figures"
 
 UPDATE = os.environ.get("UPDATE_README_FIGURES") == "1"
 
-README_GRAPH_PARAMETERS = GraphParameters(figsize=(2.8, 1.8), dpi=100, font_size=8)
+# README embeds: fixed canvas (400×250 px) matches width/height in mixin/axis/README.md.
+README_GRAPH_PARAMETERS = GraphParameters(figsize=(4.0, 2.5), dpi=100, font_size=9)
 README_FIGURE_SIZE = (
     int(README_GRAPH_PARAMETERS.figsize[0] * README_GRAPH_PARAMETERS.dpi),
     int(README_GRAPH_PARAMETERS.figsize[1] * README_GRAPH_PARAMETERS.dpi),

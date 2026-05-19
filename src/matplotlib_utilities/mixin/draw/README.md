@@ -67,7 +67,7 @@ If something you need is missing from this package, open an [issue](https://gith
 
 <table>
 <tr>
-<td width="220" valign="top"><img src="readme_figures/image/imshow.png" width="200" alt="imshow"/></td>
+<td width="420" valign="top"><img src="readme_figures/image/imshow.png" width="400" height="250" alt="imshow"/></td>
 <td valign="top">
 
 ```python
@@ -90,17 +90,25 @@ maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 
 <table>
 <tr>
-<td width="220" valign="top"><img src="readme_figures/image/colorbar.png" width="200" alt="colorbar"/></td>
+<td width="420" valign="top"><img src="readme_figures/image/colorbar.png" width="400" height="250" alt="colorbar"/></td>
 <td valign="top">
 
 ```python
 import numpy as np
-from matplotlib_utilities import ColorbarParameters, GraphLayout, GraphParameters, MatplotGraphMaker, TableAxis
+from matplotlib_utilities import (
+    ColorbarParameters,
+    GraphLayout,
+    GraphParameters,
+    ImshowParameters,
+    MatplotGraphMaker,
+    TableAxis,
+)
 
 layout = GraphLayout.from_number(number=1, axis=TableAxis.COLUMN, axis_value=1)
 maker = MatplotGraphMaker(layout=layout, parameters=GraphParameters())
 data = np.linspace(0, 1, 32 * 32).reshape(32, 32)
 idx = maker.get_subplot_index_from_number(number=0)
+maker.imshow(image=data, index=idx, subparams=ImshowParameters())
 maker.set_colorbar(index=idx, image=data, subparams=ColorbarParameters(label="value"))
 maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 ```
@@ -113,7 +121,7 @@ maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 
 <table>
 <tr>
-<td width="220" valign="top"><img src="readme_figures/series/plot.png" width="200" alt="plot"/></td>
+<td width="420" valign="top"><img src="readme_figures/series/plot.png" width="400" height="250" alt="plot"/></td>
 <td valign="top">
 
 ```python
@@ -136,7 +144,7 @@ maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 
 <table>
 <tr>
-<td width="220" valign="top"><img src="readme_figures/series/scatter.png" width="200" alt="scatter"/></td>
+<td width="420" valign="top"><img src="readme_figures/series/scatter.png" width="400" height="250" alt="scatter"/></td>
 <td valign="top">
 
 ```python
@@ -160,7 +168,7 @@ maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 
 <table>
 <tr>
-<td width="220" valign="top"><img src="readme_figures/series/bar.png" width="200" alt="bar"/></td>
+<td width="420" valign="top"><img src="readme_figures/series/bar.png" width="400" height="250" alt="bar"/></td>
 <td valign="top">
 
 ```python
@@ -187,7 +195,7 @@ maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 
 <table>
 <tr>
-<td width="220" valign="top"><img src="readme_figures/vector/quiver.png" width="200" alt="quiver"/></td>
+<td width="420" valign="top"><img src="readme_figures/vector/quiver.png" width="400" height="250" alt="quiver"/></td>
 <td valign="top">
 
 ```python
@@ -226,7 +234,7 @@ maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 
 <table>
 <tr>
-<td width="220" valign="top"><img src="readme_figures/vector/arrow.png" width="200" alt="arrow"/></td>
+<td width="420" valign="top"><img src="readme_figures/vector/arrow.png" width="400" height="250" alt="arrow"/></td>
 <td valign="top">
 
 ```python
@@ -247,7 +255,7 @@ maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 
 <table>
 <tr>
-<td width="220" valign="top"><img src="readme_figures/misc/legend.png" width="200" alt="legend"/></td>
+<td width="420" valign="top"><img src="readme_figures/misc/legend.png" width="400" height="250" alt="legend"/></td>
 <td valign="top">
 
 ```python
@@ -272,7 +280,7 @@ maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 
 <table>
 <tr>
-<td width="220" valign="top"><img src="readme_figures/misc/line.png" width="200" alt="line"/></td>
+<td width="420" valign="top"><img src="readme_figures/misc/line.png" width="400" height="250" alt="line"/></td>
 <td valign="top">
 
 ```python
@@ -296,7 +304,7 @@ maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 
 <table>
 <tr>
-<td width="220" valign="top"><img src="readme_figures/misc/annotate.png" width="200" alt="annotate"/></td>
+<td width="420" valign="top"><img src="readme_figures/misc/annotate.png" width="400" height="250" alt="annotate"/></td>
 <td valign="top">
 
 ```python

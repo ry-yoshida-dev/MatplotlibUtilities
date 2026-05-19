@@ -39,7 +39,7 @@ If something you need is missing from this package, open an [issue](https://gith
 
 <table>
 <tr>
-<td width="220" valign="top"><img src="readme_figures/set_label.png" width="200" alt="set_label"/></td>
+<td width="420" valign="top"><img src="readme_figures/set_label.png" width="400" height="250" alt="set_label"/></td>
 <td valign="top">
 
 ```python
@@ -64,7 +64,7 @@ maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 
 <table>
 <tr>
-<td width="220" valign="top"><img src="readme_figures/set_lim.png" width="200" alt="set_lim"/></td>
+<td width="420" valign="top"><img src="readme_figures/set_lim.png" width="400" height="250" alt="set_lim"/></td>
 <td valign="top">
 
 ```python
@@ -88,7 +88,7 @@ maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 
 <table>
 <tr>
-<td width="220" valign="top"><img src="readme_figures/set_title.png" width="200" alt="set_title"/></td>
+<td width="420" valign="top"><img src="readme_figures/set_title.png" width="400" height="250" alt="set_title"/></td>
 <td valign="top">
 
 ```python
@@ -112,7 +112,7 @@ maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 
 <table>
 <tr>
-<td width="220" valign="top"><img src="readme_figures/set_grid.png" width="200" alt="set_grid"/></td>
+<td width="420" valign="top"><img src="readme_figures/set_grid.png" width="400" height="250" alt="set_grid"/></td>
 <td valign="top">
 
 ```python
@@ -137,7 +137,7 @@ maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 
 <table>
 <tr>
-<td width="220" valign="top"><img src="readme_figures/delete_axis_label.png" width="200" alt="delete_axis_label"/></td>
+<td width="420" valign="top"><img src="readme_figures/delete_axis_label.png" width="400" height="250" alt="delete_axis_label"/></td>
 <td valign="top">
 
 ```python
