@@ -35,9 +35,10 @@ If something you need is missing from this package, open an [issue](https://gith
 </tbody>
 </table>
 
-## set_label
+<details>
+<summary><code>set_label</code></summary>
 
-<img align="left" width="400" height="250" src="readme_figures/set_label.png" alt="set_label"/>
+<img src="readme_figures/set_label.png" width="400" height="250" alt="set_label"/>
 
 ```python
 import numpy as np
@@ -53,12 +54,12 @@ maker.set_label(label="y", index=idx, axis=GraphAxis.Y)
 maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 ```
 
-<br clear="all"/>
+</details>
 
+<details>
+<summary><code>set_lim</code></summary>
 
-## set_lim
-
-<img align="left" width="400" height="250" src="readme_figures/set_lim.png" alt="set_lim"/>
+<img src="readme_figures/set_lim.png" width="400" height="250" alt="set_lim"/>
 
 ```python
 import numpy as np
@@ -73,12 +74,12 @@ maker.set_lim(lower=-1.0, upper=1.0, index=idx, axis=GraphAxis.Y)
 maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 ```
 
-<br clear="all"/>
+</details>
 
+<details>
+<summary><code>set_title</code></summary>
 
-## set_title
-
-<img align="left" width="400" height="250" src="readme_figures/set_title.png" alt="set_title"/>
+<img src="readme_figures/set_title.png" width="400" height="250" alt="set_title"/>
 
 ```python
 import numpy as np
@@ -93,12 +94,12 @@ maker.set_title(title="sin(x)", index=idx)
 maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 ```
 
-<br clear="all"/>
+</details>
 
+<details>
+<summary><code>set_grid</code></summary>
 
-## set_grid
-
-<img align="left" width="400" height="250" src="readme_figures/set_grid.png" alt="set_grid"/>
+<img src="readme_figures/set_grid.png" width="400" height="250" alt="set_grid"/>
 
 ```python
 import numpy as np
@@ -114,12 +115,12 @@ maker.set_grid(index=idx, subparams=GridParameters(alpha=0.4))
 maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 ```
 
-<br clear="all"/>
+</details>
 
+<details>
+<summary><code>delete_axis_label</code></summary>
 
-## delete_axis_label
-
-<img align="left" width="400" height="250" src="readme_figures/delete_axis_label.png" alt="delete_axis_label"/>
+<img src="readme_figures/delete_axis_label.png" width="400" height="250" alt="delete_axis_label"/>
 
 ```python
 import numpy as np
@@ -138,5 +139,5 @@ maker.delete_axis_label(
 maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 ```
 
-<br clear="all"/>
+</details>
 
