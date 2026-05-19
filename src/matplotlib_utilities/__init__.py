@@ -28,6 +28,7 @@ from .mixin.draw.parameters import (
     LegendParameters,
     LineParameters,
     ArrowParameters,
+    QuiverParameters,
 
     # Enums
     Aspect,
@@ -39,6 +40,9 @@ from .mixin.draw.parameters import (
     Orientation,
     ColorbarExtend,
     ColorbarSpacing,
+    QuiverAngles,
+    QuiverPivot,
+    QuiverUnits,
     )
 __all__ = [
     "GraphLayout",
@@ -62,6 +66,7 @@ __all__ = [
     "LegendParameters",
     "LineParameters",
     "ArrowParameters",
+    "QuiverParameters",
 
     # axis.parameters
     "GridAxis",
@@ -79,4 +84,7 @@ __all__ = [
     "Orientation",
     "ColorbarExtend",
     "ColorbarSpacing",
+    "QuiverAngles",
+    "QuiverPivot",
+    "QuiverUnits",
     ]

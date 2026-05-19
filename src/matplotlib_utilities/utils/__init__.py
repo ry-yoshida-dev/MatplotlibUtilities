@@ -24,6 +24,7 @@ from .origin import Origin
 from .location import Location
 from .orientation import Orientation
 from .arrow_shape import ArrowShape
+from .quiver import QuiverAngles, QuiverPivot, QuiverUnits
 from .linestyle import Linestyle
 from .colorbar import ColorbarExtend, ColorbarSpacing
 
@@ -52,6 +53,9 @@ __all__ = [
     "Location",
     "Orientation",
     "ArrowShape",
+    "QuiverAngles",
+    "QuiverPivot",
+    "QuiverUnits",
     "Linestyle",
     "ColorbarExtend",
     "ColorbarSpacing",

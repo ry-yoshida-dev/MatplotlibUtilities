@@ -7,6 +7,7 @@ from .imshow import ImshowParameters
 from .legend import LegendParameters
 from .line import LineParameters
 from .plot import PlotParameters
+from .quiver import QuiverParameters
 from .scatter import ScatterParameters
 from ....utils import (
     Aspect,
@@ -17,6 +18,9 @@ from ....utils import (
     Origin,
     Location,
     Orientation,
+    QuiverAngles,
+    QuiverPivot,
+    QuiverUnits,
     ColorbarExtend,
     ColorbarSpacing,
 )
@@ -40,6 +44,10 @@ __all__ = [
     "Orientation",
     "Origin",
     "PlotParameters",
+    "QuiverAngles",
+    "QuiverParameters",
+    "QuiverPivot",
+    "QuiverUnits",
     "ScatterParameters",
     "Subparameters",
 ]

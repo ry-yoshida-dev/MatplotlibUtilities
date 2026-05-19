@@ -18,6 +18,8 @@ from matplotlib_utilities import (
     LineParameters,
     MatplotGraphMaker,
     Orientation,
+    QuiverAngles,
+    QuiverParameters,
     ScatterParameters,
     TableAxis,
 )
@@ -92,6 +94,40 @@ def test_import_package() -> None:
 def test_scatter_parameters_label_in_to_dict() -> None:
     """Scatter includes matplotlib ``label`` in ``to_dict`` like ``Axes.scatter``."""
     assert ScatterParameters(label="series A").to_dict["label"] == "series A"
+
+
+def test_quiver_parameters_enum_values_in_to_dict() -> None:
+    params = QuiverParameters(
+        angles=QuiverAngles.XY,
+        label="flow",
+        scale=10.0,
+    )
+    d = params.to_dict
+    assert d["angles"] == "xy"
+    assert d["label"] == "flow"
+    assert d["scale"] == 10.0
+
+
+def test_graph_maker_quiver_smoke(tmp_path: Path) -> None:
+    layout = GraphLayout.from_number(number=1, axis=TableAxis.COLUMN, axis_value=1)
+    maker = MatplotGraphMaker(layout=layout, parameters=GraphParameters())
+    x = np.linspace(-2, 2, 5)
+    y = np.linspace(-2, 2, 5)
+    xx, yy = np.meshgrid(x, y)
+    u = -xx
+    v = -yy
+    maker.quiver(
+        u=u,
+        v=v,
+        x=xx,
+        y=yy,
+        index=maker.get_subplot_index_from_number(number=0),
+        subparams=QuiverParameters(angles=QuiverAngles.XY, scale=20.0),
+    )
+    out = tmp_path / "quiver.png"
+    maker.finalize(save_path=str(out), is_showing_result_enabled=False)
+    assert out.is_file()
+    assert out.stat().st_size > 0
 
 
 def test_graph_maker_demo_smoke(tmp_path: Path) -> None:

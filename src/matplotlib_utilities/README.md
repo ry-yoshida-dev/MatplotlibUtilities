@@ -9,9 +9,7 @@
 | Per-plot kwargs | `*Parameters` dataclasses | Typed kwargs → `to_dict` for Matplotlib |
 | Coordinator | `MatplotGraphMaker` | Builds `Figure` / `Axes`; drawing methods on the maker; see **`axis`** below |
 
-**Drawing API:** [`mixin/draw/`](./mixin/draw/) — flat methods on `MatplotGraphMaker` (e.g. `maker.scatter`) from `DrawMixin`; parameters under [`mixin/draw/parameters/`](./mixin/draw/parameters/).
-
-**Axis API:** [`mixin/axis/`](./mixin/axis/) — `maker.axis`, labels, limits, ticks via `AxisMixin`; parameters under [`mixin/axis/parameters/`](./mixin/axis/parameters/).
+**Mixin API:** [`mixin/`](./mixin/) — `DrawMixin` and `AxisMixin` on `MatplotGraphMaker` (e.g. `maker.scatter`, `maker.set_label`). Draw examples: [`mixin/draw/README.md`](./mixin/draw/README.md).
 
 Exported names: [`__init__.py`](./__init__.py). Utilities and subplot index types: [`utils/README.md`](./utils/README.md).
 
@@ -37,14 +35,13 @@ Exported names: [`__init__.py`](./__init__.py). Utilities and subplot index type
 | `SubplotIndex` | `RowColumnIndex` or `SubplotNumber` — see [`utils/index`](./utils/index/subplot_index.py) |
 | `GraphAxis` | `X` / `Y` for axis helpers — [`graph_axis.py`](./graph_axis.py) |
 
-## Module map
+## Components
 
 | Path | Contents |
 | ---- | -------- |
 | [`maker.py`](./maker.py) | `MatplotGraphMaker` |
 | [`layout.py`](./layout.py); enums in [`utils/table_axis.py`](./utils/table_axis.py), [`graph_axis.py`](./graph_axis.py) | Layout / table vs graph axis |
 | [`parameter.py`](./parameter.py), [`subparameter.py`](./subparameter.py) | `GraphParameters`, `Subparameters` base |
-| [`mixin/draw/`](./mixin/draw/) | `DrawMixin` + `*Parameters` dataclasses |
-| [`mixin/axis/`](./mixin/axis/) | `AxisMixin`; grid / tick kwargs (`GridParameters`, `TickParamsParameters`) |
+| [`mixin/`](./mixin/) | `DrawMixin`, `AxisMixin`, and per-feature `*Parameters` — see [`mixin/README.md`](./mixin/README.md) |
 
 Install and a short example: [../../README.md](../../README.md).

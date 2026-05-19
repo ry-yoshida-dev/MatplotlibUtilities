@@ -163,7 +163,8 @@ class ColorbarParameters(
         Append colorbar axes to divider and return the new Axes.
         """
         location = self.location.value if self.location is not None else Location.RIGHT.value
-        cax: Axes = divider.append_axes(loc=location, size=f"{self.fraction * 100}%", pad=self.pad)
+        pad = 0.05 if self.pad is None else self.pad
+        cax: Axes = divider.append_axes(location, f"{self.fraction * 100}%", pad)
         return cax
 
     def _to_dict_skip_field(self, field: Field[Any], value: Any) -> bool:

@@ -42,3 +42,6 @@ matplotlib_utilities = ["py.typed"]
 testpaths = ["tests"]
 pythonpath = ["src"]
 python_files = ["test.py", "test_*.py", "*_test.py"]
+
+[tool.pyright]
+stubPath = "typings"
