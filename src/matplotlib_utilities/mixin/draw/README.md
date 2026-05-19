@@ -65,10 +65,7 @@ If something you need is missing from this package, open an [issue](https://gith
 
 ## imshow
 
-<table>
-<tr>
-<td width="420" valign="top"><img src="readme_figures/image/imshow.png" width="400" height="250" alt="imshow"/></td>
-<td valign="top">
+<img align="left" width="400" height="250" src="readme_figures/image/imshow.png" alt="imshow"/>
 
 ```python
 import numpy as np
@@ -82,16 +79,12 @@ maker.imshow(image=data, index=idx, subparams=ImshowParameters())
 maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 ```
 
-</td>
-</tr>
-</table>
+<br clear="all"/>
+
 
 ## set_colorbar
 
-<table>
-<tr>
-<td width="420" valign="top"><img src="readme_figures/image/colorbar.png" width="400" height="250" alt="colorbar"/></td>
-<td valign="top">
+<img align="left" width="400" height="250" src="readme_figures/image/colorbar.png" alt="colorbar"/>
 
 ```python
 import numpy as np
@@ -113,16 +106,12 @@ maker.set_colorbar(index=idx, image=data, subparams=ColorbarParameters(label="va
 maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 ```
 
-</td>
-</tr>
-</table>
+<br clear="all"/>
+
 
 ## plot
 
-<table>
-<tr>
-<td width="420" valign="top"><img src="readme_figures/series/plot.png" width="400" height="250" alt="plot"/></td>
-<td valign="top">
+<img align="left" width="400" height="250" src="readme_figures/series/plot.png" alt="plot"/>
 
 ```python
 import numpy as np
@@ -136,16 +125,12 @@ maker.plot(x=x, y=np.sin(x), index=idx, subparams=PlotParameters())
 maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 ```
 
-</td>
-</tr>
-</table>
+<br clear="all"/>
+
 
 ## scatter
 
-<table>
-<tr>
-<td width="420" valign="top"><img src="readme_figures/series/scatter.png" width="400" height="250" alt="scatter"/></td>
-<td valign="top">
+<img align="left" width="400" height="250" src="readme_figures/series/scatter.png" alt="scatter"/>
 
 ```python
 import numpy as np
@@ -160,16 +145,12 @@ maker.scatter(x=x, y=y, index=idx, subparams=ScatterParameters(s=40))
 maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 ```
 
-</td>
-</tr>
-</table>
+<br clear="all"/>
+
 
 ## bar
 
-<table>
-<tr>
-<td width="420" valign="top"><img src="readme_figures/series/bar.png" width="400" height="250" alt="bar"/></td>
-<td valign="top">
+<img align="left" width="400" height="250" src="readme_figures/series/bar.png" alt="bar"/>
 
 ```python
 import numpy as np
@@ -187,16 +168,12 @@ maker.bar(
 maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 ```
 
-</td>
-</tr>
-</table>
+<br clear="all"/>
+
 
 ## quiver
 
-<table>
-<tr>
-<td width="420" valign="top"><img src="readme_figures/vector/quiver.png" width="400" height="250" alt="quiver"/></td>
-<td valign="top">
+<img align="left" width="400" height="250" src="readme_figures/vector/quiver.png" alt="quiver"/>
 
 ```python
 import numpy as np
@@ -226,16 +203,12 @@ maker.quiver(
 maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 ```
 
-</td>
-</tr>
-</table>
+<br clear="all"/>
+
 
 ## arrow
 
-<table>
-<tr>
-<td width="420" valign="top"><img src="readme_figures/vector/arrow.png" width="400" height="250" alt="arrow"/></td>
-<td valign="top">
+<img align="left" width="400" height="250" src="readme_figures/vector/arrow.png" alt="arrow"/>
 
 ```python
 from matplotlib_utilities import ArrowParameters, GraphLayout, GraphParameters, MatplotGraphMaker, TableAxis
@@ -247,16 +220,12 @@ maker.arrow(x=0.0, y=0.0, dx=0.8, dy=0.5, index=idx, subparams=ArrowParameters(w
 maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 ```
 
-</td>
-</tr>
-</table>
+<br clear="all"/>
+
 
 ## legend
 
-<table>
-<tr>
-<td width="420" valign="top"><img src="readme_figures/misc/legend.png" width="400" height="250" alt="legend"/></td>
-<td valign="top">
+<img align="left" width="400" height="250" src="readme_figures/misc/legend.png" alt="legend"/>
 
 ```python
 import numpy as np
@@ -272,16 +241,12 @@ maker.legend(index=idx)
 maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 ```
 
-</td>
-</tr>
-</table>
+<br clear="all"/>
+
 
 ## line
 
-<table>
-<tr>
-<td width="420" valign="top"><img src="readme_figures/misc/line.png" width="400" height="250" alt="line"/></td>
-<td valign="top">
+<img align="left" width="400" height="250" src="readme_figures/misc/line.png" alt="line"/>
 
 ```python
 import numpy as np
@@ -296,16 +261,12 @@ maker.line(value=0.0, orientation=Orientation.VERTICAL, index=idx, subparams=Lin
 maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 ```
 
-</td>
-</tr>
-</table>
+<br clear="all"/>
+
 
 ## annotate
 
-<table>
-<tr>
-<td width="420" valign="top"><img src="readme_figures/misc/annotate.png" width="400" height="250" alt="annotate"/></td>
-<td valign="top">
+<img align="left" width="400" height="250" src="readme_figures/misc/annotate.png" alt="annotate"/>
 
 ```python
 import numpy as np
@@ -327,6 +288,5 @@ maker.annotate(
 maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 ```
 
-</td>
-</tr>
-</table>
+<br clear="all"/>
+

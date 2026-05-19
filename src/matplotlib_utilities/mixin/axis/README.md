@@ -37,10 +37,7 @@ If something you need is missing from this package, open an [issue](https://gith
 
 ## set_label
 
-<table>
-<tr>
-<td width="420" valign="top"><img src="readme_figures/set_label.png" width="400" height="250" alt="set_label"/></td>
-<td valign="top">
+<img align="left" width="400" height="250" src="readme_figures/set_label.png" alt="set_label"/>
 
 ```python
 import numpy as np
@@ -56,16 +53,12 @@ maker.set_label(label="y", index=idx, axis=GraphAxis.Y)
 maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 ```
 
-</td>
-</tr>
-</table>
+<br clear="all"/>
+
 
 ## set_lim
 
-<table>
-<tr>
-<td width="420" valign="top"><img src="readme_figures/set_lim.png" width="400" height="250" alt="set_lim"/></td>
-<td valign="top">
+<img align="left" width="400" height="250" src="readme_figures/set_lim.png" alt="set_lim"/>
 
 ```python
 import numpy as np
@@ -80,16 +73,12 @@ maker.set_lim(lower=-1.0, upper=1.0, index=idx, axis=GraphAxis.Y)
 maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 ```
 
-</td>
-</tr>
-</table>
+<br clear="all"/>
+
 
 ## set_title
 
-<table>
-<tr>
-<td width="420" valign="top"><img src="readme_figures/set_title.png" width="400" height="250" alt="set_title"/></td>
-<td valign="top">
+<img align="left" width="400" height="250" src="readme_figures/set_title.png" alt="set_title"/>
 
 ```python
 import numpy as np
@@ -104,16 +93,12 @@ maker.set_title(title="sin(x)", index=idx)
 maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 ```
 
-</td>
-</tr>
-</table>
+<br clear="all"/>
+
 
 ## set_grid
 
-<table>
-<tr>
-<td width="420" valign="top"><img src="readme_figures/set_grid.png" width="400" height="250" alt="set_grid"/></td>
-<td valign="top">
+<img align="left" width="400" height="250" src="readme_figures/set_grid.png" alt="set_grid"/>
 
 ```python
 import numpy as np
@@ -129,16 +114,12 @@ maker.set_grid(index=idx, subparams=GridParameters(alpha=0.4))
 maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 ```
 
-</td>
-</tr>
-</table>
+<br clear="all"/>
+
 
 ## delete_axis_label
 
-<table>
-<tr>
-<td width="420" valign="top"><img src="readme_figures/delete_axis_label.png" width="400" height="250" alt="delete_axis_label"/></td>
-<td valign="top">
+<img align="left" width="400" height="250" src="readme_figures/delete_axis_label.png" alt="delete_axis_label"/>
 
 ```python
 import numpy as np
@@ -157,6 +138,5 @@ maker.delete_axis_label(
 maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 ```
 
-</td>
-</tr>
-</table>
+<br clear="all"/>
+
