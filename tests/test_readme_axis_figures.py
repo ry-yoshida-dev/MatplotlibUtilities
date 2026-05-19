@@ -14,8 +14,10 @@ import matplotlib
 
 matplotlib.use("Agg")
 
+import matplotlib.pyplot as plt
 import numpy as np
 import pytest
+from PIL import Image
 
 from matplotlib_utilities import (
     GraphAxis,
@@ -32,6 +34,10 @@ FIGURES_ROOT = AXIS_README / "readme_figures"
 UPDATE = os.environ.get("UPDATE_README_FIGURES") == "1"
 
 README_GRAPH_PARAMETERS = GraphParameters(figsize=(2.8, 1.8), dpi=100, font_size=8)
+README_FIGURE_SIZE = (
+    int(README_GRAPH_PARAMETERS.figsize[0] * README_GRAPH_PARAMETERS.dpi),
+    int(README_GRAPH_PARAMETERS.figsize[1] * README_GRAPH_PARAMETERS.dpi),
+)
 
 FIGURE_PATHS = [
     "set_label.png",
@@ -52,9 +58,15 @@ def _index(maker: MatplotGraphMaker):
 
 
 def _save(maker: MatplotGraphMaker, rel_path: str) -> Path:
+    """Save at fixed pixel size (no bbox_inches='tight') so README embeds align."""
     out = FIGURES_ROOT / rel_path
     out.parent.mkdir(parents=True, exist_ok=True)
-    maker.finalize(save_path=str(out), is_showing_result_enabled=False)
+    maker.fig.subplots_adjust(
+        wspace=maker.parameters.w_space,
+        hspace=maker.parameters.h_space,
+    )
+    maker.fig.savefig(str(out), dpi=maker.parameters.dpi)
+    plt.close(maker.fig)
     return out
 
 
@@ -68,6 +80,11 @@ def test_readme_axis_figure_committed(rel_path: str) -> None:
     path = FIGURES_ROOT / rel_path
     assert path.is_file(), f"missing {path}; run UPDATE_README_FIGURES=1 pytest -k update"
     assert path.stat().st_size > 0
+    with Image.open(path) as image:
+        assert image.size == README_FIGURE_SIZE, (
+            f"{rel_path} is {image.size}, expected {README_FIGURE_SIZE}; "
+            "run UPDATE_README_FIGURES=1 pytest -k update"
+        )
 
 
 @pytest.mark.skipif(not UPDATE, reason="set UPDATE_README_FIGURES=1 to regenerate PNGs")
