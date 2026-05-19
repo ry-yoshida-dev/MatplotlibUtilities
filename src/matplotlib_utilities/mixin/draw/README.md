@@ -63,10 +63,12 @@ If something you need is missing from this package, open an [issue](https://gith
 </tbody>
 </table>
 
-<details>
-<summary><code>imshow</code></summary>
+## imshow
 
 <img src="readme_figures/image/imshow.png" width="400" height="250" alt="imshow"/>
+
+<details>
+<summary>Code</summary>
 
 ```python
 import numpy as np
@@ -82,10 +84,12 @@ maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 
 </details>
 
-<details>
-<summary><code>set_colorbar</code></summary>
+## set_colorbar
 
 <img src="readme_figures/image/colorbar.png" width="400" height="250" alt="colorbar"/>
+
+<details>
+<summary>Code</summary>
 
 ```python
 import numpy as np
@@ -109,10 +113,12 @@ maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 
 </details>
 
-<details>
-<summary><code>plot</code></summary>
+## plot
 
 <img src="readme_figures/series/plot.png" width="400" height="250" alt="plot"/>
+
+<details>
+<summary>Code</summary>
 
 ```python
 import numpy as np
@@ -128,10 +134,12 @@ maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 
 </details>
 
-<details>
-<summary><code>scatter</code></summary>
+## scatter
 
 <img src="readme_figures/series/scatter.png" width="400" height="250" alt="scatter"/>
+
+<details>
+<summary>Code</summary>
 
 ```python
 import numpy as np
@@ -148,10 +156,12 @@ maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 
 </details>
 
-<details>
-<summary><code>bar</code></summary>
+## bar
 
 <img src="readme_figures/series/bar.png" width="400" height="250" alt="bar"/>
+
+<details>
+<summary>Code</summary>
 
 ```python
 import numpy as np
@@ -171,10 +181,12 @@ maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 
 </details>
 
-<details>
-<summary><code>quiver</code></summary>
+## quiver
 
 <img src="readme_figures/vector/quiver.png" width="400" height="250" alt="quiver"/>
+
+<details>
+<summary>Code</summary>
 
 ```python
 import numpy as np
@@ -206,10 +218,12 @@ maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 
 </details>
 
-<details>
-<summary><code>arrow</code></summary>
+## arrow
 
 <img src="readme_figures/vector/arrow.png" width="400" height="250" alt="arrow"/>
+
+<details>
+<summary>Code</summary>
 
 ```python
 from matplotlib_utilities import ArrowParameters, GraphLayout, GraphParameters, MatplotGraphMaker, TableAxis
@@ -223,10 +237,12 @@ maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 
 </details>
 
-<details>
-<summary><code>legend</code></summary>
+## legend
 
 <img src="readme_figures/misc/legend.png" width="400" height="250" alt="legend"/>
+
+<details>
+<summary>Code</summary>
 
 ```python
 import numpy as np
@@ -244,10 +260,12 @@ maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 
 </details>
 
-<details>
-<summary><code>line</code></summary>
+## line
 
 <img src="readme_figures/misc/line.png" width="400" height="250" alt="line"/>
+
+<details>
+<summary>Code</summary>
 
 ```python
 import numpy as np
@@ -264,10 +282,12 @@ maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 
 </details>
 
-<details>
-<summary><code>annotate</code></summary>
+## annotate
 
 <img src="readme_figures/misc/annotate.png" width="400" height="250" alt="annotate"/>
+
+<details>
+<summary>Code</summary>
 
 ```python
 import numpy as np

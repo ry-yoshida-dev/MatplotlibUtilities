@@ -35,10 +35,12 @@ If something you need is missing from this package, open an [issue](https://gith
 </tbody>
 </table>
 
-<details>
-<summary><code>set_label</code></summary>
+## set_label
 
 <img src="readme_figures/set_label.png" width="400" height="250" alt="set_label"/>
+
+<details>
+<summary>Code</summary>
 
 ```python
 import numpy as np
@@ -56,10 +58,12 @@ maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 
 </details>
 
-<details>
-<summary><code>set_lim</code></summary>
+## set_lim
 
 <img src="readme_figures/set_lim.png" width="400" height="250" alt="set_lim"/>
+
+<details>
+<summary>Code</summary>
 
 ```python
 import numpy as np
@@ -76,10 +80,12 @@ maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 
 </details>
 
-<details>
-<summary><code>set_title</code></summary>
+## set_title
 
 <img src="readme_figures/set_title.png" width="400" height="250" alt="set_title"/>
+
+<details>
+<summary>Code</summary>
 
 ```python
 import numpy as np
@@ -96,10 +102,12 @@ maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 
 </details>
 
-<details>
-<summary><code>set_grid</code></summary>
+## set_grid
 
 <img src="readme_figures/set_grid.png" width="400" height="250" alt="set_grid"/>
+
+<details>
+<summary>Code</summary>
 
 ```python
 import numpy as np
@@ -117,10 +125,12 @@ maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 
 </details>
 
-<details>
-<summary><code>delete_axis_label</code></summary>
+## delete_axis_label
 
 <img src="readme_figures/delete_axis_label.png" width="400" height="250" alt="delete_axis_label"/>
+
+<details>
+<summary>Code</summary>
 
 ```python
 import numpy as np
