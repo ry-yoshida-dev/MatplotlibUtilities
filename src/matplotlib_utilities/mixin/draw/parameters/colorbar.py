@@ -3,7 +3,8 @@ from typing import Any, Protocol, Sequence
 
 import numpy as np
 from matplotlib.axes import Axes
-from matplotlib.cm import ScalarMappable, get_cmap
+from matplotlib import colormaps
+from matplotlib.cm import ScalarMappable
 from matplotlib.colors import Normalize
 from matplotlib.ticker import Formatter
 from matplotlib.ticker import Locator
@@ -165,7 +166,7 @@ class ColorbarParameters(
         vmin, vmax = self._get_vmin_vmax(image)
         if self.cmap is None:
             self.cmap = "viridis"
-        cmap_obj = get_cmap(self.cmap)
+        cmap_obj = colormaps[self.cmap]
         norm = Normalize(vmin=vmin, vmax=vmax)
         sm = ScalarMappable(norm=norm, cmap=cmap_obj)
         sm.set_array([])
