@@ -2,4 +2,4 @@ matplotlib
 numpy
 pillow
 pytest
-color @ git+https://github.com/ry-yoshida-private/Color.git
+color @ git+https://github.com/ry-yoshida-dev/Color.git

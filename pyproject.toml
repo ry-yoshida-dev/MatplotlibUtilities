@@ -20,7 +20,7 @@ dependencies = [
     "matplotlib",
     "numpy",
     "pillow",
-    "color @ git+https://github.com/ry-yoshida-private/Color.git",
+    "color @ git+https://github.com/ry-yoshida-dev/Color.git",
 ]
 
 [project.optional-dependencies]
@@ -29,8 +29,8 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/ry-yoshida-private/MatplotlibUtilities"
-"Bug Tracker" = "https://github.com/ry-yoshida-private/MatplotlibUtilities/issues"
+Homepage = "https://github.com/ry-yoshida-dev/MatplotlibUtilities"
+"Bug Tracker" = "https://github.com/ry-yoshida-dev/MatplotlibUtilities/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]
