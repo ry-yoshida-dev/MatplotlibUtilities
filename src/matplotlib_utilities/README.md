@@ -42,6 +42,7 @@ Exported names: [`__init__.py`](./__init__.py). Utilities and subplot index type
 | [`maker.py`](./maker.py) | `MatplotGraphMaker` |
 | [`layout.py`](./layout.py); enums in [`utils/table_axis.py`](./utils/table_axis.py), [`graph_axis.py`](./graph_axis.py) | Layout / table vs graph axis |
 | [`parameter.py`](./parameter.py), [`subparameter.py`](./subparameter.py) | `GraphParameters`, `Subparameters` base |
+| [`types/`](./types/) | `NumericArray`, `SubplotAxesArray` — NumPy dtype aliases |
 | [`mixin/`](./mixin/) | `DrawMixin`, `AxisMixin`, and per-feature `*Parameters` — see [`mixin/README.md`](./mixin/README.md) |
 
 Install and a short example: [../../README.md](../../README.md).

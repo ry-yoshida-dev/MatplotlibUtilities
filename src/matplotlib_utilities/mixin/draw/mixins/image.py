@@ -4,8 +4,6 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-import numpy as np
-
 if TYPE_CHECKING:
     from PIL.Image import Image as PILImage
 from matplotlib.axes import Axes
@@ -16,6 +14,7 @@ from mpl_toolkits.axes_grid1.axes_divider import AxesDivider
 
 from ..parameters import ColorbarParameters, ImshowParameters
 from ....protocols import MakerCanvas
+from ....types import NumericArray
 from ....utils import SubplotIndex
 
 
@@ -25,7 +24,7 @@ class ImageDrawMixin:
     def set_colorbar(
         self: MakerCanvas,
         index: SubplotIndex | None = None,
-        image: np.ndarray | None = None,
+        image: NumericArray | None = None,
         subparams: ColorbarParameters = ColorbarParameters(),
     ) -> None:
         """
@@ -36,7 +35,7 @@ class ImageDrawMixin:
         index: SubplotIndex | None = None
             The index of the subplot. If None, the colorbar is anchored from the first subplot
             (same figure; use when a single shared colorbar is intended).
-        image: np.ndarray | None = None
+        image: NumericArray | None = None
             The image data to determine the colorbar scale from.
             If None, vmin and vmax must be specified in subparams.
         subparams: ColorbarParameters
@@ -52,7 +51,7 @@ class ImageDrawMixin:
 
     def imshow(
         self: MakerCanvas,
-        image: np.ndarray | PILImage,
+        image: NumericArray | PILImage,
         index: SubplotIndex,
         subparams: ImshowParameters = ImshowParameters(),
     ) -> None:
@@ -61,7 +60,7 @@ class ImageDrawMixin:
 
         Parameters
         ----------
-        image: np.ndarray | PIL.Image.Image
+        image: NumericArray | PIL.Image.Image
             Image data in a form Matplotlib accepts: a NumPy array (2-D grayscale
             or 3-D RGB, channel-last) or a PIL Image.
         index: SubplotIndex

@@ -2,10 +2,9 @@
 
 from __future__ import annotations
 
-import numpy as np
-
 from ..parameters import ArrowParameters, QuiverParameters
 from ....protocols import MakerCanvas
+from ....types import NumericArray
 from ....utils import SubplotIndex
 
 
@@ -40,12 +39,12 @@ class VectorDrawMixin:
 
     def quiver(
         self: MakerCanvas,
-        u: np.ndarray,
-        v: np.ndarray,
+        u: NumericArray,
+        v: NumericArray,
         index: SubplotIndex,
-        x: np.ndarray | None = None,
-        y: np.ndarray | None = None,
-        c: np.ndarray | None = None,
+        x: NumericArray | None = None,
+        y: NumericArray | None = None,
+        c: NumericArray | None = None,
         subparams: QuiverParameters = QuiverParameters(),
     ) -> None:
         """
@@ -75,11 +74,11 @@ class VectorDrawMixin:
         subplot = self.access_subplot(index=index)
         kwargs = subparams.to_dict
         # Matplotlib optional X, Y, C means fewer positional args (2–5), not None.
-        xy: tuple[np.ndarray, ...]
+        xy: tuple[NumericArray, ...]
         if x is not None:
             assert y is not None
             xy = (x, y)
         else:
             xy = ()
-        color_data: tuple[np.ndarray, ...] = () if c is None else (c,)
+        color_data: tuple[NumericArray, ...] = () if c is None else (c,)
         subplot.quiver(*xy, u, v, *color_data, **kwargs)

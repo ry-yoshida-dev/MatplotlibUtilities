@@ -2,10 +2,9 @@
 
 from __future__ import annotations
 
-import numpy as np
-
 from ..parameters import BarParameters, PlotParameters, ScatterParameters
 from ....protocols import MakerCanvas
+from ....types import NumericArray
 from ....utils import SubplotIndex
 
 
@@ -14,8 +13,8 @@ class SeriesDrawMixin:
 
     def plot(
         self: MakerCanvas,
-        x: np.ndarray,
-        y: np.ndarray,
+        x: NumericArray,
+        y: NumericArray,
         index: SubplotIndex,
         subparams: PlotParameters = PlotParameters(),
     ) -> None:
@@ -24,9 +23,9 @@ class SeriesDrawMixin:
 
         Parameters
         ----------
-        x: np.ndarray
+        x: NumericArray
             The x values of the data.
-        y: np.ndarray
+        y: NumericArray
             The y values of the data.
         index: SubplotIndex
             The index of the subplot.
@@ -38,8 +37,8 @@ class SeriesDrawMixin:
 
     def scatter(
         self: MakerCanvas,
-        x: np.ndarray,
-        y: np.ndarray,
+        x: NumericArray,
+        y: NumericArray,
         index: SubplotIndex,
         subparams: ScatterParameters = ScatterParameters(),
     ) -> None:
@@ -48,9 +47,9 @@ class SeriesDrawMixin:
 
         Parameters
         ----------
-        x: np.ndarray
+        x: NumericArray
             The x values of the data.
-        y: np.ndarray
+        y: NumericArray
             The y values of the data.
         index: SubplotIndex
             The index of the subplot.
@@ -62,7 +61,7 @@ class SeriesDrawMixin:
 
     def bar(
         self: MakerCanvas,
-        x: np.ndarray,
+        x: NumericArray,
         index: SubplotIndex,
         subparams: BarParameters = BarParameters(),
     ) -> None:
@@ -71,7 +70,7 @@ class SeriesDrawMixin:
 
         Parameters
         ----------
-        x: np.ndarray
+        x: NumericArray
             The x values of the bars.
         index: SubplotIndex
             The index of the subplot.

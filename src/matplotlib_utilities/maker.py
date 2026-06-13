@@ -1,10 +1,11 @@
 # pyright: reportUnknownMemberType=false
 
 import gc
-import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
 from matplotlib.axes import Axes
+
+from .types import SubplotAxesArray
 
 from .utils import (
     SubplotIndex,
@@ -28,7 +29,7 @@ class MatplotGraphMaker(DrawMixin, AxisMixin):
         The parameters for the MatplotGraphMaker.
     fig: Figure
         The figure of the matplotlib graphs.
-    ax: np.ndarray
+    ax: SubplotAxesArray
         The axes of the matplotlib graphs.
     axis: AxisMixin
         Axis API (labels, limits, tick visibility; e.g. maker.axis.set_label(...)).
@@ -134,13 +135,13 @@ class MatplotGraphMaker(DrawMixin, AxisMixin):
         row_index, column_index = index.tuple
         return self.ax[row_index, column_index]
 
-    def _create_canvas(self) -> tuple[Figure, np.ndarray]:
+    def _create_canvas(self) -> tuple[Figure, SubplotAxesArray]:
         """
         Create a canvas for the matplotlib graphs.
 
         Returns
         -------
-        tuple[Figure, np.ndarray]:
+        tuple[Figure, SubplotAxesArray]:
             A tuple of the figure and the axes.
         """
         row = self.layout.row

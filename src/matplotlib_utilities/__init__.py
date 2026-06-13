@@ -5,6 +5,7 @@ from .protocols import MakerCanvas
 from .mixin.axis import AxisMixin
 from .mixin.draw import DrawMixin
 from .layout import GraphLayout
+from .types import NumericArray, SubplotAxesArray
 from .utils import (
     GraphAxis,
     GridAxis,
@@ -51,6 +52,8 @@ __all__ = [
     "GraphParameters",
     "MatplotGraphMaker",
     "MakerCanvas",
+    "NumericArray",
+    "SubplotAxesArray",
     "AxisMixin",
     "DrawMixin",
     "RowColumnIndex",

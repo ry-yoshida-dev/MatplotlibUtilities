@@ -1,7 +1,6 @@
 from dataclasses import dataclass, Field
 from typing import Any, Protocol, Sequence
 
-import numpy as np
 from matplotlib.axes import Axes
 from matplotlib import colormaps
 from matplotlib.cm import ScalarMappable
@@ -10,6 +9,7 @@ from matplotlib.ticker import Formatter
 from matplotlib.ticker import Locator
 
 from ....subparameter import Subparameters
+from ....types import NumericArray
 from ....utils import ColorbarExtend, ColorbarSpacing, Location, Orientation
 from .base import ArtistParameters, CmapParameters, LabelParameters
 
@@ -144,7 +144,7 @@ class ColorbarParameters(
         if self.boundaries is not None and self.values is not None and len(self.boundaries) != len(self.values) + 1:
             raise ValueError("boundaries must have a length 1 greater than values")
 
-    def _get_vmin_vmax(self, image: np.ndarray | None) -> tuple[float, float]:
+    def _get_vmin_vmax(self, image: NumericArray | None) -> tuple[float, float]:
         """
         Get vmin and vmax values, using image data if not specified.
         """
@@ -159,7 +159,7 @@ class ColorbarParameters(
             raise ValueError("Either image must be provided, or both vmin and vmax must be specified.")
         return vmin, vmax
 
-    def create_scalar_mappable(self, image: np.ndarray | None = None) -> ScalarMappable:
+    def create_scalar_mappable(self, image: NumericArray | None = None) -> ScalarMappable:
         """
         Create a ScalarMappable for the colorbar without displaying the image.
         """
