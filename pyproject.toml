@@ -39,9 +39,8 @@ where = ["src"]
 [tool.setuptools.package-data]
 matplotlib_utilities = ["py.typed"]
 
-[[tool.mypy.overrides]]
-module = "matplotlib_fontja"
-ignore_missing_imports = true
+[tool.mypy]
+mypy_path = "typings"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
