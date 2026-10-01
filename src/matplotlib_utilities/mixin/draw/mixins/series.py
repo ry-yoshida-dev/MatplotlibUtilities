@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from ..parameters import BarParameters, PlotParameters, ScatterParameters
+from ..parameters import BarhParameters, BarParameters, PlotParameters, ScatterParameters
 from ....protocols import MakerCanvas
 from ....types import NumericArray
 from ....utils import SubplotIndex
@@ -79,3 +79,41 @@ class SeriesDrawMixin:
         """
         subplot = self.access_subplot(index=index)
         subplot.bar(x, **subparams.to_dict)
+
+    def barh(
+        self: MakerCanvas,
+        y: NumericArray,
+        width: NumericArray,
+        index: SubplotIndex,
+        subparams: BarhParameters = BarhParameters(),
+    ) -> None:
+        """
+        Draw a horizontal bar plot on the subplot.
+
+        Bars run along the x axis, so the categories sit on the y axis and
+        their labels read horizontally. That suits a category whose name is
+        too long to fit under a vertical bar.
+
+        Parameters
+        ----------
+        y: NumericArray
+            The positions of the bars on the category axis.
+        width: NumericArray
+            The length of each bar, which is the value it encodes.
+        index: SubplotIndex
+            The index of the subplot.
+        subparams: BarhParameters
+            The subparameters for the horizontal bar plot.
+
+        Raises
+        ------
+        ValueError
+            If y and width do not hold the same number of entries.
+        """
+        if len(y) != len(width):
+            raise ValueError(
+                f"y and width must hold the same number of entries, "
+                f"given {len(y)} and {len(width)}"
+            )
+        subplot = self.access_subplot(index=index)
+        subplot.barh(y, width, **subparams.to_dict)

@@ -1,4 +1,5 @@
 matplotlib
+matplotlib-fontja
 numpy
 pillow
 pytest

@@ -1,5 +1,6 @@
 
 from .parameter import GraphParameters
+from .font_family import FontFamily
 from .maker import MatplotGraphMaker
 from .protocols import MakerCanvas
 from .mixin.axis import AxisMixin
@@ -23,6 +24,8 @@ from .mixin.axis.parameters import (
 from .mixin.draw.parameters import (
     # Parameters (Draw)
     AnnotateParameters,
+    BarParameters,
+    BarhParameters,
     PlotParameters,
     ScatterParameters,
     ImshowParameters,
@@ -50,6 +53,7 @@ __all__ = [
     "GraphLayout",
     "TableAxis",
     "GraphParameters",
+    "FontFamily",
     "MatplotGraphMaker",
     "MakerCanvas",
     "NumericArray",
@@ -63,6 +67,8 @@ __all__ = [
 
     # draw.parameters: Subparameters subclasses
     "AnnotateParameters",
+    "BarParameters",
+    "BarhParameters",
     "PlotParameters",
     "ScatterParameters",
     "ImshowParameters",

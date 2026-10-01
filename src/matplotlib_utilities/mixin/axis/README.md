@@ -26,6 +26,8 @@ If something you need is missing from this package, open an [issue](https://gith
 <ul>
 <li><code>set_label</code></li>
 <li><code>set_lim</code></li>
+<li><code>set_ticks</code></li>
+<li><code>invert</code></li>
 <li><code>set_title</code></li>
 <li><code>set_grid</code></li>
 <li><code>delete_axis_label</code></li>
@@ -75,6 +77,55 @@ x = np.linspace(0, 2 * np.pi, 40)
 idx = maker.get_subplot_index_from_number(number=0)
 maker.plot(x=x, y=np.sin(x), index=idx)
 maker.set_lim(lower=-1.0, upper=1.0, index=idx, axis=GraphAxis.Y)
+maker.finalize(save_path="out.png", is_showing_result_enabled=False)
+```
+
+</details>
+
+## set_ticks
+
+<img src="readme_figures/set_ticks.png" width="400" height="250" alt="set_ticks"/>
+
+<details>
+<summary>Code</summary>
+
+```python
+import numpy as np
+from matplotlib_utilities import GraphAxis, GraphLayout, GraphParameters, MatplotGraphMaker, TableAxis
+
+layout = GraphLayout.from_number(number=1, axis=TableAxis.COLUMN, axis_value=1)
+maker = MatplotGraphMaker(layout=layout, parameters=GraphParameters())
+x = np.linspace(0, 2 * np.pi, 40)
+idx = maker.get_subplot_index_from_number(number=0)
+maker.plot(x=x, y=np.sin(x), index=idx)
+maker.set_ticks(
+    positions=[0.0, np.pi, 2 * np.pi],
+    index=idx,
+    axis=GraphAxis.X,
+    labels=["0", "π", "2π"],
+)
+maker.finalize(save_path="out.png", is_showing_result_enabled=False)
+```
+
+</details>
+
+## invert
+
+<img src="readme_figures/invert.png" width="400" height="250" alt="invert"/>
+
+<details>
+<summary>Code</summary>
+
+```python
+import numpy as np
+from matplotlib_utilities import GraphAxis, GraphLayout, GraphParameters, MatplotGraphMaker, TableAxis
+
+layout = GraphLayout.from_number(number=1, axis=TableAxis.COLUMN, axis_value=1)
+maker = MatplotGraphMaker(layout=layout, parameters=GraphParameters())
+x = np.linspace(0, 2 * np.pi, 40)
+idx = maker.get_subplot_index_from_number(number=0)
+maker.plot(x=x, y=np.sin(x), index=idx)
+maker.invert(index=idx, axis=GraphAxis.Y)
 maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 ```
 

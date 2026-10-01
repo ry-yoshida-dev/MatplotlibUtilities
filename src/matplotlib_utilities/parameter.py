@@ -1,5 +1,7 @@
 from dataclasses import dataclass, field
 
+from .font_family import FontFamily
+
 @dataclass
 class GraphParameters:
     """
@@ -9,6 +11,8 @@ class GraphParameters:
     ----------
     font_size: int
         The size of the font.
+    font_family: FontFamily
+        The font family. Select JAPANESE to draw Japanese labels.
     point_size: int
         The size of the points.
     w_space: float
@@ -25,6 +29,7 @@ class GraphParameters:
         The maximum size of the image with shape(width, height).
     """
     font_size: float = 10.0
+    font_family: FontFamily = FontFamily.DEFAULT
     point_size: float = 5.0
     w_space: float = 0.2
     h_space: float = 0.2

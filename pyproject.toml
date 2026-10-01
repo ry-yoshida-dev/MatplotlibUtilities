@@ -18,6 +18,7 @@ classifiers = [
 ]
 dependencies = [
     "matplotlib",
+    "matplotlib-fontja",
     "numpy",
     "pillow",
     "color @ git+https://github.com/ry-yoshida-dev/Color.git",
@@ -37,6 +38,10 @@ where = ["src"]
 
 [tool.setuptools.package-data]
 matplotlib_utilities = ["py.typed"]
+
+[[tool.mypy.overrides]]
+module = "matplotlib_fontja"
+ignore_missing_imports = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

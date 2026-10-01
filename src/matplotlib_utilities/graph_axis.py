@@ -60,3 +60,35 @@ class GraphAxis(Enum):
                 return "set_xlim"
             case GraphAxis.Y:
                 return "set_ylim"
+
+    @property
+    def ticks_set_attribute(self) -> str:
+        """
+        Get the attribute to set the ticks.
+
+        Returns
+        -------
+        str:
+            The attribute to set the ticks.
+        """
+        match self:
+            case GraphAxis.X:
+                return "set_xticks"
+            case GraphAxis.Y:
+                return "set_yticks"
+
+    @property
+    def invert_attribute(self) -> str:
+        """
+        Get the attribute to invert the axis.
+
+        Returns
+        -------
+        str:
+            The attribute to invert the axis.
+        """
+        match self:
+            case GraphAxis.X:
+                return "invert_xaxis"
+            case GraphAxis.Y:
+                return "invert_yaxis"

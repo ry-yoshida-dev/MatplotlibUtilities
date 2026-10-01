@@ -147,6 +147,7 @@ class MatplotGraphMaker(DrawMixin, AxisMixin):
         row = self.layout.row
         column = self.layout.column
         plt.rcParams["font.size"] = self.parameters.font_size
+        self.parameters.font_family.apply()
         fig = plt.figure(
             dpi=self.parameters.dpi,
             figsize=self.parameters.figsize,

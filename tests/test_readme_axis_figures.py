@@ -43,6 +43,8 @@ README_FIGURE_SIZE = (
 FIGURE_PATHS = [
     "set_label.png",
     "set_lim.png",
+    "set_ticks.png",
+    "invert.png",
     "set_title.png",
     "set_grid.png",
     "delete_axis_label.png",
@@ -104,6 +106,25 @@ class TestUpdateReadmeAxisFigures:
         _base_plot(maker, idx)
         maker.set_lim(lower=-1.0, upper=1.0, index=idx, axis=GraphAxis.Y)
         _save(maker, "set_lim.png")
+
+    def test_set_ticks(self) -> None:
+        maker = _maker()
+        idx = _index(maker)
+        _base_plot(maker, idx)
+        maker.set_ticks(
+            positions=[0.0, np.pi, 2 * np.pi],
+            index=idx,
+            axis=GraphAxis.X,
+            labels=["0", "π", "2π"],
+        )
+        _save(maker, "set_ticks.png")
+
+    def test_invert(self) -> None:
+        maker = _maker()
+        idx = _index(maker)
+        _base_plot(maker, idx)
+        maker.invert(index=idx, axis=GraphAxis.Y)
+        _save(maker, "invert.png")
 
     def test_set_title(self) -> None:
         maker = _maker()

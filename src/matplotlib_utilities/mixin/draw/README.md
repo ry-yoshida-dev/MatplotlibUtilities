@@ -36,6 +36,7 @@ If something you need is missing from this package, open an [issue](https://gith
 <li><code>plot</code></li>
 <li><code>scatter</code></li>
 <li><code>bar</code></li>
+<li><code>barh</code></li>
 </ul>
 </td>
 </tr>
@@ -175,6 +176,31 @@ maker.bar(
     x=np.arange(4.0),
     index=idx,
     subparams=BarParameters(height=[3.0, 5.0, 2.0, 4.0], width=0.6),
+)
+maker.finalize(save_path="out.png", is_showing_result_enabled=False)
+```
+
+</details>
+
+## barh
+
+<img src="readme_figures/series/barh.png" width="400" height="250" alt="barh"/>
+
+<details>
+<summary>Code</summary>
+
+```python
+import numpy as np
+from matplotlib_utilities import BarhParameters, GraphLayout, GraphParameters, MatplotGraphMaker, TableAxis
+
+layout = GraphLayout.from_number(number=1, axis=TableAxis.COLUMN, axis_value=1)
+maker = MatplotGraphMaker(layout=layout, parameters=GraphParameters())
+idx = maker.get_subplot_index_from_number(number=0)
+maker.barh(
+    y=np.arange(4.0),
+    width=np.array([3.0, 5.0, 2.0, 4.0]),
+    index=idx,
+    subparams=BarhParameters(height=0.6),
 )
 maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 ```

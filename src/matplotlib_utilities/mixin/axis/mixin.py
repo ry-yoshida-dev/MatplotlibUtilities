@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from collections.abc import Sequence
+
 from ...protocols import MakerCanvas
 from ...graph_axis import GraphAxis
 from ...utils import SubplotIndex
@@ -59,6 +61,67 @@ class AxisMixin:
         subplot = self.access_subplot(index=index)
         attribute = axis.limit_set_attribute
         getattr(subplot, attribute)(lower, upper)
+
+    def set_ticks(
+        self: MakerCanvas,
+        positions: Sequence[float],
+        index: SubplotIndex,
+        axis: GraphAxis,
+        labels: Sequence[str] | None = None,
+    ) -> None:
+        """
+        Set the tick positions on the subplot, and optionally their labels.
+
+        Parameters
+        ----------
+        positions: Sequence[float]
+            The positions to place ticks at.
+        index: SubplotIndex
+            The index of the subplot.
+        axis: GraphAxis
+            The axis to set the ticks on.
+        labels: Sequence[str] | None
+            The text to draw at each position. None keeps the numeric labels
+            Matplotlib derives from the positions. When given, it must hold
+            one label per position.
+
+        Raises
+        ------
+        ValueError
+            If labels is given and does not match positions in length.
+        """
+        if labels is not None and len(labels) != len(positions):
+            raise ValueError(
+                f"labels must hold one entry per position, "
+                f"given {len(labels)} for {len(positions)} positions"
+            )
+        subplot = self.access_subplot(index=index)
+        attribute = axis.ticks_set_attribute
+        if labels is None:
+            getattr(subplot, attribute)(list(positions))
+            return
+        getattr(subplot, attribute)(list(positions), list(labels))
+
+    def invert(
+        self: MakerCanvas,
+        index: SubplotIndex,
+        axis: GraphAxis,
+    ) -> None:
+        """
+        Invert the direction of an axis on the subplot.
+
+        Inverting the y axis puts the first entry at the top, which is the
+        reading order of a horizontal bar chart.
+
+        Parameters
+        ----------
+        index: SubplotIndex
+            The index of the subplot.
+        axis: GraphAxis
+            The axis to invert.
+        """
+        subplot = self.access_subplot(index=index)
+        getattr(subplot, axis.invert_attribute)()
 
     def set_title(
         self: MakerCanvas,

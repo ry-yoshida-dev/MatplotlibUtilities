@@ -22,6 +22,7 @@ from PIL import Image
 from matplotlib_utilities import (
     AnnotateParameters,
     ArrowParameters,
+    BarhParameters,
     ColorbarParameters,
     GraphLayout,
     GraphParameters,
@@ -55,6 +56,7 @@ FIGURE_PATHS = [
     "series/plot.png",
     "series/scatter.png",
     "series/bar.png",
+    "series/barh.png",
     "vector/quiver.png",
     "vector/arrow.png",
     "misc/legend.png",
@@ -144,6 +146,16 @@ class TestUpdateReadmeFigures:
             subparams=BarParameters(height=[3.0, 5.0, 2.0, 4.0], width=0.6),
         )
         _save(maker, "series/bar.png")
+
+    def test_barh(self) -> None:
+        maker = _maker()
+        maker.barh(
+            y=np.arange(4.0),
+            width=np.array([3.0, 5.0, 2.0, 4.0]),
+            index=_index(maker),
+            subparams=BarhParameters(height=0.6),
+        )
+        _save(maker, "series/barh.png")
 
     def test_quiver(self) -> None:
         maker = _maker()

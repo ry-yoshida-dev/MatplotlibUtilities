@@ -55,6 +55,46 @@ maker.legend(index=idx1, subparams=legend_params)
 maker.finalize(is_showing_result_enabled=True)
 ```
 
+## Japanese labels
+
+Matplotlib ships no font holding Japanese glyphs, so Japanese text is drawn as tofu boxes
+unless a font that holds them is registered first. Select `FontFamily.JAPANESE` and a bundled
+font is registered for you:
+
+```python
+from matplotlib_utilities import FontFamily, GraphParameters, MatplotGraphMaker
+
+maker = MatplotGraphMaker(parameters=GraphParameters(font_family=FontFamily.JAPANESE))
+```
+
+The family is set on the global rcParams, so it applies to every figure drawn afterwards.
+
+## Horizontal bars
+
+`barh` draws bars along the x axis, which suits categories whose names are too long to fit
+under a vertical bar. Pair it with `set_ticks` to label them and `invert` to read top to
+bottom:
+
+```python
+import numpy as np
+from matplotlib_utilities import BarhParameters, GraphAxis
+
+positions = np.arange(3)
+maker.barh(
+    y=positions,
+    width=np.array([1832.3, 84.4, 19.9]),
+    index=index,
+    subparams=BarhParameters(height=0.45, facecolor="#2a78d6"),
+)
+maker.set_ticks(
+    positions=list(positions),
+    index=index,
+    axis=GraphAxis.Y,
+    labels=["市区町村道", "主要地方道・都道府県道", "一般国道"],
+)
+maker.invert(index=index, axis=GraphAxis.Y)
+```
+
 ## Notes
 
 - `requirements.txt` includes a Git dependency for `color` (used with typed color arguments in subparameters).

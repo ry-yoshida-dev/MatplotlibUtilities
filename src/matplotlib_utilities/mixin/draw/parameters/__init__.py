@@ -2,6 +2,7 @@ from ....subparameter import Subparameters
 from .annotate import AnnotateParameters
 from .arrow import ArrowParameters
 from .bar import BarParameters
+from .barh import BarhParameters
 from .colorbar import ColorbarParameters
 from .imshow import ImshowParameters
 from .legend import LegendParameters
@@ -31,6 +32,7 @@ __all__ = [
     "ArrowShape",
     "Aspect",
     "BarParameters",
+    "BarhParameters",
     "ColorbarExtend",
     "ColorbarParameters",
     "ColorbarSpacing",
