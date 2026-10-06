@@ -30,6 +30,14 @@ If something you need is missing from this package, open an [issue](https://gith
 </td>
 </tr>
 <tr>
+<td><a href="./mixins/proportion.py"><code>ProportionDrawMixin</code></a></td>
+<td>
+<ul>
+<li><code>pie</code></li>
+</ul>
+</td>
+</tr>
+<tr>
 <td><a href="./mixins/series.py"><code>SeriesDrawMixin</code></a></td>
 <td>
 <ul>
@@ -201,6 +209,38 @@ maker.barh(
     width=np.array([3.0, 5.0, 2.0, 4.0]),
     index=idx,
     subparams=BarhParameters(height=0.6),
+)
+maker.finalize(save_path="out.png", is_showing_result_enabled=False)
+```
+
+</details>
+
+## pie
+
+<img src="readme_figures/proportion/pie.png" width="400" height="250" alt="pie"/>
+
+Wedge-wide styling such as outlines or a donut hole goes in `WedgeStyle`, passed as `wedgeprops`.
+
+<details>
+<summary>Code</summary>
+
+```python
+import numpy as np
+from matplotlib_utilities import GraphLayout, GraphParameters, MatplotGraphMaker, PieParameters, TableAxis, WedgeStyle
+
+layout = GraphLayout.from_number(number=1, axis=TableAxis.COLUMN, axis_value=1)
+maker = MatplotGraphMaker(layout=layout, parameters=GraphParameters())
+idx = maker.get_subplot_index_from_number(number=0)
+maker.pie(
+    values=np.array([45.0, 30.0, 15.0, 10.0]),
+    index=idx,
+    labels=["A", "B", "C", "D"],
+    subparams=PieParameters(
+        autopct="%1.0f%%",
+        startangle=90.0,
+        counterclock=False,
+        wedgeprops=WedgeStyle(edgecolor="white", linewidth=1.5),
+    ),
 )
 maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 ```

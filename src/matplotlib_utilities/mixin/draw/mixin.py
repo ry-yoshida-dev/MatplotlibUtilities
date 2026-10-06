@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from .mixins import (
     ImageDrawMixin,
+    ProportionDrawMixin,
     SeriesDrawMixin,
     VectorDrawMixin,
 )
@@ -17,7 +18,7 @@ from ...protocols import MakerCanvas
 from ...utils import SubplotIndex
 
 
-class DrawMixin(ImageDrawMixin, SeriesDrawMixin, VectorDrawMixin):
+class DrawMixin(ImageDrawMixin, ProportionDrawMixin, SeriesDrawMixin, VectorDrawMixin):
     """
     Drawing API on the graph maker (for example maker.scatter(...)).
 

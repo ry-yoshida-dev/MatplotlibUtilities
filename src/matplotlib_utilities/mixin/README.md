@@ -15,5 +15,5 @@ Detailed examples and API maps: [`draw/README.md`](./draw/README.md), [`axis/REA
 
 | Path | Contents |
 | ---- | -------- |
-| [`draw/`](./draw/) | [`DrawMixin`](./draw/mixin.py), [`draw/mixins/`](./draw/mixins/) (image / series / vector), [`draw/parameters/`](./draw/parameters/) (`*Parameters` → `to_dict`) |
+| [`draw/`](./draw/) | [`DrawMixin`](./draw/mixin.py), [`draw/mixins/`](./draw/mixins/) (image / proportion / series / vector), [`draw/parameters/`](./draw/parameters/) (`*Parameters` → `to_dict`) |
 | [`axis/`](./axis/) | [`AxisMixin`](./axis/mixin.py); [`axis/parameters/`](./axis/parameters/) (`GridParameters`, `TickParamsParameters`) |

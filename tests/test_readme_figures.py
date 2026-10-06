@@ -30,11 +30,13 @@ from matplotlib_utilities import (
     LineParameters,
     MatplotGraphMaker,
     Orientation,
+    PieParameters,
     PlotParameters,
     QuiverAngles,
     QuiverParameters,
     ScatterParameters,
     TableAxis,
+    WedgeStyle,
 )
 from matplotlib_utilities.mixin.draw.parameters import BarParameters
 
@@ -57,6 +59,7 @@ FIGURE_PATHS = [
     "series/scatter.png",
     "series/bar.png",
     "series/barh.png",
+    "proportion/pie.png",
     "vector/quiver.png",
     "vector/arrow.png",
     "misc/legend.png",
@@ -156,6 +159,21 @@ class TestUpdateReadmeFigures:
             subparams=BarhParameters(height=0.6),
         )
         _save(maker, "series/barh.png")
+
+    def test_pie(self) -> None:
+        maker = _maker()
+        maker.pie(
+            values=np.array([45.0, 30.0, 15.0, 10.0]),
+            index=_index(maker),
+            labels=["A", "B", "C", "D"],
+            subparams=PieParameters(
+                autopct="%1.0f%%",
+                startangle=90.0,
+                counterclock=False,
+                wedgeprops=WedgeStyle(edgecolor="white", linewidth=1.5),
+            ),
+        )
+        _save(maker, "proportion/pie.png")
 
     def test_quiver(self) -> None:
         maker = _maker()

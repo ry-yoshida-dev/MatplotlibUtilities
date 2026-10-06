@@ -14,7 +14,8 @@ class Subparameters(ABC):
 
     Subclasses inherit to_dict by iterating dataclass fields. Override
     _to_dict_skip_field only when omit rules differ from the default (omit None).
-    Enum-like values with a .value attribute are unwrapped in to_dict.
+    Enum-like values with a .value attribute are unwrapped in to_dict, and
+    nested Subparameters become nested dicts (for example wedgeprops).
     """
 
     def _to_dict_skip_field(self, field: Field[Any], value: Any) -> bool:
@@ -48,7 +49,9 @@ class Subparameters(ABC):
             val = getattr(self, f.name)
             if self._to_dict_skip_field(f, val):
                 continue
-            if hasattr(val, "value"):
+            if isinstance(val, Subparameters):
+                out[f.name] = val.to_dict
+            elif hasattr(val, "value"):
                 out[f.name] = val.value
             else:
                 out[f.name] = val

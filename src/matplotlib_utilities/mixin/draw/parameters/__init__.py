@@ -7,9 +7,11 @@ from .colorbar import ColorbarParameters
 from .imshow import ImshowParameters
 from .legend import LegendParameters
 from .line import LineParameters
+from .pie import PieParameters
 from .plot import PlotParameters
 from .quiver import QuiverParameters
 from .scatter import ScatterParameters
+from .wedge_style import WedgeStyle
 from ....utils import (
     Aspect,
     ArrowShape,
@@ -45,6 +47,7 @@ __all__ = [
     "Location",
     "Orientation",
     "Origin",
+    "PieParameters",
     "PlotParameters",
     "QuiverAngles",
     "QuiverParameters",
@@ -52,4 +55,5 @@ __all__ = [
     "QuiverUnits",
     "ScatterParameters",
     "Subparameters",
+    "WedgeStyle",
 ]
