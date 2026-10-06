@@ -82,6 +82,29 @@ class MatplotGraphMaker(DrawMixin, AxisMixin):
             plt.close(self.fig)
             gc.collect()
 
+    def set_figure_title(self, title: str) -> None:
+        """
+        Set the title of the whole figure, above every subplot.
+
+        Parameters
+        ----------
+        title: str
+            The title text.
+        """
+        self.fig.suptitle(title)
+
+    def hide_unused_subplots(self) -> None:
+        """
+        Hide the cells of the grid that hold no subplot.
+
+        A layout whose number of subplots does not fill its rows, such as 5
+        subplots on 2 rows of 3, leaves empty axes in the last row. Hiding
+        them removes their frames and ticks.
+        """
+        for number in range(self.layout.number, self.layout.row * self.layout.column):
+            row_index, column_index = divmod(number, self.layout.column)
+            self.ax[row_index, column_index].set_axis_off()
+
     def get_subplot_index_from_number(
         self,
         number: int

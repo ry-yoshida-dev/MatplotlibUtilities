@@ -25,6 +25,8 @@ Exported names: [`__init__.py`](./__init__.py). Utilities and subplot index type
 | ------ | ---- |
 | `access_subplot(index)` | `Axes` for a `SubplotIndex` |
 | `get_subplot_index_from_number` / `..._row_column` | Build indices |
+| `set_figure_title(title)` | Title above every subplot (`Figure.suptitle`) |
+| `hide_unused_subplots()` | Hide grid cells beyond `layout.number` |
 | `finalize(...)` | `subplots_adjust`, optional save / show / close |
 
 ## Layout and indices (minimal)

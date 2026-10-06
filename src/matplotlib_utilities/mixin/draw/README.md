@@ -182,8 +182,9 @@ maker = MatplotGraphMaker(layout=layout, parameters=GraphParameters())
 idx = maker.get_subplot_index_from_number(number=0)
 maker.bar(
     x=np.arange(4.0),
+    height=np.array([3.0, 5.0, 2.0, 4.0]),
     index=idx,
-    subparams=BarParameters(height=[3.0, 5.0, 2.0, 4.0], width=0.6),
+    subparams=BarParameters(width=0.6),
 )
 maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 ```

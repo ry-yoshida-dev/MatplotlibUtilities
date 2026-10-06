@@ -161,6 +161,27 @@ class AxisMixin:
         subplot = self.access_subplot(index=index)
         subplot.grid(**subparams.to_dict)
 
+    def set_grid_below(
+        self: MakerCanvas,
+        index: SubplotIndex,
+        is_below: bool = True,
+    ) -> None:
+        """
+        Place the grid lines and ticks below or above the drawn data.
+
+        Matplotlib draws the grid above patches such as bars by default, so
+        the lines cross them; placing it below keeps the bars whole.
+
+        Parameters
+        ----------
+        index: SubplotIndex
+            The index of the subplot.
+        is_below: bool
+            Whether the grid goes below every artist drawn on the subplot.
+        """
+        subplot = self.access_subplot(index=index)
+        subplot.set_axisbelow(is_below)
+
     def delete_axis_label(
         self: MakerCanvas,
         index: SubplotIndex,

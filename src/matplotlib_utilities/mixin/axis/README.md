@@ -30,6 +30,7 @@ If something you need is missing from this package, open an [issue](https://gith
 <li><code>invert</code></li>
 <li><code>set_title</code></li>
 <li><code>set_grid</code></li>
+<li><code>set_grid_below</code></li>
 <li><code>delete_axis_label</code></li>
 </ul>
 </td>

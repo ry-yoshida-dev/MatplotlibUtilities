@@ -145,8 +145,9 @@ class TestUpdateReadmeFigures:
         maker = _maker()
         maker.bar(
             x=np.arange(4.0),
+            height=np.array([3.0, 5.0, 2.0, 4.0]),
             index=_index(maker),
-            subparams=BarParameters(height=[3.0, 5.0, 2.0, 4.0], width=0.6),
+            subparams=BarParameters(width=0.6),
         )
         _save(maker, "series/bar.png")
 

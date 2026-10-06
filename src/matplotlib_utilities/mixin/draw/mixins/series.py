@@ -62,6 +62,7 @@ class SeriesDrawMixin:
     def bar(
         self: MakerCanvas,
         x: NumericArray,
+        height: NumericArray,
         index: SubplotIndex,
         subparams: BarParameters = BarParameters(),
     ) -> None:
@@ -71,14 +72,25 @@ class SeriesDrawMixin:
         Parameters
         ----------
         x: NumericArray
-            The x values of the bars.
+            The positions of the bars on the category axis.
+        height: NumericArray
+            The height of each bar, which is the value it encodes.
         index: SubplotIndex
             The index of the subplot.
         subparams: BarParameters
             The subparameters for the bar plot.
+
+        Raises
+        ------
+        ValueError
+            If x and height do not hold the same number of entries.
         """
+        if len(x) != len(height):
+            raise ValueError(
+                f"x and height must hold the same number of entries, given {len(x)} and {len(height)}"
+            )
         subplot = self.access_subplot(index=index)
-        subplot.bar(x, **subparams.to_dict)
+        subplot.bar(x, height, **subparams.to_dict)
 
     def barh(
         self: MakerCanvas,
