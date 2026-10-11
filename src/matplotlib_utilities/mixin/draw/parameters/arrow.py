@@ -1,18 +1,19 @@
 from dataclasses import dataclass
 
-from ....subparameter import Subparameters
+from ....keyword_subparameter import KeywordSubparameters
+from ..keyword_arguments import ArrowKeywordArguments
 from ....utils import ArrowShape
 from ....utils.color import MplColor
 from .base import ArtistParameters, ColorParameters, LabelParameters, LineStyleParameters
 
 
-@dataclass
+@dataclass(frozen=True)
 class ArrowParameters(
     LineStyleParameters,
     ColorParameters,
     LabelParameters,
     ArtistParameters,
-    Subparameters,
+    KeywordSubparameters[ArrowKeywordArguments],
 ):
     """
     Optional keyword arguments for matplotlib.axes.Axes.arrow.

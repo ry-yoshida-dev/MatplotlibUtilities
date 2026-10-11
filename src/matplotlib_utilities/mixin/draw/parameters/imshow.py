@@ -2,16 +2,17 @@ from dataclasses import dataclass
 
 from matplotlib.colors import Normalize
 
-from ....subparameter import Subparameters
+from ....keyword_subparameter import KeywordSubparameters
+from ..keyword_arguments import ImshowKeywordArguments
 from ....utils import Aspect, InterpolationMethod, InterpolationStage, Origin
 from .base import ArtistParameters, CmapParameters
 
 
-@dataclass
+@dataclass(frozen=True)
 class ImshowParameters(
     CmapParameters,
     ArtistParameters,
-    Subparameters,
+    KeywordSubparameters[ImshowKeywordArguments],
 ):
     """
     Parameters for the imshow plot.
@@ -40,7 +41,7 @@ class ImshowParameters(
     url: str | None
         URL of the created AxesImage.
     # inherited from CmapParameters
-    cmap: str | None
+    cmap: ColorMap | None
         The colormap name used to convert normalized values to RGBA.
     vmin: float | None
         The lower bound of the data range mapped to the colormap minimum.
@@ -64,7 +65,7 @@ class ImshowParameters(
     resample: bool = True
     url: str | None = None
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         super().__post_init__()
         if self.filterrad <= 0:
             raise ValueError("filterrad must be greater than 0")

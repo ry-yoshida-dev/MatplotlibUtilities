@@ -1,34 +1,20 @@
-from dataclasses import dataclass, Field
-from typing import Any, Protocol, Sequence
+from collections.abc import Sequence
+from dataclasses import dataclass
 
 from matplotlib.axes import Axes
-from matplotlib import colormaps
 from matplotlib.cm import ScalarMappable
 from matplotlib.colors import Normalize
-from matplotlib.ticker import Formatter
-from matplotlib.ticker import Locator
+from matplotlib.ticker import Formatter, Locator
+from mpl_toolkits.axes_grid1.axes_divider import AxesDivider
 
 from ....subparameter import Subparameters
 from ....types import NumericArray
-from ....utils import ColorbarExtend, ColorbarSpacing, Location, Orientation
+from ....utils import ColorbarExtend, ColorbarSpacing, ColorMap, Location
+from ..keyword_arguments import ColorbarKeywordArguments
 from .base import ArtistParameters, CmapParameters, LabelParameters
 
 
-class _AxesDivider(Protocol):
-    """Structural type for :class:`mpl_toolkits.axes_grid1.axes_divider.AxesDivider`."""
-
-    def append_axes(
-        self,
-        position: str,
-        size: str,
-        pad: float | None = None,
-        *,
-        axes_class: type[Axes] | None = None,
-        **kwargs: Any,
-    ) -> Axes: ...
-
-
-@dataclass
+@dataclass(frozen=True)
 class ColorbarParameters(
     CmapParameters,
     LabelParameters,
@@ -38,111 +24,126 @@ class ColorbarParameters(
     """
     Parameters for the colorbar.
 
+    The colorbar is drawn in a new Axes appended next to the subplot, so its
+    size is set by fraction and pad rather than by Matplotlib's shrink or
+    aspect options.
+
     Attributes:
     ----------
     # own
     location: Location | None = None
-        The location, relative to the parent Axes, where the colorbar Axes is created.
-        It also determines the orientation of the colorbar.
-    orientation: Orientation | None = None
-        The orientation of the colorbar. It is preferable to set the location
-        of the colorbar, as that also determines the orientation.
+        The side of the subplot where the colorbar Axes is created. It also
+        determines the orientation of the colorbar. Defaults to the right.
     fraction: float = 0.15
-        Fraction of original Axes to use for colorbar.
-    shrink: float = 1.0
-        Fraction by which to multiply the size of the colorbar.
-    aspect: float = 20
-        Ratio of long to short dimensions.
+        The size of the colorbar Axes as a fraction of the subplot.
     pad: float | None = None
-        Fraction of original Axes between colorbar and new image Axes.
-        Defaults to 0.05 if vertical, 0.15 if horizontal.
-    anchor: tuple[float, float] | None = None
-        The anchor point of the colorbar Axes.
-        Defaults to (0.0, 0.5) if vertical; (0.5, 1.0) if horizontal.
-    panchor: tuple[float, float] | bool | None = None
-        The anchor point of the colorbar parent Axes.
-        If False, the parent axes anchor is unchanged.
-        Defaults to (1.0, 0.5) if vertical; (0.5, 0.0) if horizontal.
+        The gap between the subplot and the colorbar, in inches.
+        Defaults to 0.05.
     extend: ColorbarExtend = ColorbarExtend.NEITHER
         Make pointed end(s) for out-of-range values.
-    extendfrac: None | str | float | tuple[float, float] = None
+    extendfrac: float | tuple[float, float] | None = None
         Length of triangular colorbar extensions as a fraction of the interior colorbar length.
-        If auto, makes extensions the same lengths as interior boxes.
     extendrect: bool = False
         If False the extensions are triangular.
         If True the extensions are rectangular.
-    ticks: None | list | Locator = None
+    ticks: Sequence[float] | Locator | None = None
         If None, ticks are determined automatically from the input.
-    format: None | str | Formatter = None
+    format: str | Formatter | None = None
         If None, ScalarFormatter is used. Format strings are supported.
     drawedges: bool = False
         Whether to draw lines at color boundaries.
-    boundaries: None | Sequence = None
+    boundaries: Sequence[float] | None = None
         If unset, the colormap is displayed on a 0-1 scale.
-    values: None | Sequence = None
+    values: Sequence[float] | None = None
         Must have a length 1 less than boundaries if boundaries is set.
     spacing: ColorbarSpacing | None = None
         For discrete colorbars, uniform gives each color the same space;
         proportional makes the space proportional to the data interval.
     # inherited from CmapParameters
-    cmap: str | None
-        The colormap name used for mapping normalized values to colors.
+    cmap: ColorMap | None
+        The colormap of a colorbar built from image data. It must stay unset
+        when the colorbar describes an existing mappable.
     vmin: float | None
-        The minimum data value represented by the color scale.
+        The minimum data value of a colorbar built from image data.
     vmax: float | None
-        The maximum data value represented by the color scale.
+        The maximum data value of a colorbar built from image data.
     # inherited from LabelParameters
     label: str | None
-        The label string for axis, legend, and other uses.
+        The label of the colorbar's long axis.
     # inherited from ArtistParameters
     alpha: float | None
         The alpha of the colorbar.
     zorder: float | None
-        The drawing order.
+        The drawing order of the colorbar Axes.
     """
 
     location: Location | None = None
-    orientation: Orientation | None = None
     fraction: float = 0.15
-    shrink: float = 1.0
-    aspect: float = 20.0
     pad: float | None = None
-    anchor: tuple[float, float] | None = None
-    panchor: tuple[float, float] | bool | None = None
     extend: ColorbarExtend = ColorbarExtend.NEITHER
-    extendfrac: None | str | float | tuple[float, float] = None
+    extendfrac: float | tuple[float, float] | None = None
     extendrect: bool = False
-    ticks: None | list[float] | Locator = None
-    format: None | str | Formatter = None
+    ticks: Sequence[float] | Locator | None = None
+    format: str | Formatter | None = None
     drawedges: bool = False
-    boundaries: None | Sequence[float] = None
-    values: None | Sequence[float] = None
+    boundaries: Sequence[float] | None = None
+    values: Sequence[float] | None = None
     spacing: ColorbarSpacing | None = None
 
     def __post_init__(self) -> None:
         super().__post_init__()
         if self.fraction <= 0 or self.fraction > 1:
             raise ValueError("fraction must be between 0 and 1")
-        if self.shrink <= 0 or self.shrink > 1:
-            raise ValueError("shrink must be between 0 and 1")
-        if self.aspect <= 0:
-            raise ValueError("aspect must be greater than 0")
         if self.pad is not None and (self.pad <= 0 or self.pad > 1):
             raise ValueError("pad must be between 0 and 1")
-        if self.anchor is not None and len(self.anchor) != 2:
-            raise ValueError("anchor must be a tuple of 2 floats")
-        if self.panchor is not None and isinstance(self.panchor, tuple) and len(self.panchor) != 2:
-            raise ValueError("panchor must be a tuple of 2 floats")
-        if self.extend not in [ColorbarExtend.NEITHER, ColorbarExtend.BOTH, ColorbarExtend.MIN, ColorbarExtend.MAX]:
-            raise ValueError("extend must be ColorbarExtend enum")
         if self.extendfrac is not None and isinstance(self.extendfrac, tuple) and len(self.extendfrac) != 2:
             raise ValueError("extendfrac tuple must have 2 elements")
         if self.extendrect and self.extend == ColorbarExtend.NEITHER:
             raise ValueError("extendrect can only be True if extend is not NEITHER")
-        if self.drawedges and self.boundaries is None:
-            raise ValueError("drawedges can only be True if boundaries is set")
         if self.boundaries is not None and self.values is not None and len(self.boundaries) != len(self.values) + 1:
             raise ValueError("boundaries must have a length 1 greater than values")
+
+    @property
+    def is_scale_set(self) -> bool:
+        """
+        Whether cmap, vmin or vmax is set, which only applies to a colorbar built from image data.
+        """
+        return self.cmap is not None or self.vmin is not None or self.vmax is not None
+
+    @property
+    def colorbar_keyword_arguments(self) -> ColorbarKeywordArguments:
+        """
+        Return the fields that Figure.colorbar accepts as keyword arguments.
+
+        Returns
+        -------
+        ColorbarKeywordArguments
+            The keyword arguments, without the fields left as None.
+        """
+        location = Location.RIGHT if self.location is None else self.location
+        keyword_arguments = ColorbarKeywordArguments(
+            location=location.value,
+            extend=self.extend.value,
+            extendrect=self.extendrect,
+            drawedges=self.drawedges,
+        )
+        if self.extendfrac is not None:
+            keyword_arguments["extendfrac"] = self.extendfrac
+        if self.ticks is not None:
+            keyword_arguments["ticks"] = self.ticks
+        if self.format is not None:
+            keyword_arguments["format"] = self.format
+        if self.boundaries is not None:
+            keyword_arguments["boundaries"] = self.boundaries
+        if self.values is not None:
+            keyword_arguments["values"] = self.values
+        if self.spacing is not None:
+            keyword_arguments["spacing"] = self.spacing.value
+        if self.label is not None:
+            keyword_arguments["label"] = self.label
+        if self.alpha is not None:
+            keyword_arguments["alpha"] = self.alpha
+        return keyword_arguments
 
     def _get_vmin_vmax(self, image: NumericArray | None) -> tuple[float, float]:
         """
@@ -164,21 +165,19 @@ class ColorbarParameters(
         Create a ScalarMappable for the colorbar without displaying the image.
         """
         vmin, vmax = self._get_vmin_vmax(image)
-        if self.cmap is None:
-            self.cmap = "viridis"
-        cmap_obj = colormaps[self.cmap]
+        colormap = ColorMap.VIRIDIS if self.cmap is None else self.cmap
         norm = Normalize(vmin=vmin, vmax=vmax)
-        sm = ScalarMappable(norm=norm, cmap=cmap_obj)
-        sm.set_array([])
-        return sm
+        scalar_mappable = ScalarMappable(norm=norm, cmap=colormap.colormap_object)
+        scalar_mappable.set_array([])
+        return scalar_mappable
 
-    def create_cax(self, divider: _AxesDivider) -> Axes:
+    def create_cax(self, divider: AxesDivider) -> Axes:
         """
         Append colorbar axes to divider and return the new Axes.
         """
-        location = self.location.value if self.location is not None else Location.RIGHT.value
+        location = Location.RIGHT if self.location is None else self.location
         pad = 0.05 if self.pad is None else self.pad
-        return divider.append_axes(location, f"{self.fraction * 100}%", pad)
-
-    def _to_dict_skip_field(self, field: Field[Any], value: Any) -> bool:
-        return value == field.default
+        cax = divider.append_axes(location.value, f"{self.fraction * 100}%", pad)
+        if self.zorder is not None:
+            cax.set_zorder(self.zorder)
+        return cax

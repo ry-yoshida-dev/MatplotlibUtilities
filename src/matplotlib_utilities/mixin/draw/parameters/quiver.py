@@ -1,18 +1,20 @@
 from dataclasses import dataclass
 
-from ....subparameter import Subparameters
+from ....keyword_subparameter import KeywordSubparameters
+from ..keyword_arguments import QuiverKeywordArguments
 from ....utils import QuiverAngles, QuiverPivot, QuiverUnits
 from ....utils.color import MplColor
-from .base import ArtistParameters, CmapParameters, LabelParameters, LineStyleParameters
+from .base import ArtistParameters, CmapParameters, ColorParameters, LabelParameters, LineStyleParameters
 
 
-@dataclass
+@dataclass(frozen=True)
 class QuiverParameters(
     CmapParameters,
     LabelParameters,
     LineStyleParameters,
+    ColorParameters,
     ArtistParameters,
-    Subparameters,
+    KeywordSubparameters[QuiverKeywordArguments],
 ):
     """
     Parameters for :meth:`matplotlib.axes.Axes.quiver`.
@@ -45,7 +47,7 @@ class QuiverParameters(
     color: MplColor | None
         Explicit arrow colors (ignored when colormap data ``C`` is passed to quiver).
     # inherited from CmapParameters
-    cmap: str | None
+    cmap: ColorMap | None
         Colormap name when ``C`` is passed to quiver.
     vmin: float | None
         Lower bound for colormap normalization.
@@ -61,6 +63,7 @@ class QuiverParameters(
         Line style of arrow edges.
     antialiased: bool | None
         Whether to antialias arrow edges.
+    # inherited from ColorParameters
     facecolor: MplColor | None
         Fill color of arrow polygons.
     edgecolor: MplColor | None
@@ -91,8 +94,11 @@ class QuiverParameters(
             raise ValueError("scale must be positive")
         if self.width is not None and self.width <= 0:
             raise ValueError("width must be positive")
-        for name in ("headwidth", "headlength", "headaxislength"):
-            value = getattr(self, name)
+        for name, value in (
+            ("headwidth", self.headwidth),
+            ("headlength", self.headlength),
+            ("headaxislength", self.headaxislength),
+        ):
             if value is not None and value <= 0:
                 raise ValueError(f"{name} must be positive")
         if self.minshaft is not None and self.minshaft < 1:

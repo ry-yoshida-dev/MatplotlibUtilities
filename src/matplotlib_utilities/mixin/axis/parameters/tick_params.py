@@ -1,10 +1,11 @@
 from dataclasses import dataclass
 
-from ....subparameter import Subparameters
+from ....keyword_subparameter import KeywordSubparameters
+from ..keyword_arguments import TickParamsKeywordArguments
 
 
-@dataclass
-class TickParamsParameters(Subparameters):
+@dataclass(frozen=True)
+class TickParamsParameters(KeywordSubparameters[TickParamsKeywordArguments]):
     """
     Parameters for configuring tick marks and labels on matplotlib axes.
 

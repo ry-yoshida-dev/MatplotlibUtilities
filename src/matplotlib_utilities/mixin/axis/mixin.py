@@ -34,8 +34,11 @@ class AxisMixin:
             The axis to set the label on.
         """
         subplot = self.access_subplot(index=index)
-        axis_attribute = axis.label_set_attribute
-        getattr(subplot, axis_attribute)(label)
+        match axis:
+            case GraphAxis.X:
+                _ = subplot.set_xlabel(label)
+            case GraphAxis.Y:
+                _ = subplot.set_ylabel(label)
 
     def set_lim(
         self: MakerCanvas,
@@ -59,8 +62,11 @@ class AxisMixin:
             The axis to set the limit on.
         """
         subplot = self.access_subplot(index=index)
-        attribute = axis.limit_set_attribute
-        getattr(subplot, attribute)(lower, upper)
+        match axis:
+            case GraphAxis.X:
+                _ = subplot.set_xlim(lower, upper)
+            case GraphAxis.Y:
+                _ = subplot.set_ylim(lower, upper)
 
     def set_ticks(
         self: MakerCanvas,
@@ -92,15 +98,15 @@ class AxisMixin:
         """
         if labels is not None and len(labels) != len(positions):
             raise ValueError(
-                f"labels must hold one entry per position, "
-                f"given {len(labels)} for {len(positions)} positions"
+                f"labels must hold one entry per position, given {len(labels)} for {len(positions)} positions"
             )
         subplot = self.access_subplot(index=index)
-        attribute = axis.ticks_set_attribute
-        if labels is None:
-            getattr(subplot, attribute)(list(positions))
-            return
-        getattr(subplot, attribute)(list(positions), list(labels))
+        tick_labels = None if labels is None else list(labels)
+        match axis:
+            case GraphAxis.X:
+                _ = subplot.set_xticks(list(positions), labels=tick_labels)
+            case GraphAxis.Y:
+                _ = subplot.set_yticks(list(positions), labels=tick_labels)
 
     def invert(
         self: MakerCanvas,
@@ -121,7 +127,11 @@ class AxisMixin:
             The axis to invert.
         """
         subplot = self.access_subplot(index=index)
-        getattr(subplot, axis.invert_attribute)()
+        match axis:
+            case GraphAxis.X:
+                subplot.invert_xaxis()
+            case GraphAxis.Y:
+                subplot.invert_yaxis()
 
     def set_title(
         self: MakerCanvas,
@@ -139,7 +149,7 @@ class AxisMixin:
             The index of the subplot.
         """
         subplot = self.access_subplot(index=index)
-        subplot.set_title(title)
+        _ = subplot.set_title(title)
 
     def set_grid(
         self: MakerCanvas,

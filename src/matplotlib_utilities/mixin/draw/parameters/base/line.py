@@ -1,11 +1,10 @@
 from dataclasses import dataclass
 
 from .....utils import Linestyle
-from .color import ColorParameters
 
 
-@dataclass
-class LineStyleParameters(ColorParameters):
+@dataclass(frozen=True)
+class LineStyleParameters:
     """
     Common line-like kwargs shared by line and plot style artists.
     """
@@ -19,4 +18,4 @@ class LineStyleParameters(ColorParameters):
             raise ValueError("linewidth must be positive")
         post_init = getattr(super(), "__post_init__", None)
         if callable(post_init):
-            post_init()
+            _ = post_init()

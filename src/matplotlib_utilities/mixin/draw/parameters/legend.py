@@ -1,13 +1,15 @@
 from dataclasses import dataclass
 
-from ....subparameter import Subparameters
+from ....keyword_subparameter import KeywordSubparameters
+from ....utils import FontSize, LegendLocation
+from ..keyword_arguments import LegendKeywordArguments
 from .base import ColorParameters
 
 
-@dataclass
+@dataclass(frozen=True)
 class LegendParameters(
     ColorParameters,
-    Subparameters,
+    KeywordSubparameters[LegendKeywordArguments],
 ):
     """
     Parameters for the legend.
@@ -15,13 +17,13 @@ class LegendParameters(
     Attributes:
     ----------
     # own
-    loc: str | None
+    loc: LegendLocation | None
         The location of the legend.
     bbox_to_anchor: tuple | None
         Box that is used to position the legend in conjunction with loc.
     ncol: int | None
         The number of columns that the legend has.
-    fontsize: int | str | None
+    fontsize: float | FontSize | None
         The font size of the legend.
     frameon: bool | None
         Whether the legend should be drawn on a frame.
@@ -33,7 +35,7 @@ class LegendParameters(
         The alpha transparency of the legend background.
     title: str | None
         The legend title.
-    title_fontsize: int | str | None
+    title_fontsize: float | FontSize | None
         The font size of the legend title.
     # inherited from ColorParameters
     facecolor: MplColor | None
@@ -42,13 +44,13 @@ class LegendParameters(
         The border color of the legend frame.
     """
 
-    loc: str | None = None
+    loc: LegendLocation | None = None
     bbox_to_anchor: tuple[float, ...] | None = None
     ncol: int | None = None
-    fontsize: int | str | None = None
+    fontsize: float | FontSize | None = None
     frameon: bool | None = None
     fancybox: bool | None = None
     shadow: bool | None = None
     framealpha: float | None = None
     title: str | None = None
-    title_fontsize: int | str | None = None
+    title_fontsize: float | FontSize | None = None

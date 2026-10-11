@@ -1,7 +1,7 @@
 from __future__ import annotations
 from dataclasses import dataclass
 
-@dataclass
+@dataclass(frozen=True)
 class SubplotNumber:
     """
     A class for accessing the number of the subplot.
@@ -14,7 +14,7 @@ class SubplotNumber:
     number: int
     row_index: int
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         if self.number < 0:
             raise ValueError("number must be greater than or equal to 0")
 

@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 
-@dataclass
+@dataclass(frozen=True)
 class ArtistParameters:
     """
     Common artist kwargs shared by many matplotlib draw calls.
@@ -17,4 +17,4 @@ class ArtistParameters:
             raise ValueError("zorder must be non-negative")
         post_init = getattr(super(), "__post_init__", None)
         if callable(post_init):
-            post_init()
+            _ = post_init()

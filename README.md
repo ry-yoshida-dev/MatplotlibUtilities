@@ -2,7 +2,7 @@
 
 ## Overview
 
-MatplotlibUtilities (`matplotlib_utilities`) is a small Python library that wraps common Matplotlib workflows: subplot layout, typed “subparameter” dataclasses for plot kwargs, and a `MatplotGraphMaker` facade for scatter, plot, imshow, colorbars, legends, and annotations.
+MatplotlibUtilities (`matplotlib_utilities`) is a small Python library that wraps common Matplotlib workflows: subplot layout, typed “subparameter” dataclasses for plot kwargs, and a `MatplotGraphMaker` facade for line, bar, pie, distribution (histogram, box, violin, hexbin), contour, mesh, vector-field and image plots, plus colorbars, legends, and annotations. See [mixin/draw/README.md](src/matplotlib_utilities/mixin/draw/README.md) for every chart type with an example figure.
 
 For package structure and modules, see [src/matplotlib_utilities/README.md](src/matplotlib_utilities/README.md).
 
@@ -22,13 +22,22 @@ pytest
 
 You can also install the package in editable mode with `pip install -e .` from the repository root (see `pyproject.toml`).
 
+The source passes `mypy --strict` and basedpyright with no warnings; both are configured in `pyproject.toml`:
+
+```bash
+pip install -e ".[dev]"
+mypy
+basedpyright
+```
+
 ## Quick example
 
 ```python
 import numpy as np
 from matplotlib_utilities import (
-    GraphLayout, 
-    GraphParameters, 
+    ColorMap,
+    GraphLayout,
+    GraphParameters,
     MatplotGraphMaker,
     PlotParameters,
     ScatterParameters,
@@ -48,7 +57,7 @@ z = np.cos(x * 10)
 idx0 = maker.get_subplot_index_from_number(number=0)
 idx1 = maker.get_subplot_index_from_number(number=1)
 maker.plot(index=idx0, x=x, y=y, subparams=PlotParameters())
-maker.scatter(index=idx1, x=x, y=y, subparams=ScatterParameters(c=z, cmap="viridis", label="sin"))
+maker.scatter(index=idx1, x=x, y=y, subparams=ScatterParameters(c=z, cmap=ColorMap.VIRIDIS, label="sin"))
 maker.set_label(label="x", index=idx0, axis=GraphAxis.X)
 maker.set_label(label="y", index=idx0, axis=GraphAxis.Y)
 maker.legend(index=idx1, subparams=legend_params)
@@ -97,5 +106,5 @@ maker.invert(index=index, axis=GraphAxis.Y)
 
 ## Notes
 
-- `requirements.txt` includes a Git dependency for `color` (used with typed color arguments in subparameters).
+- `requirements.txt` includes a Git dependency for `color`, whose palette types are re-exported from `utils`. Color fields in parameters take `MplColor`, which is Matplotlib's `ColorType`: a name, a hex string, or an RGB(A) tuple of floats in 0–1.
 - Subplot indexing types live under [`src/matplotlib_utilities/utils/index/`](src/matplotlib_utilities/utils/index/README.md); `SubplotIndex` is also exported from the `matplotlib_utilities` package root.

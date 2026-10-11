@@ -2,12 +2,13 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from ....subparameter import Subparameters
+from ....keyword_subparameter import KeywordSubparameters
+from ..keyword_arguments import GridKeywordArguments
 from ....utils import GridAxis, GridWhich
 
 
-@dataclass
-class GridParameters(Subparameters):
+@dataclass(frozen=True)
+class GridParameters(KeywordSubparameters[GridKeywordArguments]):
     """
     Parameters for :meth:`matplotlib.axes.Axes.grid`.
 

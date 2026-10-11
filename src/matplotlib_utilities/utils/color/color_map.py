@@ -1,9 +1,9 @@
-from enum import Enum
+from ..keyword_enum import KeywordEnum
 
 from matplotlib.colors import Colormap
 from matplotlib import colormaps
 
-class ColorMap(Enum):
+class ColorMap(KeywordEnum):
     # --- Perceptually Uniform Sequential ---
     VIRIDIS = 'viridis'
     PLASMA = 'plasma'

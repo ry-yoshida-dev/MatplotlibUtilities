@@ -6,7 +6,7 @@
 | ----- | ----- | ---- |
 | Layout | `GraphLayout`, `TableAxis` | Subplot grid; helpers to build layout from a count |
 | Global style | `GraphParameters` | Font, spacing, DPI, figure size |
-| Per-plot kwargs | `*Parameters` dataclasses | Typed kwargs → `to_dict` for Matplotlib |
+| Per-plot kwargs | `*Parameters` dataclasses | Frozen, typed kwargs → `to_dict` returns a TypedDict checked against Matplotlib |
 | Coordinator | `MatplotGraphMaker` | Builds `Figure` / `Axes`; drawing methods on the maker; see **`axis`** below |
 
 **Mixin API:** [`mixin/`](./mixin/) — `DrawMixin` and `AxisMixin` on `MatplotGraphMaker` (e.g. `maker.scatter`, `maker.set_label`). Draw examples: [`mixin/draw/README.md`](./mixin/draw/README.md).
@@ -18,7 +18,7 @@ Exported names: [`__init__.py`](./__init__.py). Utilities and subplot index type
 | Attribute | Role |
 | --------- | ---- |
 | `layout`, `parameters` | Grid + figure defaults (applied when the figure is created) |
-| `fig`, `ax` | Raw Matplotlib objects (`ax` is 2D, `squeeze=False`) |
+| `fig`, `ax` | Raw Matplotlib objects (`ax[row][column]` is an `Axes`) |
 | `axis` | Axis helpers; drawing uses flat methods on the maker (`scatter`, `plot`, …) |
 
 | Method | Role |
@@ -43,9 +43,9 @@ Exported names: [`__init__.py`](./__init__.py). Utilities and subplot index type
 | ---- | -------- |
 | [`maker.py`](./maker.py) | `MatplotGraphMaker` |
 | [`layout.py`](./layout.py); enums in [`utils/table_axis.py`](./utils/table_axis.py), [`graph_axis.py`](./graph_axis.py) | Layout / table vs graph axis |
-| [`parameter.py`](./parameter.py), [`subparameter.py`](./subparameter.py) | `GraphParameters`, `Subparameters` base |
+| [`parameter.py`](./parameter.py), [`subparameter.py`](./subparameter.py), [`keyword_subparameter.py`](./keyword_subparameter.py) | `GraphParameters`; `Subparameters` (frozen base with `rebuild`); `KeywordSubparameters` (adds the typed `to_dict`) |
 | [`font_family.py`](./font_family.py) | `FontFamily` — the font family a figure is drawn in, including a Japanese one |
-| [`types/`](./types/) | `NumericArray`, `SubplotAxesArray` — NumPy dtype aliases |
+| [`types/`](./types/) | `NumericArray`, `SubplotAxesGrid` — shared type aliases |
 | [`mixin/`](./mixin/) | `DrawMixin`, `AxisMixin`, and per-feature `*Parameters` — see [`mixin/README.md`](./mixin/README.md) |
 
 Install and a short example: [../../README.md](../../README.md).

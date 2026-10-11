@@ -1,7 +1,7 @@
-from enum import Enum
+from .keyword_enum import KeywordEnum
 
 
-class ArrowShape(Enum):
+class ArrowShape(KeywordEnum):
     """
     shape for :meth:`matplotlib.axes.Axes.arrow` (left-half, right-half, or full arrow).
     """

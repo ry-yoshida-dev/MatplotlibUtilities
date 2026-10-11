@@ -1,7 +1,7 @@
-from enum import Enum
+from ..keyword_enum import KeywordEnum
 
 
-class QuiverAngles(Enum):
+class QuiverAngles(KeywordEnum):
     """Angle mode for :meth:`matplotlib.axes.Axes.quiver`."""
 
     UV = "uv"

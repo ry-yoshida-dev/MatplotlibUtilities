@@ -1,20 +1,22 @@
+from collections.abc import Sequence
 from dataclasses import dataclass
 
 import numpy as np
 from numpy.typing import ArrayLike
 
-from ....subparameter import Subparameters
+from ....keyword_subparameter import KeywordSubparameters
+from ..keyword_arguments import ScatterKeywordArguments
 from ....utils import Marker
-from ....utils.color import ScatterColorArg
+from ....utils.color import MplColor, ScatterColorArg
 from .base import ArtistParameters, CmapParameters, LabelParameters
 
 
-@dataclass
+@dataclass(frozen=True)
 class ScatterParameters(
     CmapParameters,
     LabelParameters,
     ArtistParameters,
-    Subparameters,
+    KeywordSubparameters[ScatterKeywordArguments],
 ):
     """
     Parameters for the scatter plot.
@@ -28,14 +30,15 @@ class ScatterParameters(
         Marker face color or scalar values for colormap mapping.
     marker: Marker
         Marker style.
-    linewidths: float | None
-        Edge line width of the markers.
-    edgecolors: ScatterColorArg | None
-        Marker edge colors.
+    linewidths: float | Sequence[float] | None
+        Edge line width of the markers, one for all or one per point.
+    edgecolors: MplColor | Sequence[MplColor] | None
+        Marker edge colors, one for all or one per point. "face" uses the
+        face color and "none" draws no edge.
     plotnonfinite: bool
         Whether to draw points with non-finite c values.
     # inherited from CmapParameters
-    cmap: str | None
+    cmap: ColorMap | None
         The colormap name used when `c` contains numeric values.
     vmin: float | None
         The lower data bound mapped to the start of the colormap.
@@ -52,10 +55,10 @@ class ScatterParameters(
     """
 
     s: float | ArrayLike | None = None
-    c: ScatterColorArg | ArrayLike | None = None
+    c: ScatterColorArg | None = None
     marker: Marker = Marker.POINT
-    linewidths: float | ArrayLike | None = None
-    edgecolors: ScatterColorArg | ArrayLike | None = None
+    linewidths: float | Sequence[float] | None = None
+    edgecolors: MplColor | Sequence[MplColor] | None = None
     plotnonfinite: bool = False
 
     def __post_init__(self) -> None:

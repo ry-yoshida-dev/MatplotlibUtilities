@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from .....utils.color import MplColor
 
 
-@dataclass
+@dataclass(frozen=True)
 class ColorParameters:
     """
     Base color parameters shared by patch-like artists.

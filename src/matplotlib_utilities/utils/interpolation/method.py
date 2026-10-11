@@ -1,7 +1,7 @@
-from enum import Enum
+from ..keyword_enum import KeywordEnum
 
 
-class InterpolationMethod(Enum):
+class InterpolationMethod(KeywordEnum):
     """
     Interpolation methods for matplotlib imshow.
 

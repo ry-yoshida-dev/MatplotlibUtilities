@@ -1,13 +1,14 @@
 from collections.abc import Sequence
 from dataclasses import dataclass
 
-from ....subparameter import Subparameters
+from ....keyword_subparameter import KeywordSubparameters
+from ..keyword_arguments import PieKeywordArguments
 from ....utils.color import MplColor
 from .wedge_style import WedgeStyle
 
 
-@dataclass
-class PieParameters(Subparameters):
+@dataclass(frozen=True)
+class PieParameters(KeywordSubparameters[PieKeywordArguments]):
     """
     Parameters for the pie chart.
 

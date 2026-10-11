@@ -1,16 +1,17 @@
 from dataclasses import dataclass
 
-from ....subparameter import Subparameters
+from ....keyword_subparameter import KeywordSubparameters
+from ..keyword_arguments import LineKeywordArguments
 from ....utils.color import MplColor
 from .base import ArtistParameters, LabelParameters, LineStyleParameters
 
 
-@dataclass
+@dataclass(frozen=True)
 class LineParameters(
     LineStyleParameters,
     LabelParameters,
     ArtistParameters,
-    Subparameters,
+    KeywordSubparameters[LineKeywordArguments],
 ):
     """
     Parameters for the line.

@@ -1,7 +1,7 @@
-from enum import Enum
+from .keyword_enum import KeywordEnum
 
 
-class Orientation(Enum):
+class Orientation(KeywordEnum):
     """
     Orientation options for matplotlib elements (e.g., colorbar, legend).
     
@@ -12,11 +12,3 @@ class Orientation(Enum):
     """
     VERTICAL = "vertical"
     HORIZONTAL = "horizontal"
-
-    @property
-    def ax_line_attribute(self) -> str:
-        match self:
-            case Orientation.VERTICAL:
-                return "axvline"
-            case Orientation.HORIZONTAL:
-                return "axhline"

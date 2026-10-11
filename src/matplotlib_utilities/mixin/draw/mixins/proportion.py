@@ -66,4 +66,4 @@ class ProportionDrawMixin:
                     + f"given {len(entries)} for {wedge_sizes.size} values"
                 )
         subplot = self.access_subplot(index=index)
-        subplot.pie(wedge_sizes, labels=labels, **subparams.to_dict)
+        _ = subplot.pie(wedge_sizes, labels=labels, **subparams.to_dict)

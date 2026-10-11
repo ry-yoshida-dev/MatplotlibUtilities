@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
 from matplotlib.axes import Axes
 
-from .types import SubplotAxesArray
+from .types import SubplotAxesGrid
 
 from .utils import (
     SubplotIndex,
@@ -29,10 +29,8 @@ class MatplotGraphMaker(DrawMixin, AxisMixin):
         The parameters for the MatplotGraphMaker.
     fig: Figure
         The figure of the matplotlib graphs.
-    ax: SubplotAxesArray
-        The axes of the matplotlib graphs.
-    axis: AxisMixin
-        Axis API (labels, limits, tick visibility; e.g. maker.axis.set_label(...)).
+    ax: SubplotAxesGrid
+        The axes of the matplotlib graphs, indexed as ax[row][column].
     """
     def __init__(
         self,
@@ -51,7 +49,8 @@ class MatplotGraphMaker(DrawMixin, AxisMixin):
         """
         self.layout: GraphLayout = layout or GraphLayout(number=1, column=1, row=1)
         self.parameters: GraphParameters = parameters or GraphParameters()
-        self.fig, self.ax = self._create_canvas()
+        self.fig: Figure = self._create_figure()
+        self.ax: SubplotAxesGrid = self._create_axes_grid()
 
     def finalize(
         self,
@@ -80,7 +79,7 @@ class MatplotGraphMaker(DrawMixin, AxisMixin):
             self.fig.show()
         else:
             plt.close(self.fig)
-            gc.collect()
+            _ = gc.collect()
 
     def set_figure_title(self, title: str) -> None:
         """
@@ -91,7 +90,7 @@ class MatplotGraphMaker(DrawMixin, AxisMixin):
         title: str
             The title text.
         """
-        self.fig.suptitle(title)
+        _ = self.fig.suptitle(title)
 
     def hide_unused_subplots(self) -> None:
         """
@@ -103,7 +102,7 @@ class MatplotGraphMaker(DrawMixin, AxisMixin):
         """
         for number in range(self.layout.number, self.layout.row * self.layout.column):
             row_index, column_index = divmod(number, self.layout.column)
-            self.ax[row_index, column_index].set_axis_off()
+            self.ax[row_index][column_index].set_axis_off()
 
     def get_subplot_index_from_number(
         self,
@@ -156,24 +155,35 @@ class MatplotGraphMaker(DrawMixin, AxisMixin):
             The index of the subplot.
         """
         row_index, column_index = index.tuple
-        return self.ax[row_index, column_index]
+        return self.ax[row_index][column_index]
 
-    def _create_canvas(self) -> tuple[Figure, SubplotAxesArray]:
+    def _create_figure(self) -> Figure:
         """
-        Create a canvas for the matplotlib graphs.
+        Create the figure with the global style in parameters applied.
 
         Returns
         -------
-        tuple[Figure, SubplotAxesArray]:
-            A tuple of the figure and the axes.
+        Figure
+            The empty figure.
         """
-        row = self.layout.row
-        column = self.layout.column
         plt.rcParams["font.size"] = self.parameters.font_size
         self.parameters.font_family.apply()
-        fig = plt.figure(
+        return plt.figure(
             dpi=self.parameters.dpi,
             figsize=self.parameters.figsize,
         )
-        ax = fig.subplots(nrows=row, ncols=column, squeeze=False)
-        return fig, ax
+
+    def _create_axes_grid(self) -> SubplotAxesGrid:
+        """
+        Create one Axes per cell of the layout grid.
+
+        Returns
+        -------
+        SubplotAxesGrid
+            The Axes, indexed as grid[row][column].
+        """
+        grid_spec = self.fig.add_gridspec(nrows=self.layout.row, ncols=self.layout.column)
+        return tuple(
+            tuple(self.fig.add_subplot(grid_spec[row_index, column_index]) for column_index in range(self.layout.column))
+            for row_index in range(self.layout.row)
+        )

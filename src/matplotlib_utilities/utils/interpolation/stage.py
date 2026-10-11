@@ -1,7 +1,7 @@
-from enum import Enum
+from ..keyword_enum import KeywordEnum
 
 
-class InterpolationStage(Enum):
+class InterpolationStage(KeywordEnum):
     """
     Interpolation stage for matplotlib imshow.
 

@@ -1,7 +1,7 @@
-from enum import Enum
+from .keyword_enum import KeywordEnum
 
 
-class Aspect(Enum):
+class Aspect(KeywordEnum):
     """
     Aspect ratio options for matplotlib imshow.
 

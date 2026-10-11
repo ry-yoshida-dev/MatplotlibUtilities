@@ -21,7 +21,7 @@ def test_set_figure_title_sets_the_suptitle() -> None:
 def test_hide_unused_subplots_hides_only_empty_cells() -> None:
     maker = MatplotGraphMaker(layout=GraphLayout(number=5, column=3, row=2))
     maker.hide_unused_subplots()
-    visibility = [axes.axison for axes in maker.ax.flat]
+    visibility = [axes.axison for row in maker.ax for axes in row]
     assert visibility == [True, True, True, True, True, False]
     plt.close(maker.fig)
 

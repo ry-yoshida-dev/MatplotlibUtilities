@@ -2,7 +2,7 @@ from dataclasses import dataclass, field
 
 from .font_family import FontFamily
 
-@dataclass
+@dataclass(frozen=True)
 class GraphParameters:
     """
     Parameters for the Matplotlib utilities.
@@ -38,7 +38,7 @@ class GraphParameters:
     aspect_ratio: float = 2.0 # height/width
     max_image_size: tuple[int, int] = (64, 128)
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         if self.font_size < 0:
             raise ValueError("font_size must be greater than 0")
         if self.point_size < 0:

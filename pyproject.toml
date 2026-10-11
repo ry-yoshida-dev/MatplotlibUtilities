@@ -10,14 +10,14 @@ authors = [
 ]
 description = "Small library wrapping common Matplotlib workflows: subplot layout, typed subparameter dataclasses, and a MatplotGraphMaker facade."
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.12"
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
 dependencies = [
-    "matplotlib",
+    "matplotlib>=3.11",
     "matplotlib-fontja",
     "numpy",
     "pillow",
@@ -26,6 +26,8 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = [
+    "basedpyright",
+    "mypy",
     "pytest",
 ]
 
@@ -41,6 +43,13 @@ matplotlib_utilities = ["py.typed"]
 
 [tool.mypy]
 mypy_path = "typings"
+strict = true
+files = ["src"]
+
+[tool.basedpyright]
+include = ["src"]
+stubPath = "typings"
+reportCallInDefaultInitializer = false
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

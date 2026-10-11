@@ -1,7 +1,7 @@
-from enum import Enum
+from .keyword_enum import KeywordEnum
 
 
-class Location(Enum):
+class Location(KeywordEnum):
     """
     Location options for matplotlib elements (e.g., colorbar, legend).
     

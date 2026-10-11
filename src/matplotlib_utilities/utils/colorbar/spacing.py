@@ -1,7 +1,7 @@
-from enum import Enum
+from ..keyword_enum import KeywordEnum
 
 
-class ColorbarSpacing(Enum):
+class ColorbarSpacing(KeywordEnum):
     """
     Spacing options for matplotlib colorbar.
 

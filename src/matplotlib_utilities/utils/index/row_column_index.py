@@ -1,7 +1,7 @@
 from __future__ import annotations
 from dataclasses import dataclass
 
-@dataclass
+@dataclass(frozen=True)
 class RowColumnIndex:
     """
     A class for accessing the row and column of the subplot.
@@ -16,7 +16,7 @@ class RowColumnIndex:
     row_index: int 
     column_index: int
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         if self.row_index < 0:
             raise ValueError("row_index must be greater than or equal to 0")
         if self.column_index < 0:

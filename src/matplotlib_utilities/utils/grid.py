@@ -2,10 +2,10 @@
 
 from __future__ import annotations
 
-from enum import Enum
+from .keyword_enum import KeywordEnum
 
 
-class GridWhich(Enum):
+class GridWhich(KeywordEnum):
     """
     Which grid lines :meth:`matplotlib.axes.Axes.grid` affects.
 
@@ -24,7 +24,7 @@ class GridWhich(Enum):
     BOTH = "both"
     
 
-class GridAxis(Enum):
+class GridAxis(KeywordEnum):
     """
     Which axis :meth:`matplotlib.axes.Axes.grid` draws grid lines for.
 

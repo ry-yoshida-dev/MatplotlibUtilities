@@ -12,6 +12,8 @@ from pathlib import Path
 
 from matplotlib_utilities import (
     AnnotateParameters,
+    ArrowProperties,
+    ArrowStyle,
     GraphAxis,
     GraphLayout,
     GraphParameters,
@@ -54,7 +56,7 @@ def build_demo_graph_maker() -> MatplotGraphMaker:
         index=index,
         xytext=(float(np.mean(x1)) + 0.5, float(np.mean(y1)) + 0.5),
         subparams=AnnotateParameters(
-            arrowprops={"arrowstyle": "->"},
+            arrowprops=ArrowProperties(arrowstyle=ArrowStyle.HEAD_AT_END),
             fontsize=9,
         ),
     )

@@ -1,15 +1,17 @@
 from dataclasses import dataclass
 
-from ....subparameter import Subparameters
+from ....keyword_subparameter import KeywordSubparameters
+from ....utils import BarAlign
+from ..keyword_arguments import BarKeywordArguments
 from .base import ArtistParameters, ColorParameters, LabelParameters
 
 
-@dataclass
+@dataclass(frozen=True)
 class BarParameters(
     ColorParameters,
     LabelParameters,
     ArtistParameters,
-    Subparameters,
+    KeywordSubparameters[BarKeywordArguments],
 ):
     """
     Parameters for the bar plot.
@@ -21,8 +23,8 @@ class BarParameters(
         The width of the bars, measured along the category axis.
     bottom: float | None
         The value each bar starts from.
-    align: str | None
-        The alignment of the bars against their tick positions.
+    align: BarAlign | None
+        Whether each bar is centered on its position or starts at it.
     # inherited from ColorParameters
     facecolor: MplColor | None
         The color of the face of the artist.
@@ -39,7 +41,7 @@ class BarParameters(
     """
     width: float | None = None
     bottom: float | None = None
-    align: str | None = None
+    align: BarAlign | None = None
 
     def __post_init__(self) -> None:
         super().__post_init__()

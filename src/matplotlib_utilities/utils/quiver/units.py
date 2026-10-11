@@ -1,7 +1,7 @@
-from enum import Enum
+from ..keyword_enum import KeywordEnum
 
 
-class QuiverUnits(Enum):
+class QuiverUnits(KeywordEnum):
     """Physical units for quiver arrow length and width scaling."""
 
     WIDTH = "width"

@@ -1,7 +1,7 @@
-from enum import Enum
+from .keyword_enum import KeywordEnum
 
 
-class Origin(Enum):
+class Origin(KeywordEnum):
     """
     Origin position options for matplotlib imshow.
     

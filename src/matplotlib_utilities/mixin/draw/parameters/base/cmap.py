@@ -6,23 +6,30 @@ from dataclasses import dataclass
 from .....utils import ColorMap
 
 
-@dataclass
+@dataclass(frozen=True)
 class CmapParameters:
     """
     Parameters for colormap scaling (cmap, vmin, vmax).
+
+    Attributes
+    ----------
+    cmap: ColorMap | None
+        The colormap that maps values to colors.
+    vmin: float | None
+        The value mapped to the lowest color.
+    vmax: float | None
+        The value mapped to the highest color.
     """
 
-    cmap: str | None = None
+    cmap: ColorMap | None = None
     vmin: float | None = None
     vmax: float | None = None
 
     def __post_init__(self) -> None:
         self._validate_values()
-        if self.cmap is not None:
-            ColorMap(self.cmap)
         post_init = getattr(super(), "__post_init__", None)
         if callable(post_init):
-            post_init()
+            _ = post_init()
 
     def _validate_values(self) -> None:
         vmin = self.vmin

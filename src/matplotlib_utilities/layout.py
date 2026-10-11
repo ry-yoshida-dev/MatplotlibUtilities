@@ -1,11 +1,12 @@
 from __future__ import annotations
+
 import math
+from collections.abc import Iterator
 from dataclasses import dataclass
-from typing import Iterator
 
 from .utils import TableAxis
 
-@dataclass
+@dataclass(frozen=True)
 class GraphLayout:
     """
     A class for layouting the matplotlib graphs.
@@ -23,7 +24,7 @@ class GraphLayout:
     column: int
     row: int
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         if self.number < 1:
             raise ValueError("number must be greater than 0")
         if self.column < 1:
@@ -54,7 +55,7 @@ class GraphLayout:
                     break
                 yield row, column
 
-    def __len__(self):
+    def __len__(self) -> int:
         """
         Get the number of subplots.
 

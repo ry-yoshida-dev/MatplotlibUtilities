@@ -1,7 +1,7 @@
-from enum import Enum
+from ..keyword_enum import KeywordEnum
 
 
-class QuiverPivot(Enum):
+class QuiverPivot(KeywordEnum):
     """Pivot anchor for :meth:`matplotlib.axes.Axes.quiver`."""
 
     TAIL = "tail"

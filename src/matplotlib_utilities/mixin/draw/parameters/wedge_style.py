@@ -1,11 +1,12 @@
 from dataclasses import dataclass
 
-from ....subparameter import Subparameters
+from ....keyword_subparameter import KeywordSubparameters
+from ..keyword_arguments import WedgeStyleKeywordArguments
 from ....utils.color import MplColor
 
 
-@dataclass
-class WedgeStyle(Subparameters):
+@dataclass(frozen=True)
+class WedgeStyle(KeywordSubparameters[WedgeStyleKeywordArguments]):
     """
     Styling applied to every wedge of a pie chart (matplotlib wedgeprops).
 

@@ -4,8 +4,13 @@ from enum import Enum
 class Linestyle(Enum):
     """
     Linestyle is the linestyle for the line plot.
+
+    Named styles are strings; the others are Matplotlib dash patterns of the
+    form (offset, (on, off, ...)) in points.
     Ref: https://matplotlib.org/stable/api/lines_api.html
     """
+
+    _value_: str | tuple[int, tuple[int, ...]]
 
     SOLID = "solid"
     DOTTED = "dotted"
@@ -20,21 +25,3 @@ class Linestyle(Enum):
     DASHDOTDOT = (0, (3, 5, 1, 5, 1, 5))
     LOOSELY_DASHDOTDOT = (0, (3, 10, 1, 10, 1, 10))
     DENSELY_DASHDOTDOT = (0, (3, 1, 1, 1, 1, 1))
-
-
-if __name__ == "__main__":
-    linestyle = Linestyle("solid")
-    print(linestyle)
-    linestyle = Linestyle((0, (1, 10)))
-    print(linestyle)
-
-    print(Linestyle.SOLID.value)
-    print(Linestyle.DOTTED.value)
-    print(Linestyle.DASHED.value)
-    print(Linestyle.DASHDOT.value)
-    print(Linestyle.LOOSELY_DOTTED.value)
-    print(Linestyle.DENSELY_DOTTED.value)
-    print(Linestyle.LOOSELY_DASHED.value)
-    print(Linestyle.DENSELY_DASHED.value)
-    print(Linestyle.LOOSELY_DASHDOT.value)
-    print(Linestyle.DENSELY_DASHDOT.value)

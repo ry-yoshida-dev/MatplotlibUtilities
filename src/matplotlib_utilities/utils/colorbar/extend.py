@@ -1,7 +1,7 @@
-from enum import Enum
+from ..keyword_enum import KeywordEnum
 
 
-class ColorbarExtend(Enum):
+class ColorbarExtend(KeywordEnum):
     """
     Extend options for matplotlib colorbar.
 

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from .mixins import (
+    DistributionDrawMixin,
     ImageDrawMixin,
     ProportionDrawMixin,
     SeriesDrawMixin,
@@ -13,12 +14,19 @@ from .parameters import (
     LegendParameters,
     LineParameters,
     Orientation,
+    SpanParameters,
 )
 from ...protocols import MakerCanvas
 from ...utils import SubplotIndex
 
 
-class DrawMixin(ImageDrawMixin, ProportionDrawMixin, SeriesDrawMixin, VectorDrawMixin):
+class DrawMixin(
+    DistributionDrawMixin,
+    ImageDrawMixin,
+    ProportionDrawMixin,
+    SeriesDrawMixin,
+    VectorDrawMixin,
+):
     """
     Drawing API on the graph maker (for example maker.scatter(...)).
 
@@ -43,7 +51,7 @@ class DrawMixin(ImageDrawMixin, ProportionDrawMixin, SeriesDrawMixin, VectorDraw
             The subparameters for the legend.
         """
         subplot = self.access_subplot(index=index)
-        subplot.legend(**subparams.to_dict)
+        _ = subplot.legend(**subparams.to_dict)
 
     def line(
         self: MakerCanvas,
@@ -67,12 +75,11 @@ class DrawMixin(ImageDrawMixin, ProportionDrawMixin, SeriesDrawMixin, VectorDraw
             The subparameters for line styling.
         """
         subplot = self.access_subplot(index=index)
-        draw = getattr(subplot, orientation.ax_line_attribute)
         match orientation:
             case Orientation.VERTICAL:
-                draw(x=value, **subparams.to_dict)
+                _ = subplot.axvline(x=value, **subparams.to_dict)
             case Orientation.HORIZONTAL:
-                draw(y=value, **subparams.to_dict)
+                _ = subplot.axhline(y=value, **subparams.to_dict)
 
     def annotate(
         self: MakerCanvas,
@@ -99,10 +106,46 @@ class DrawMixin(ImageDrawMixin, ProportionDrawMixin, SeriesDrawMixin, VectorDraw
             Coordinate systems, arrow properties, clipping, and text styling.
         """
         subplot = self.access_subplot(index=index)
-        subplot.annotate(text, xy, xytext=xytext, **subparams.to_dict)
+        _ = subplot.annotate(text, xy, xytext=xytext, **subparams.to_dict)
 
-    def imscatter(self: MakerCanvas) -> None:
-        raise NotImplementedError("Not implemented yet.")
+    def span(
+        self: MakerCanvas,
+        start: float,
+        end: float,
+        orientation: Orientation,
+        index: SubplotIndex,
+        subparams: SpanParameters = SpanParameters(),
+    ) -> None:
+        """
+        Shade a band that spans the whole subplot.
 
-    def hist(self: MakerCanvas) -> None:
-        raise NotImplementedError("Not implemented yet.")
+        A vertical band covers an x range across the full height, which
+        suits marking a period of interest; a horizontal band covers a
+        y range across the full width, which suits marking a target range.
+
+        Parameters
+        ----------
+        start: float
+            Where the band begins on the selected axis.
+        end: float
+            Where the band ends on the selected axis.
+        orientation: Orientation
+            VERTICAL shades an x range; HORIZONTAL shades a y range.
+        index: SubplotIndex
+            The index of the subplot.
+        subparams: SpanParameters
+            The subparameters for the band.
+
+        Raises
+        ------
+        ValueError
+            If start is not less than end.
+        """
+        if start >= end:
+            raise ValueError(f"start must be less than end, given {start} and {end}")
+        subplot = self.access_subplot(index=index)
+        match orientation:
+            case Orientation.VERTICAL:
+                _ = subplot.axvspan(start, end, **subparams.to_dict)
+            case Orientation.HORIZONTAL:
+                _ = subplot.axhspan(start, end, **subparams.to_dict)
