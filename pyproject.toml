@@ -29,6 +29,7 @@ dev = [
     "basedpyright",
     "mypy",
     "pytest",
+    "ruff",
 ]
 
 [project.urls]

@@ -18,8 +18,8 @@ class AxisMixin:
     def set_label(
         self: MakerCanvas,
         label: str,
-        index: SubplotIndex,
         axis: GraphAxis,
+        index: SubplotIndex = 0,
     ) -> None:
         """
         Set the label on the subplot.
@@ -28,10 +28,10 @@ class AxisMixin:
         ----------
         label: str
             The label to set.
-        index: SubplotIndex
-            The index of the subplot.
         axis: GraphAxis
             The axis to set the label on.
+        index: SubplotIndex
+            The index of the subplot.
         """
         subplot = self.access_subplot(index=index)
         match axis:
@@ -44,8 +44,8 @@ class AxisMixin:
         self: MakerCanvas,
         lower: float,
         upper: float,
-        index: SubplotIndex,
         axis: GraphAxis,
+        index: SubplotIndex = 0,
     ) -> None:
         """
         Set the limit on the subplot.
@@ -56,10 +56,10 @@ class AxisMixin:
             The lower limit.
         upper: float
             The upper limit.
-        index: SubplotIndex
-            The index of the subplot.
         axis: GraphAxis
             The axis to set the limit on.
+        index: SubplotIndex
+            The index of the subplot.
         """
         subplot = self.access_subplot(index=index)
         match axis:
@@ -71,8 +71,8 @@ class AxisMixin:
     def set_ticks(
         self: MakerCanvas,
         positions: Sequence[float],
-        index: SubplotIndex,
         axis: GraphAxis,
+        index: SubplotIndex = 0,
         labels: Sequence[str] | None = None,
     ) -> None:
         """
@@ -82,10 +82,10 @@ class AxisMixin:
         ----------
         positions: Sequence[float]
             The positions to place ticks at.
-        index: SubplotIndex
-            The index of the subplot.
         axis: GraphAxis
             The axis to set the ticks on.
+        index: SubplotIndex
+            The index of the subplot.
         labels: Sequence[str] | None
             The text to draw at each position. None keeps the numeric labels
             Matplotlib derives from the positions. When given, it must hold
@@ -110,8 +110,8 @@ class AxisMixin:
 
     def invert(
         self: MakerCanvas,
-        index: SubplotIndex,
         axis: GraphAxis,
+        index: SubplotIndex = 0,
     ) -> None:
         """
         Invert the direction of an axis on the subplot.
@@ -121,10 +121,10 @@ class AxisMixin:
 
         Parameters
         ----------
-        index: SubplotIndex
-            The index of the subplot.
         axis: GraphAxis
             The axis to invert.
+        index: SubplotIndex
+            The index of the subplot.
         """
         subplot = self.access_subplot(index=index)
         match axis:
@@ -136,7 +136,7 @@ class AxisMixin:
     def set_title(
         self: MakerCanvas,
         title: str,
-        index: SubplotIndex,
+        index: SubplotIndex = 0,
     ) -> None:
         """
         Set the title on the subplot.
@@ -153,7 +153,7 @@ class AxisMixin:
 
     def set_grid(
         self: MakerCanvas,
-        index: SubplotIndex,
+        index: SubplotIndex = 0,
         subparams: GridParameters = GridParameters(),
     ) -> None:
         """
@@ -173,7 +173,7 @@ class AxisMixin:
 
     def set_grid_below(
         self: MakerCanvas,
-        index: SubplotIndex,
+        index: SubplotIndex = 0,
         is_below: bool = True,
     ) -> None:
         """
@@ -194,7 +194,7 @@ class AxisMixin:
 
     def delete_axis_label(
         self: MakerCanvas,
-        index: SubplotIndex,
+        index: SubplotIndex = 0,
         subparams: TickParamsParameters = TickParamsParameters(),
     ) -> None:
         """

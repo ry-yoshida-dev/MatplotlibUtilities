@@ -29,7 +29,6 @@ from .utils import (
     RotationMode,
     RowColumnIndex,
     SubplotIndex,
-    SubplotNumber,
     TableAxis,
     VerticalAlignment,
     )
@@ -104,7 +103,6 @@ __all__ = [
     "DrawMixin",
     "RowColumnIndex",
     "SubplotIndex",
-    "SubplotNumber",
     "GraphAxis",
     "Subparameters",
     "KeywordSubparameters",

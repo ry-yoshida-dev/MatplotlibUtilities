@@ -34,7 +34,7 @@ Exported names: [`__init__.py`](./__init__.py). Utilities and subplot index type
 | Type | Note |
 | ---- | ---- |
 | `GraphLayout` | `number`, `row`, `column`; factories in [`layout.py`](./layout.py) |
-| `SubplotIndex` | `RowColumnIndex` or `SubplotNumber` — see [`utils/index`](./utils/index/subplot_index.py) |
+| `SubplotIndex` | `RowColumnIndex` or a subplot number (`int`) — see [`utils/index`](./utils/index/subplot_index.py) |
 | `GraphAxis` | `X` / `Y` for axis helpers — [`graph_axis.py`](./graph_axis.py) |
 
 ## Components

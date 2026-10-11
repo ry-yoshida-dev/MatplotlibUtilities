@@ -14,8 +14,7 @@ class FontFamily(Enum):
     Attributes:
     ----------
     DEFAULT: str
-        Leaves the font family in the rcParams untouched. A family set
-        earlier, such as by a previous JAPANESE maker, stays in effect.
+        Leaves the font family in the rcParams untouched.
     JAPANESE: str
         A bundled font holding Japanese glyphs.
     """
@@ -27,9 +26,9 @@ class FontFamily(Enum):
         """
         Register this font family with Matplotlib.
 
-        Takes effect for every figure drawn afterwards, since the family is
-        set on the global rcParams. DEFAULT does nothing, so it does not
-        undo a family applied before.
+        The family is set on the global rcParams. MatplotGraphMaker
+        restores the previous family when it is finalized. DEFAULT does
+        nothing.
         """
         match self:
             case FontFamily.DEFAULT:

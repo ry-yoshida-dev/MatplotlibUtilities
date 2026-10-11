@@ -34,7 +34,7 @@ class ImageDrawMixin:
 
     def set_colorbar(
         self: MakerCanvas,
-        index: SubplotIndex | None = None,
+        index: SubplotIndex = 0,
         image: NumericArray | None = None,
         mappable: ScalarMappable | None = None,
         subparams: ColorbarParameters = ColorbarParameters(),
@@ -50,9 +50,8 @@ class ImageDrawMixin:
 
         Parameters
         ----------
-        index: SubplotIndex | None = None
-            The index of the subplot. If None, the colorbar is anchored from the first subplot
-            (same figure; use when a single shared colorbar is intended).
+        index: SubplotIndex
+            The index of the subplot the colorbar is anchored to.
         image: NumericArray | None = None
             The image data to determine the colorbar scale from.
             If None and mappable is None, vmin and vmax must be specified in subparams.
@@ -81,7 +80,7 @@ class ImageDrawMixin:
                 scalar_mappable = mappable
             case None:
                 scalar_mappable = subparams.create_scalar_mappable(image)
-        ax: Axes = self.ax[0][0] if index is None else self.access_subplot(index=index)
+        ax: Axes = self.access_subplot(index=index)
         divider: AxesDivider = make_axes_locatable(ax)
         cax: Axes = subparams.create_cax(divider=divider)
         return self.fig.colorbar(scalar_mappable, cax=cax, **subparams.colorbar_keyword_arguments)
@@ -89,7 +88,7 @@ class ImageDrawMixin:
     def imshow(
         self: MakerCanvas,
         image: NumericArray | PILImage,
-        index: SubplotIndex,
+        index: SubplotIndex = 0,
         subparams: ImshowParameters = ImshowParameters(),
     ) -> AxesImage:
         """
@@ -118,7 +117,7 @@ class ImageDrawMixin:
         x: NumericArray,
         y: NumericArray,
         images: list[NumericArray | PILImage],
-        index: SubplotIndex,
+        index: SubplotIndex = 0,
         subparams: ImscatterParameters = ImscatterParameters(),
     ) -> None:
         """
@@ -164,7 +163,7 @@ class ImageDrawMixin:
     def contour(
         self: MakerCanvas,
         z: NumericArray,
-        index: SubplotIndex,
+        index: SubplotIndex = 0,
         x: NumericArray | None = None,
         y: NumericArray | None = None,
         is_labeled: bool = False,
@@ -206,7 +205,7 @@ class ImageDrawMixin:
     def contourf(
         self: MakerCanvas,
         z: NumericArray,
-        index: SubplotIndex,
+        index: SubplotIndex = 0,
         x: NumericArray | None = None,
         y: NumericArray | None = None,
         subparams: ContourfParameters = ContourfParameters(),
@@ -244,7 +243,7 @@ class ImageDrawMixin:
     def pcolormesh(
         self: MakerCanvas,
         z: NumericArray,
-        index: SubplotIndex,
+        index: SubplotIndex = 0,
         x: NumericArray | None = None,
         y: NumericArray | None = None,
         subparams: PcolormeshParameters = PcolormeshParameters(),

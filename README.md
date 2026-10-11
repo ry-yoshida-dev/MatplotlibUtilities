@@ -32,37 +32,49 @@ basedpyright
 
 ## Quick example
 
+A single plot needs no layout and no index; every method draws on the first subplot by default:
+
+```python
+import numpy as np
+from matplotlib_utilities import GraphAxis, MatplotGraphMaker
+
+x = np.linspace(0, 1, 50)
+maker = MatplotGraphMaker()
+maker.plot(x=x, y=np.sin(x * 10))
+maker.set_label(label="x", axis=GraphAxis.X)
+maker.finalize(save_path="sin.png")
+```
+
+With several subplots, pass the subplot number (row-major, from 0) as `index`:
+
 ```python
 import numpy as np
 from matplotlib_utilities import (
     ColorMap,
     GraphLayout,
     GraphParameters,
-    MatplotGraphMaker,
-    PlotParameters,
-    ScatterParameters,
     LegendParameters,
-    GraphAxis,
+    MatplotGraphMaker,
+    ScatterParameters,
 )
 
-layout = GraphLayout.from_row_column(row=1, column=2)
-legend_params = LegendParameters(edgecolor="black")
-graph_params = GraphParameters(figsize=(8, 1.5))
-maker = MatplotGraphMaker(layout=layout, parameters=graph_params)
-
 x = np.linspace(0, 1, 50)
-y = np.sin(x * 10)
-z = np.cos(x * 10)
-
-idx0 = maker.get_subplot_index_from_number(number=0)
-idx1 = maker.get_subplot_index_from_number(number=1)
-maker.plot(index=idx0, x=x, y=y, subparams=PlotParameters())
-maker.scatter(index=idx1, x=x, y=y, subparams=ScatterParameters(c=z, cmap=ColorMap.VIRIDIS, label="sin"))
-maker.set_label(label="x", index=idx0, axis=GraphAxis.X)
-maker.set_label(label="y", index=idx0, axis=GraphAxis.Y)
-maker.legend(index=idx1, subparams=legend_params)
-maker.finalize(is_showing_result_enabled=True)
+maker = MatplotGraphMaker(
+    layout=GraphLayout.from_row_column(row=1, column=2),
+    parameters=GraphParameters(figsize=(8, 3)),
+)
+maker.plot(x=x, y=np.sin(x * 10), index=0)
+maker.scatter(
+    x=x,
+    y=np.sin(x * 10),
+    index=1,
+    subparams=ScatterParameters(c=np.cos(x * 10), cmap=ColorMap.VIRIDIS, label="sin"),
+)
+maker.legend(index=1, subparams=LegendParameters(edgecolor="black"))
+maker.finalize()
 ```
+
+`finalize` hides grid cells that hold no subplot, saves the figure when `save_path` is given, shows it, and closes it.
 
 ## Japanese labels
 
@@ -76,7 +88,7 @@ from matplotlib_utilities import FontFamily, GraphParameters, MatplotGraphMaker
 maker = MatplotGraphMaker(parameters=GraphParameters(font_family=FontFamily.JAPANESE))
 ```
 
-The family is set on the global rcParams, so it applies to every figure drawn afterwards.
+The font family and size are set on the global rcParams while the maker is in use, and `finalize` restores the previous values.
 
 ## Horizontal bars
 
@@ -92,16 +104,14 @@ positions = np.arange(3)
 maker.barh(
     y=positions,
     width=np.array([1832.3, 84.4, 19.9]),
-    index=index,
     subparams=BarhParameters(height=0.45, facecolor="#2a78d6"),
 )
 maker.set_ticks(
     positions=list(positions),
-    index=index,
     axis=GraphAxis.Y,
     labels=["市区町村道", "主要地方道・都道府県道", "一般国道"],
 )
-maker.invert(index=index, axis=GraphAxis.Y)
+maker.invert(axis=GraphAxis.Y)
 ```
 
 ## Notes

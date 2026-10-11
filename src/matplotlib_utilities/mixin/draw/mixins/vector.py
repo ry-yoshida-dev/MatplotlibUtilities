@@ -20,7 +20,7 @@ class VectorDrawMixin:
         y: float,
         dx: float,
         dy: float,
-        index: SubplotIndex,
+        index: SubplotIndex = 0,
         subparams: ArrowParameters = ArrowParameters(),
     ) -> None:
         """
@@ -44,7 +44,7 @@ class VectorDrawMixin:
         self: MakerCanvas,
         u: NumericArray,
         v: NumericArray,
-        index: SubplotIndex,
+        index: SubplotIndex = 0,
         x: NumericArray | None = None,
         y: NumericArray | None = None,
         c: NumericArray | None = None,
@@ -84,7 +84,7 @@ class VectorDrawMixin:
         y: NumericArray,
         u: NumericArray,
         v: NumericArray,
-        index: SubplotIndex,
+        index: SubplotIndex = 0,
         color_values: NumericArray | None = None,
         subparams: StreamplotParameters = StreamplotParameters(),
     ) -> None:

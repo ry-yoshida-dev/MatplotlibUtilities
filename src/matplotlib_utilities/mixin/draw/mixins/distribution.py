@@ -26,7 +26,7 @@ class DistributionDrawMixin:
     def hist(
         self: MakerCanvas,
         x: NumericArray | Sequence[NumericArray],
-        index: SubplotIndex,
+        index: SubplotIndex = 0,
         subparams: HistParameters = HistParameters(),
     ) -> None:
         """
@@ -61,7 +61,7 @@ class DistributionDrawMixin:
     def boxplot(
         self: MakerCanvas,
         data: NumericArray | Sequence[NumericArray],
-        index: SubplotIndex,
+        index: SubplotIndex = 0,
         positions: Sequence[float] | None = None,
         tick_labels: Sequence[str] | None = None,
         subparams: BoxplotParameters = BoxplotParameters(),
@@ -106,7 +106,7 @@ class DistributionDrawMixin:
     def violinplot(
         self: MakerCanvas,
         data: NumericArray | Sequence[NumericArray],
-        index: SubplotIndex,
+        index: SubplotIndex = 0,
         positions: Sequence[float] | None = None,
         subparams: ViolinplotParameters = ViolinplotParameters(),
     ) -> None:
@@ -149,7 +149,7 @@ class DistributionDrawMixin:
         self: MakerCanvas,
         x: NumericArray,
         y: NumericArray,
-        index: SubplotIndex,
+        index: SubplotIndex = 0,
         c: NumericArray | None = None,
         subparams: HexbinParameters = HexbinParameters(),
     ) -> PolyCollection:
@@ -190,7 +190,7 @@ class DistributionDrawMixin:
         self: MakerCanvas,
         x: NumericArray,
         y: NumericArray,
-        index: SubplotIndex,
+        index: SubplotIndex = 0,
         subparams: Hist2dParameters = Hist2dParameters(),
     ) -> QuadMesh:
         """

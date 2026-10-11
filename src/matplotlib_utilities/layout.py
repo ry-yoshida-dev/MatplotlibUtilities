@@ -26,17 +26,15 @@ class GraphLayout:
 
     def __post_init__(self) -> None:
         if self.number < 1:
-            raise ValueError("number must be greater than 0")
+            raise ValueError(f"number must be at least 1, got {self.number}")
         if self.column < 1:
-            raise ValueError("column must be greater than or equal to 1")
+            raise ValueError(f"column must be at least 1, got {self.column}")
         if self.row < 1:
-            raise ValueError("row must be greater than or equal to 1")
+            raise ValueError(f"row must be at least 1, got {self.row}")
         if self.number > self.column * self.row:
-            raise ValueError("number must be less than or equal to column * row")
-        if math.ceil(self.number/self.column) != self.row:
-            raise ValueError("number must be divisible by column")
-        if math.ceil(self.number/self.row) != self.column:
-            raise ValueError("number must be divisible by row")
+            raise ValueError(
+                f"number must fit in the grid, got {self.number} for {self.row} rows of {self.column}"
+            )
 
     def __iter__(self) -> Iterator[tuple[int, int]]:
         """

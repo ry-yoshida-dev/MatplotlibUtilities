@@ -31,7 +31,7 @@ class SeriesDrawMixin:
         self: MakerCanvas,
         x: NumericArray,
         y: NumericArray,
-        index: SubplotIndex,
+        index: SubplotIndex = 0,
         subparams: PlotParameters = PlotParameters(),
     ) -> None:
         """
@@ -55,7 +55,7 @@ class SeriesDrawMixin:
         self: MakerCanvas,
         x: NumericArray,
         y: NumericArray,
-        index: SubplotIndex,
+        index: SubplotIndex = 0,
         subparams: ScatterParameters = ScatterParameters(),
     ) -> PathCollection:
         """
@@ -85,7 +85,7 @@ class SeriesDrawMixin:
         self: MakerCanvas,
         x: NumericArray,
         height: NumericArray,
-        index: SubplotIndex,
+        index: SubplotIndex = 0,
         subparams: BarParameters = BarParameters(),
     ) -> None:
         """
@@ -115,7 +115,7 @@ class SeriesDrawMixin:
         self: MakerCanvas,
         y: NumericArray,
         width: NumericArray,
-        index: SubplotIndex,
+        index: SubplotIndex = 0,
         subparams: BarhParameters = BarhParameters(),
     ) -> None:
         """
@@ -149,7 +149,7 @@ class SeriesDrawMixin:
         self: MakerCanvas,
         x: NumericArray,
         y: NumericArray,
-        index: SubplotIndex,
+        index: SubplotIndex = 0,
         subparams: StepParameters = StepParameters(),
     ) -> None:
         """
@@ -182,7 +182,7 @@ class SeriesDrawMixin:
         self: MakerCanvas,
         x: NumericArray,
         y: NumericArray,
-        index: SubplotIndex,
+        index: SubplotIndex = 0,
         yerr: NumericArray | float | None = None,
         xerr: NumericArray | float | None = None,
         subparams: ErrorbarParameters = ErrorbarParameters(),
@@ -233,7 +233,7 @@ class SeriesDrawMixin:
         self: MakerCanvas,
         x: NumericArray,
         y1: NumericArray,
-        index: SubplotIndex,
+        index: SubplotIndex = 0,
         y2: NumericArray | float = 0.0,
         where: NDArray[np.bool_] | None = None,
         subparams: FillBetweenParameters = FillBetweenParameters(),
@@ -280,7 +280,7 @@ class SeriesDrawMixin:
         self: MakerCanvas,
         x: NumericArray,
         ys: Sequence[NumericArray],
-        index: SubplotIndex,
+        index: SubplotIndex = 0,
         labels: Sequence[str] | None = None,
         subparams: StackplotParameters = StackplotParameters(),
     ) -> None:

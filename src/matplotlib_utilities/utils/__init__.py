@@ -4,7 +4,6 @@ from .marker import Marker
 from .table_axis import TableAxis
 from .index import (
     SubplotIndex,
-    SubplotNumber,
     RowColumnIndex
     )
 from .color import (
@@ -55,7 +54,6 @@ __all__ = [
     "Marker",
     "TableAxis",
     "SubplotIndex",
-    "SubplotNumber",
     "RowColumnIndex",
     "ColorMap",
     "ColorType",

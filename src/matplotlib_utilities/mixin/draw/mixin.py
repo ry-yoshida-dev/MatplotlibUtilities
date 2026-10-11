@@ -37,7 +37,7 @@ class DrawMixin(
 
     def legend(
         self: MakerCanvas,
-        index: SubplotIndex,
+        index: SubplotIndex = 0,
         subparams: LegendParameters = LegendParameters(),
     ) -> None:
         """
@@ -57,7 +57,7 @@ class DrawMixin(
         self: MakerCanvas,
         value: float,
         orientation: Orientation,
-        index: SubplotIndex,
+        index: SubplotIndex = 0,
         subparams: LineParameters = LineParameters(),
     ) -> None:
         """
@@ -85,7 +85,7 @@ class DrawMixin(
         self: MakerCanvas,
         text: str,
         xy: tuple[float, float],
-        index: SubplotIndex,
+        index: SubplotIndex = 0,
         xytext: tuple[float, float] | None = None,
         subparams: AnnotateParameters = AnnotateParameters(),
     ) -> None:
@@ -113,7 +113,7 @@ class DrawMixin(
         start: float,
         end: float,
         orientation: Orientation,
-        index: SubplotIndex,
+        index: SubplotIndex = 0,
         subparams: SpanParameters = SpanParameters(),
     ) -> None:
         """

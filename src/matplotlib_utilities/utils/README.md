@@ -6,7 +6,7 @@ Small **enums**, **type aliases**, and **subplot index** types used by `mixin.dr
 
 | Topic | Location | Role |
 | ----- | -------- | ---- |
-| Subplot addressing | [`index/`](./index/README.md) | `SubplotIndex`, `RowColumnIndex`, `SubplotNumber` |
+| Subplot addressing | [`index/`](./index/README.md) | `SubplotIndex`, `RowColumnIndex` |
 | Markers | [`marker.py`](./marker.py) | `Marker` enum (Matplotlib marker strings) |
 | Colormaps & colors | [`color/`](./color/) | `ColorMap`; palette types from `color` + Matplotlib/numpy shims |
 | Layout / axes (enums) | [`../graph_axis.py`](../graph_axis.py); [`table_axis.py`](./table_axis.py), [`grid.py`](./grid.py) | `GraphAxis` lives at package root; `TableAxis` (row/column layout), `GridWhich` / `GridAxis` (`Axes.grid` kwargs) |
@@ -21,9 +21,8 @@ Small **enums**, **type aliases**, and **subplot index** types used by `mixin.dr
 
 | Name | Kind | Summary |
 | ---- | ---- | ------- |
-| `SubplotIndex` | Type alias | `RowColumnIndex \| SubplotNumber` — see [`index/subplot_index.py`](./index/subplot_index.py) |
+| `SubplotIndex` | Type alias | `RowColumnIndex \| int` — see [`index/subplot_index.py`](./index/subplot_index.py) |
 | `RowColumnIndex` | Dataclass | Zero-based `(row_index, column_index)` |
-| `SubplotNumber` | Dataclass | Linear subplot index with row hint — [`index/subplot_number.py`](./index/subplot_number.py) |
 | `GraphAxis` | Enum | X/Y axis for labels and limits (`AxisMixin`) |
 | `TableAxis` | Enum | Row/column when building `GraphLayout` |
 | `GridWhich`, `GridAxis` | Enum | `Axes.grid` `which` / `axis` kwargs (`GridParameters`) |

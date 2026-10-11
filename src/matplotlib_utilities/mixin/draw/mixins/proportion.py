@@ -18,7 +18,7 @@ class ProportionDrawMixin:
     def pie(
         self: MakerCanvas,
         values: NumericArray,
-        index: SubplotIndex,
+        index: SubplotIndex = 0,
         labels: Sequence[str] | None = None,
         subparams: PieParameters = PieParameters(),
     ) -> None:
