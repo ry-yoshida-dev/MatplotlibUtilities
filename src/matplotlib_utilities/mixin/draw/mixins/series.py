@@ -105,9 +105,12 @@ class SeriesDrawMixin:
         Raises
         ------
         ValueError
-            If x and height do not hold the same number of entries.
+            If x and height, or x and a bottom given per bar, do not hold the
+            same number of entries.
         """
         ArgumentValidator.require_equal_length("x", x, "height", height)
+        if isinstance(subparams.bottom, np.ndarray) and subparams.bottom.ndim > 0:
+            ArgumentValidator.require_equal_length("x", x, "bottom", subparams.bottom)
         subplot = self.access_subplot(index=index)
         _ = subplot.bar(x, height, **subparams.to_dict)
 
@@ -139,9 +142,12 @@ class SeriesDrawMixin:
         Raises
         ------
         ValueError
-            If y and width do not hold the same number of entries.
+            If y and width, or y and a left given per bar, do not hold the same
+            number of entries.
         """
         ArgumentValidator.require_equal_length("y", y, "width", width)
+        if isinstance(subparams.left, np.ndarray) and subparams.left.ndim > 0:
+            ArgumentValidator.require_equal_length("y", y, "left", subparams.left)
         subplot = self.access_subplot(index=index)
         _ = subplot.barh(y, width, **subparams.to_dict)
 

@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 
 from ....keyword_subparameter import KeywordSubparameters
+from ....types import NumericArray
 from ....utils import BarAlign
 from ..keyword_arguments import BarhKeywordArguments
 from .base import ArtistParameters, ColorParameters, LabelParameters
@@ -21,8 +22,9 @@ class BarhParameters(
     # own
     height: float | None
         The height of the bars, measured across the category axis.
-    left: float | None
-        The value each bar starts from.
+    left: float | NumericArray | None
+        The value each bar starts from, or one value per bar, such as the ends
+        of the bars of another series to stack these on.
     align: BarAlign | None
         Whether each bar is centered on its position or starts at it.
     # inherited from ColorParameters
@@ -40,7 +42,7 @@ class BarhParameters(
         The drawing order of the bars.
     """
     height: float | None = None
-    left: float | None = None
+    left: float | NumericArray | None = None
     align: BarAlign | None = None
 
     def __post_init__(self) -> None:

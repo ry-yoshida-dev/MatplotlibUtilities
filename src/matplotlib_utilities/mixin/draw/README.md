@@ -193,6 +193,8 @@ maker.finalize(save_path="out.png", is_showing_result_enabled=False)
 
 <img src="readme_figures/series/bar.png" width="400" height="250" alt="bar"/>
 
+To stack bars, pass the tops of the bars below as `bottom`, one value per bar; `barh` takes them as `left`.
+
 <details>
 <summary>Code</summary>
 

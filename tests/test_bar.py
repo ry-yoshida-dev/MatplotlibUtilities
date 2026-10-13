@@ -77,6 +77,82 @@ def test_barh_opacity_reaches_the_bars() -> None:
     plt.close(maker.fig)
 
 
+def test_bar_stacks_on_a_bottom_per_bar() -> None:
+    maker = _maker()
+    index = maker.get_subplot_index_from_number(number=0)
+    lower = np.array([1.0, 2.0, 3.0])
+    maker.bar(x=np.arange(3), height=lower, index=index)
+    maker.bar(
+        x=np.arange(3),
+        height=np.array([4.0, 5.0, 6.0]),
+        index=index,
+        subparams=BarParameters(bottom=lower),
+    )
+    container = maker.access_subplot(index=index).containers[1]
+    assert isinstance(container, BarContainer)
+    assert [patch.get_y() for patch in container.patches] == [1.0, 2.0, 3.0]
+    plt.close(maker.fig)
+
+
+def test_barh_stacks_on_a_left_per_bar() -> None:
+    maker = _maker()
+    index = maker.get_subplot_index_from_number(number=0)
+    maker.barh(
+        y=np.arange(2),
+        width=np.array([1.0, 2.0]),
+        index=index,
+        subparams=BarhParameters(left=np.array([3.0, 4.0])),
+    )
+    container = maker.access_subplot(index=index).containers[0]
+    assert isinstance(container, BarContainer)
+    assert [patch.get_x() for patch in container.patches] == [3.0, 4.0]
+    plt.close(maker.fig)
+
+
+def test_bar_rejects_a_bottom_per_bar_of_another_length() -> None:
+    maker = _maker()
+    index = maker.get_subplot_index_from_number(number=0)
+    with pytest.raises(ValueError, match="x and bottom"):
+        maker.bar(
+            x=np.arange(3),
+            height=np.ones(3),
+            index=index,
+            subparams=BarParameters(bottom=np.ones(2)),
+        )
+    with pytest.raises(ValueError, match="y and left"):
+        maker.barh(
+            y=np.arange(3),
+            width=np.ones(3),
+            index=index,
+            subparams=BarhParameters(left=np.ones(2)),
+        )
+    plt.close(maker.fig)
+
+
+def test_bar_accepts_a_zero_dimensional_bottom() -> None:
+    maker = _maker()
+    index = maker.get_subplot_index_from_number(number=0)
+    maker.bar(
+        x=np.arange(3),
+        height=np.ones(3),
+        index=index,
+        subparams=BarParameters(bottom=np.array(2.0)),
+    )
+    maker.barh(
+        y=np.arange(3),
+        width=np.ones(3),
+        index=index,
+        subparams=BarhParameters(left=np.array(2.0)),
+    )
+    bar_container = maker.access_subplot(index=index).containers[0]
+    barh_container = maker.access_subplot(index=index).containers[1]
+    assert isinstance(bar_container, BarContainer)
+    assert isinstance(barh_container, BarContainer)
+    assert [patch.get_y() for patch in bar_container.patches] == [2.0, 2.0, 2.0]
+    assert [patch.get_x() for patch in barh_container.patches] == [2.0, 2.0, 2.0]
+    plt.close(maker.fig)
+
+
 @pytest.mark.parametrize(
     "build",
     [

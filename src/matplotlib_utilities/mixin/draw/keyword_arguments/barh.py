@@ -1,5 +1,6 @@
 from typing import Literal, TypedDict
 
+from ....types import NumericArray
 from ....utils.color import MplColor
 
 
@@ -16,5 +17,5 @@ class BarhKeywordArguments(TypedDict, total=False):
     facecolor: MplColor
     edgecolor: MplColor
     height: float
-    left: float
+    left: float | NumericArray
     align: Literal["center", "edge"]
