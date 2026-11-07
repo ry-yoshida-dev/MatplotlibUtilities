@@ -12,6 +12,7 @@ class Shading(KeywordEnum):
     GOURAUD: Colors are interpolated linearly between the vertices.
     AUTO: Choose FLAT or NEAREST from the shapes of the coordinates.
     """
+
     FLAT = "flat"
     NEAREST = "nearest"
     GOURAUD = "gouraud"

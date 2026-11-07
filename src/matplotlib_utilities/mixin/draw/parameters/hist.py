@@ -53,6 +53,7 @@ class HistParameters(
     zorder: float | None
         The drawing order of the bars.
     """
+
     bins: int | Sequence[float] | None = None
     range: tuple[float, float] | None = None
     density: bool | None = None

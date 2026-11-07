@@ -28,7 +28,18 @@ class LegendKeywordArguments(TypedDict, total=False):
     bbox_to_anchor: tuple[float, ...]
     ncol: int
     fontsize: (
-        float | Literal["xx-small", "x-small", "small", "medium", "large", "x-large", "xx-large", "smaller", "larger"]
+        float
+        | Literal[
+            "xx-small",
+            "x-small",
+            "small",
+            "medium",
+            "large",
+            "x-large",
+            "xx-large",
+            "smaller",
+            "larger",
+        ]
     )
     frameon: bool
     fancybox: bool
@@ -36,5 +47,16 @@ class LegendKeywordArguments(TypedDict, total=False):
     framealpha: float
     title: str
     title_fontsize: (
-        float | Literal["xx-small", "x-small", "small", "medium", "large", "x-large", "xx-large", "smaller", "larger"]
+        float
+        | Literal[
+            "xx-small",
+            "x-small",
+            "small",
+            "medium",
+            "large",
+            "x-large",
+            "xx-large",
+            "smaller",
+            "larger",
+        ]
     )

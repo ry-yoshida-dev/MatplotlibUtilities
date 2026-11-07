@@ -10,6 +10,7 @@ class InterpolationStage(KeywordEnum):
     - 'rgba': Interpolate after colormapping
     - 'auto': Automatically select the appropriate stage
     """
+
     AUTO = "auto"
     DATA = "data"
     RGBA = "rgba"

@@ -4,7 +4,13 @@ from ....keyword_subparameter import KeywordSubparameters
 from ..keyword_arguments import QuiverKeywordArguments
 from ....utils import QuiverAngles, QuiverPivot, QuiverUnits
 from ....utils.color import MplColor
-from .base import ArtistParameters, CmapParameters, ColorParameters, LabelParameters, LineStyleParameters
+from .base import (
+    ArtistParameters,
+    CmapParameters,
+    ColorParameters,
+    LabelParameters,
+    LineStyleParameters,
+)
 
 
 @dataclass(frozen=True)

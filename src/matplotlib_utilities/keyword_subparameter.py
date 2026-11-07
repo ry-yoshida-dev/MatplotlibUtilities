@@ -39,7 +39,9 @@ class KeywordSubparameters[KeywordArgumentsT: Mapping[str, object]](Subparameter
         """
         attributes: dict[str, object] = vars(self)
         keyword_arguments: dict[str, object] = {
-            name: _to_keyword_value(value) for name, value in attributes.items() if value is not None
+            name: _to_keyword_value(value)
+            for name, value in attributes.items()
+            if value is not None
         }
         return cast(KeywordArgumentsT, keyword_arguments)
 
@@ -49,13 +51,17 @@ def _to_keyword_value(value: object) -> object:
         case KeywordEnum() | Linestyle():
             return value.value
         case Enum():
-            raise TypeError(f"{type(value).__name__} must derive from KeywordEnum to be passed to Matplotlib")
+            raise TypeError(
+                f"{type(value).__name__} must derive from KeywordEnum to be passed to Matplotlib"
+            )
         case KeywordSubparameters():
             nested_arguments: Mapping[str, object] = value.to_dict
             return nested_arguments
         case list():
             return [_to_keyword_value(item) for item in cast(list[object], value)]
         case tuple():
-            return tuple(_to_keyword_value(member) for member in cast(tuple[object, ...], value))
+            return tuple(
+                _to_keyword_value(member) for member in cast(tuple[object, ...], value)
+            )
         case _:
             return value

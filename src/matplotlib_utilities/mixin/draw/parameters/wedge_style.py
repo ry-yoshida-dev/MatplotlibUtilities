@@ -25,6 +25,7 @@ class WedgeStyle(KeywordSubparameters[WedgeStyleKeywordArguments]):
     zorder: float | None
         The drawing order of the wedges.
     """
+
     edgecolor: MplColor | None = None
     linewidth: float | None = None
     width: float | None = None

@@ -269,13 +269,19 @@ class SeriesDrawMixin:
         ValueError
             If y1, y2 or where do not hold one entry per x value.
         """
-        per_point_arguments: dict[str, NumericArray | NDArray[np.bool_] | float | None] = {
+        per_point_arguments: dict[
+            str, NumericArray | NDArray[np.bool_] | float | None
+        ] = {
             "y1": y1,
             "y2": y2,
             "where": where,
         }
         for name, values in per_point_arguments.items():
-            if values is not None and np.ndim(values) > 0 and len(np.asarray(values)) != len(x):
+            if (
+                values is not None
+                and np.ndim(values) > 0
+                and len(np.asarray(values)) != len(x)
+            ):
                 raise ValueError(
                     f"{name} must hold one entry per x value, given {len(np.asarray(values))} for {len(x)}"
                 )
@@ -332,4 +338,6 @@ class SeriesDrawMixin:
                     f"{name} must hold one entry per series, given {len(entries)} for {len(ys)} series"
                 )
         subplot = self.access_subplot(index=index)
-        _ = subplot.stackplot(x, *ys, labels=() if labels is None else labels, **subparams.to_dict)
+        _ = subplot.stackplot(
+            x, *ys, labels=() if labels is None else labels, **subparams.to_dict
+        )

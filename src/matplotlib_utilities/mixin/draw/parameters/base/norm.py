@@ -21,5 +21,7 @@ class NormParameters(CmapParameters):
 
     def __post_init__(self) -> None:
         if self.norm is not None and (self.vmin is not None or self.vmax is not None):
-            raise ValueError("norm cannot be combined with vmin or vmax; set the limits on norm instead")
+            raise ValueError(
+                "norm cannot be combined with vmin or vmax; set the limits on norm instead"
+            )
         super().__post_init__()

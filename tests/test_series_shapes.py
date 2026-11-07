@@ -56,7 +56,9 @@ def test_step_sets_the_drawstyle_from_where(maker: MatplotGraphMaker) -> None:
 
 
 def test_step_rejects_mismatched_data(maker: MatplotGraphMaker) -> None:
-    with pytest.raises(ValueError, match="x and y must hold the same number of entries"):
+    with pytest.raises(
+        ValueError, match="x and y must hold the same number of entries"
+    ):
         maker.step(x=np.arange(3.0), y=np.arange(2.0), index=_index(maker))
 
 
@@ -84,7 +86,9 @@ def test_errorbar_accepts_asymmetric_errors(maker: MatplotGraphMaker) -> None:
         yerr=np.array([[0.1, 0.2, 0.3], [1.0, 1.0, 1.0]]),
         index=_index(maker),
     )
-    lower_end = np.asarray(_subplot(maker).collections[0].get_paths()[2].vertices)[:, 1].min()
+    lower_end = np.asarray(_subplot(maker).collections[0].get_paths()[2].vertices)[
+        :, 1
+    ].min()
     assert lower_end == pytest.approx(-0.3)
 
 
@@ -102,7 +106,9 @@ def test_errorbar_rejects_invalid_errors(
     message: str,
 ) -> None:
     with pytest.raises(ValueError, match=message):
-        maker.errorbar(x=np.arange(3.0), y=np.arange(3.0), yerr=yerr, index=_index(maker))
+        maker.errorbar(
+            x=np.arange(3.0), y=np.arange(3.0), yerr=yerr, index=_index(maker)
+        )
 
 
 def test_fill_between_fills_the_band(maker: MatplotGraphMaker) -> None:
@@ -120,7 +126,9 @@ def test_fill_between_fills_the_band(maker: MatplotGraphMaker) -> None:
     assert band.get_label() == "band"
 
 
-def test_fill_between_rejects_a_mask_of_the_wrong_length(maker: MatplotGraphMaker) -> None:
+def test_fill_between_rejects_a_mask_of_the_wrong_length(
+    maker: MatplotGraphMaker,
+) -> None:
     with pytest.raises(ValueError, match="where must hold one entry per x value"):
         maker.fill_between(
             x=np.arange(3.0),
@@ -140,7 +148,9 @@ def test_stackplot_stacks_each_layer_on_the_previous(maker: MatplotGraphMaker) -
     )
     layers = _subplot(maker).collections
     assert len(layers) == 2
-    assert np.asarray(layers[1].get_paths()[0].vertices)[:, 1].max() == pytest.approx(3.0)
+    assert np.asarray(layers[1].get_paths()[0].vertices)[:, 1].max() == pytest.approx(
+        3.0
+    )
     assert [layer.get_label() for layer in layers] == ["a", "b"]
 
 

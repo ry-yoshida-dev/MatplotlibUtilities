@@ -4,7 +4,12 @@ from ....keyword_subparameter import KeywordSubparameters
 from ..keyword_arguments import ArrowKeywordArguments
 from ....utils import ArrowShape
 from ....utils.color import MplColor
-from .base import ArtistParameters, ColorParameters, LabelParameters, LineStyleParameters
+from .base import (
+    ArtistParameters,
+    ColorParameters,
+    LabelParameters,
+    LineStyleParameters,
+)
 
 
 @dataclass(frozen=True)

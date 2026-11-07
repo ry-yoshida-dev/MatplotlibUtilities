@@ -78,7 +78,9 @@ def test_set_ticks_places_labels_at_the_given_positions() -> None:
     maker.set_ticks(
         positions=[0.0, 1.0, 2.0], index=index, axis=GraphAxis.Y, labels=JAPANESE_LABELS
     )
-    drawn = [text.get_text() for text in maker.access_subplot(index=index).get_yticklabels()]
+    drawn = [
+        text.get_text() for text in maker.access_subplot(index=index).get_yticklabels()
+    ]
     assert drawn == JAPANESE_LABELS
     _close(maker)
 
@@ -95,7 +97,9 @@ def test_set_ticks_rejects_a_label_count_that_does_not_match() -> None:
     maker = _maker()
     index = maker.get_subplot_index_from_number(number=0)
     with pytest.raises(ValueError, match="one entry per position"):
-        maker.set_ticks(positions=[0.0, 1.0], index=index, axis=GraphAxis.Y, labels=["only one"])
+        maker.set_ticks(
+            positions=[0.0, 1.0], index=index, axis=GraphAxis.Y, labels=["only one"]
+        )
     _close(maker)
 
 
@@ -124,7 +128,9 @@ def test_japanese_labels_are_drawn_rather_than_dropped() -> None:
         positions=[0.0, 1.0, 2.0], index=index, axis=GraphAxis.Y, labels=JAPANESE_LABELS
     )
     maker.fig.canvas.draw()
-    drawn = [text.get_text() for text in maker.access_subplot(index=index).get_yticklabels()]
+    drawn = [
+        text.get_text() for text in maker.access_subplot(index=index).get_yticklabels()
+    ]
     assert drawn == JAPANESE_LABELS
     _close(maker)
 

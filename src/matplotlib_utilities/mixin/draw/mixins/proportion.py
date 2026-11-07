@@ -47,7 +47,9 @@ class ProportionDrawMixin:
         """
         wedge_sizes = np.asarray(values, dtype=float)
         if wedge_sizes.ndim != 1 or wedge_sizes.size == 0:
-            raise ValueError(f"values must be a non-empty 1-D array, given shape {wedge_sizes.shape}")
+            raise ValueError(
+                f"values must be a non-empty 1-D array, given shape {wedge_sizes.shape}"
+            )
         if not np.all(np.isfinite(wedge_sizes)):
             raise ValueError("values must be finite")
         if np.any(wedge_sizes < 0):

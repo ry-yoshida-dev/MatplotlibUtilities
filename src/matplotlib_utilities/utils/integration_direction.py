@@ -11,6 +11,7 @@ class IntegrationDirection(KeywordEnum):
     BACKWARD: Trace against the vector field.
     BOTH: Trace in both directions.
     """
+
     FORWARD = "forward"
     BACKWARD = "backward"
     BOTH = "both"

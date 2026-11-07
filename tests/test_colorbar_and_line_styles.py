@@ -55,7 +55,9 @@ def _grid_values() -> np.ndarray:
     return values
 
 
-def test_colorbar_shares_the_colormap_and_levels_of_the_mappable(maker: MatplotGraphMaker) -> None:
+def test_colorbar_shares_the_colormap_and_levels_of_the_mappable(
+    maker: MatplotGraphMaker,
+) -> None:
     levels = [0.0, 0.25, 0.5, 1.0]
     bands = maker.contourf(
         z=_grid_values(),
@@ -100,10 +102,14 @@ def test_colorbar_passes_its_options_to_matplotlib(maker: MatplotGraphMaker) -> 
 def test_colorbar_rejects_both_image_and_mappable(maker: MatplotGraphMaker) -> None:
     image = maker.imshow(image=_grid_values(), index=_index(maker))
     with pytest.raises(ValueError, match="cannot both be given"):
-        _ = maker.set_colorbar(index=_index(maker), image=_grid_values(), mappable=image)
+        _ = maker.set_colorbar(
+            index=_index(maker), image=_grid_values(), mappable=image
+        )
 
 
-def test_colorbar_rejects_a_scale_that_would_be_ignored(maker: MatplotGraphMaker) -> None:
+def test_colorbar_rejects_a_scale_that_would_be_ignored(
+    maker: MatplotGraphMaker,
+) -> None:
     image = maker.imshow(image=_grid_values(), index=_index(maker))
     with pytest.raises(ValueError, match="cannot be set when a mappable is given"):
         _ = maker.set_colorbar(
@@ -113,7 +119,9 @@ def test_colorbar_rejects_a_scale_that_would_be_ignored(maker: MatplotGraphMaker
         )
 
 
-@pytest.mark.parametrize("parameters_class", [LineParameters, PlotParameters, StepParameters])
+@pytest.mark.parametrize(
+    "parameters_class", [LineParameters, PlotParameters, StepParameters]
+)
 def test_line_parameters_have_no_face_or_edge_color(parameters_class: type) -> None:
     with pytest.raises(TypeError):
         _ = parameters_class(facecolor="red")
@@ -136,9 +144,15 @@ def test_contour_levels_accept_an_increasing_array() -> None:
     assert parameters.levels is not None
 
 
-def test_hist_rejects_extra_colors_for_a_single_dataset(maker: MatplotGraphMaker) -> None:
+def test_hist_rejects_extra_colors_for_a_single_dataset(
+    maker: MatplotGraphMaker,
+) -> None:
     with pytest.raises(ValueError, match="one entry per dataset"):
-        maker.hist(x=np.arange(10.0), index=_index(maker), subparams=HistParameters(color=["r", "g", "b"]))
+        maker.hist(
+            x=np.arange(10.0),
+            index=_index(maker),
+            subparams=HistParameters(color=["r", "g", "b"]),
+        )
 
 
 def test_imscatter_draws_a_frame_when_requested(maker: MatplotGraphMaker) -> None:

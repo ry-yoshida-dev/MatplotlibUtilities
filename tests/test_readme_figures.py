@@ -60,7 +60,9 @@ from matplotlib_utilities import (
 )
 from matplotlib_utilities.mixin.draw.parameters import BarParameters
 
-DRAW_README = Path(__file__).resolve().parents[1] / "src/matplotlib_utilities/mixin/draw"
+DRAW_README = (
+    Path(__file__).resolve().parents[1] / "src/matplotlib_utilities/mixin/draw"
+)
 FIGURES_ROOT = DRAW_README / "readme_figures"
 
 UPDATE = os.environ.get("UPDATE_README_FIGURES") == "1"
@@ -128,7 +130,9 @@ def _save(maker: MatplotGraphMaker, rel_path: str) -> Path:
 @pytest.mark.parametrize("rel_path", FIGURE_PATHS)
 def test_readme_figure_committed(rel_path: str) -> None:
     path = FIGURES_ROOT / rel_path
-    assert path.is_file(), f"missing {path}; run UPDATE_README_FIGURES=1 pytest -k update"
+    assert path.is_file(), (
+        f"missing {path}; run UPDATE_README_FIGURES=1 pytest -k update"
+    )
     assert path.stat().st_size > 0
     with Image.open(path) as image:
         assert image.size == README_FIGURE_SIZE, (
@@ -331,7 +335,10 @@ class TestUpdateReadmeFigures:
         x = np.arange(6.0)
         maker.stackplot(
             x=x,
-            ys=[np.array([1.0, 2.0, 2.0, 3.0, 3.0, 4.0]), np.array([2.0, 2.0, 3.0, 2.0, 3.0, 3.0])],
+            ys=[
+                np.array([1.0, 2.0, 2.0, 3.0, 3.0, 4.0]),
+                np.array([2.0, 2.0, 3.0, 2.0, 3.0, 3.0]),
+            ],
             index=_index(maker),
             labels=["a", "b"],
             subparams=StackplotParameters(alpha=0.8),
@@ -409,7 +416,13 @@ class TestUpdateReadmeFigures:
         xx, yy = np.meshgrid(np.linspace(-2, 2, 50), np.linspace(-2, 2, 50))
         z = np.exp(-(xx**2) - yy**2)
         idx = _index(maker)
-        bands = maker.contourf(z=z, x=xx, y=yy, index=idx, subparams=ContourfParameters(levels=8, cmap=ColorMap.VIRIDIS))
+        bands = maker.contourf(
+            z=z,
+            x=xx,
+            y=yy,
+            index=idx,
+            subparams=ContourfParameters(levels=8, cmap=ColorMap.VIRIDIS),
+        )
         _ = maker.set_colorbar(index=idx, mappable=bands)
         _save(maker, "image/contourf.png")
 
@@ -422,7 +435,9 @@ class TestUpdateReadmeFigures:
             x=x,
             y=y,
             index=_index(maker),
-            subparams=PcolormeshParameters(shading=Shading.FLAT, edgecolors="white", cmap=ColorMap.VIRIDIS),
+            subparams=PcolormeshParameters(
+                shading=Shading.FLAT, edgecolors="white", cmap=ColorMap.VIRIDIS
+            ),
         )
         _save(maker, "image/pcolormesh.png")
 

@@ -26,9 +26,14 @@ from matplotlib_utilities import (
     MatplotGraphMaker,
     TableAxis,
 )
-from matplotlib_utilities.mixin.axis.parameters import GridParameters, TickParamsParameters
+from matplotlib_utilities.mixin.axis.parameters import (
+    GridParameters,
+    TickParamsParameters,
+)
 
-AXIS_README = Path(__file__).resolve().parents[1] / "src/matplotlib_utilities/mixin/axis"
+AXIS_README = (
+    Path(__file__).resolve().parents[1] / "src/matplotlib_utilities/mixin/axis"
+)
 FIGURES_ROOT = AXIS_README / "readme_figures"
 
 UPDATE = os.environ.get("UPDATE_README_FIGURES") == "1"
@@ -81,7 +86,9 @@ def _base_plot(maker: MatplotGraphMaker, idx) -> None:
 @pytest.mark.parametrize("rel_path", FIGURE_PATHS)
 def test_readme_axis_figure_committed(rel_path: str) -> None:
     path = FIGURES_ROOT / rel_path
-    assert path.is_file(), f"missing {path}; run UPDATE_README_FIGURES=1 pytest -k update"
+    assert path.is_file(), (
+        f"missing {path}; run UPDATE_README_FIGURES=1 pytest -k update"
+    )
     assert path.stat().st_size > 0
     with Image.open(path) as image:
         assert image.size == README_FIGURE_SIZE, (

@@ -52,14 +52,22 @@ def _subplot(maker: MatplotGraphMaker) -> Axes:
 
 
 def test_hist_draws_one_bar_per_bin(maker: MatplotGraphMaker) -> None:
-    maker.hist(x=RNG.normal(size=100), index=_index(maker), subparams=HistParameters(bins=7))
+    maker.hist(
+        x=RNG.normal(size=100), index=_index(maker), subparams=HistParameters(bins=7)
+    )
     bars = [patch for patch in _subplot(maker).patches if isinstance(patch, Rectangle)]
     assert len(bars) == 7
 
 
 def test_hist_counts_sum_to_the_sample_size(maker: MatplotGraphMaker) -> None:
-    maker.hist(x=RNG.normal(size=100), index=_index(maker), subparams=HistParameters(bins=5))
-    heights = [patch.get_height() for patch in _subplot(maker).patches if isinstance(patch, Rectangle)]
+    maker.hist(
+        x=RNG.normal(size=100), index=_index(maker), subparams=HistParameters(bins=5)
+    )
+    heights = [
+        patch.get_height()
+        for patch in _subplot(maker).patches
+        if isinstance(patch, Rectangle)
+    ]
     assert sum(heights) == pytest.approx(100.0)
 
 
@@ -67,12 +75,16 @@ def test_hist_accepts_several_datasets(maker: MatplotGraphMaker) -> None:
     maker.hist(
         x=[RNG.normal(size=50), RNG.normal(size=50)],
         index=_index(maker),
-        subparams=HistParameters(bins=4, stacked=True, color=["C0", "C1"], histtype=HistType.BAR_STACKED),
+        subparams=HistParameters(
+            bins=4, stacked=True, color=["C0", "C1"], histtype=HistType.BAR_STACKED
+        ),
     )
     assert len(_subplot(maker).patches) == 8
 
 
-def test_hist_treats_each_column_of_a_2d_array_as_a_dataset(maker: MatplotGraphMaker) -> None:
+def test_hist_treats_each_column_of_a_2d_array_as_a_dataset(
+    maker: MatplotGraphMaker,
+) -> None:
     maker.hist(
         x=RNG.normal(size=(50, 2)),
         index=_index(maker),
@@ -81,7 +93,9 @@ def test_hist_treats_each_column_of_a_2d_array_as_a_dataset(maker: MatplotGraphM
     assert len(_subplot(maker).patches) == 8
 
 
-def test_hist_rejects_an_array_with_more_than_two_dimensions(maker: MatplotGraphMaker) -> None:
+def test_hist_rejects_an_array_with_more_than_two_dimensions(
+    maker: MatplotGraphMaker,
+) -> None:
     with pytest.raises(ValueError, match="x must be a 1-D or 2-D array"):
         maker.hist(x=np.zeros((2, 2, 2)), index=_index(maker))
 
@@ -91,7 +105,9 @@ def test_hist_rejects_an_empty_dataset(maker: MatplotGraphMaker) -> None:
         maker.hist(x=np.array([]), index=_index(maker))
 
 
-def test_hist_rejects_colors_that_do_not_match_the_datasets(maker: MatplotGraphMaker) -> None:
+def test_hist_rejects_colors_that_do_not_match_the_datasets(
+    maker: MatplotGraphMaker,
+) -> None:
     with pytest.raises(ValueError, match="color must hold one entry per dataset"):
         maker.hist(
             x=[RNG.normal(size=10), RNG.normal(size=10)],
@@ -121,8 +137,12 @@ def test_boxplot_horizontal_puts_labels_on_the_y_axis(maker: MatplotGraphMaker) 
     assert labels == ["a", "b"]
 
 
-def test_boxplot_treats_each_column_of_a_2d_array_as_a_dataset(maker: MatplotGraphMaker) -> None:
-    maker.boxplot(data=RNG.normal(size=(20, 3)), index=_index(maker), tick_labels=["a", "b", "c"])
+def test_boxplot_treats_each_column_of_a_2d_array_as_a_dataset(
+    maker: MatplotGraphMaker,
+) -> None:
+    maker.boxplot(
+        data=RNG.normal(size=(20, 3)), index=_index(maker), tick_labels=["a", "b", "c"]
+    )
     labels = [label.get_text() for label in _subplot(maker).get_xticklabels()]
     assert labels == ["a", "b", "c"]
 
@@ -133,9 +153,13 @@ def test_boxplot_treats_a_1d_array_as_one_dataset(maker: MatplotGraphMaker) -> N
     assert labels == ["a"]
 
 
-def test_boxplot_rejects_labels_that_do_not_match_the_data(maker: MatplotGraphMaker) -> None:
+def test_boxplot_rejects_labels_that_do_not_match_the_data(
+    maker: MatplotGraphMaker,
+) -> None:
     with pytest.raises(ValueError, match="tick_labels must hold one entry per dataset"):
-        maker.boxplot(data=[RNG.normal(size=5)], index=_index(maker), tick_labels=["a", "b"])
+        maker.boxplot(
+            data=[RNG.normal(size=5)], index=_index(maker), tick_labels=["a", "b"]
+        )
 
 
 def test_violinplot_draws_one_body_per_dataset(maker: MatplotGraphMaker) -> None:
@@ -144,13 +168,23 @@ def test_violinplot_draws_one_body_per_dataset(maker: MatplotGraphMaker) -> None
         index=_index(maker),
         subparams=ViolinplotParameters(showmedians=True),
     )
-    bodies = [collection for collection in _subplot(maker).collections if isinstance(collection, PolyCollection)]
+    bodies = [
+        collection
+        for collection in _subplot(maker).collections
+        if isinstance(collection, PolyCollection)
+    ]
     assert len(bodies) == 3
 
 
-def test_violinplot_treats_each_column_of_a_2d_array_as_a_dataset(maker: MatplotGraphMaker) -> None:
+def test_violinplot_treats_each_column_of_a_2d_array_as_a_dataset(
+    maker: MatplotGraphMaker,
+) -> None:
     maker.violinplot(data=RNG.normal(size=(30, 3)), index=_index(maker))
-    bodies = [collection for collection in _subplot(maker).collections if isinstance(collection, PolyCollection)]
+    bodies = [
+        collection
+        for collection in _subplot(maker).collections
+        if isinstance(collection, PolyCollection)
+    ]
     assert len(bodies) == 3
 
 
@@ -159,9 +193,13 @@ def test_violinplot_rejects_an_empty_sequence(maker: MatplotGraphMaker) -> None:
         maker.violinplot(data=[], index=_index(maker))
 
 
-def test_violinplot_rejects_positions_that_do_not_match_the_data(maker: MatplotGraphMaker) -> None:
+def test_violinplot_rejects_positions_that_do_not_match_the_data(
+    maker: MatplotGraphMaker,
+) -> None:
     with pytest.raises(ValueError, match="positions must hold one entry per dataset"):
-        maker.violinplot(data=[RNG.normal(size=5)], index=_index(maker), positions=[1.0, 2.0])
+        maker.violinplot(
+            data=[RNG.normal(size=5)], index=_index(maker), positions=[1.0, 2.0]
+        )
 
 
 def test_hexbin_hides_empty_hexagons_with_mincnt(maker: MatplotGraphMaker) -> None:
@@ -176,7 +214,9 @@ def test_hexbin_hides_empty_hexagons_with_mincnt(maker: MatplotGraphMaker) -> No
     assert sorted(np.asarray(counts).tolist()) == [1.0, 2.0]
 
 
-def test_hexbin_rejects_c_that_does_not_match_the_points(maker: MatplotGraphMaker) -> None:
+def test_hexbin_rejects_c_that_does_not_match_the_points(
+    maker: MatplotGraphMaker,
+) -> None:
     with pytest.raises(ValueError, match="c must hold one entry per point"):
         maker.hexbin(x=np.zeros(3), y=np.zeros(3), c=np.zeros(2), index=_index(maker))
 
@@ -195,7 +235,9 @@ def test_hist2d_draws_a_mesh_with_the_requested_bins(maker: MatplotGraphMaker) -
 
 
 def test_hist2d_rejects_mismatched_points(maker: MatplotGraphMaker) -> None:
-    with pytest.raises(ValueError, match="x and y must hold the same number of entries"):
+    with pytest.raises(
+        ValueError, match="x and y must hold the same number of entries"
+    ):
         maker.hist2d(x=np.zeros(3), y=np.zeros(2), index=_index(maker))
 
 

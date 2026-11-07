@@ -22,7 +22,20 @@ class StreamplotKeywordArguments(TypedDict, total=False):
     norm: Normalize
     arrowsize: float
     arrowstyle: Literal[
-        "-", "->", "<-", "<->", "-|>", "<|-", "<|-|>", "-[", "]-", "]-[", "|-|", "simple", "fancy", "wedge"
+        "-",
+        "->",
+        "<-",
+        "<->",
+        "-|>",
+        "<|-",
+        "<|-|>",
+        "-[",
+        "]-",
+        "]-[",
+        "|-|",
+        "simple",
+        "fancy",
+        "wedge",
     ]
     minlength: float
     maxlength: float

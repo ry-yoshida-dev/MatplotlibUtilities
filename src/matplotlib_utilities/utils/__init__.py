@@ -2,10 +2,7 @@ from ..graph_axis import GraphAxis
 from .grid import GridAxis, GridWhich
 from .marker import Marker
 from .table_axis import TableAxis
-from .index import (
-    SubplotIndex,
-    RowColumnIndex
-    )
+from .index import SubplotIndex, RowColumnIndex
 from .color import (
     ColorMap,
     ColorType,

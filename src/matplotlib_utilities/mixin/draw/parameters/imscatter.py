@@ -20,6 +20,7 @@ class ImscatterParameters(Subparameters):
     zorder: float | None
         The drawing order of the images.
     """
+
     zoom: float = 1.0
     cmap: ColorMap | None = None
     is_framed: bool = False

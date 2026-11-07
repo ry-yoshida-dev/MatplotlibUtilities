@@ -41,6 +41,7 @@ class BarhParameters(
     zorder: float | None
         The drawing order of the bars.
     """
+
     height: float | None = None
     left: float | NumericArray | None = None
     align: BarAlign | None = None

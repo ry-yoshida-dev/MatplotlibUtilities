@@ -12,6 +12,7 @@ class StackBaseline(KeywordEnum):
     WIGGLE: Minimize the sum of squared slopes (a streamgraph).
     WEIGHTED_WIGGLE: Like WIGGLE, weighted by the size of each layer.
     """
+
     ZERO = "zero"
     SYMMETRIC = "sym"
     WIGGLE = "wiggle"

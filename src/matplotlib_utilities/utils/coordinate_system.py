@@ -64,7 +64,11 @@ class CoordinateSystem(KeywordEnum):
             True for the offset systems, which only the text accepts.
         """
         match self:
-            case CoordinateSystem.OFFSET_POINTS | CoordinateSystem.OFFSET_PIXELS | CoordinateSystem.OFFSET_FONTSIZE:
+            case (
+                CoordinateSystem.OFFSET_POINTS
+                | CoordinateSystem.OFFSET_PIXELS
+                | CoordinateSystem.OFFSET_FONTSIZE
+            ):
                 return True
             case _:
                 return False

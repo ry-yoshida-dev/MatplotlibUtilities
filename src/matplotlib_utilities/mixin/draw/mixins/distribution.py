@@ -101,7 +101,9 @@ class DistributionDrawMixin:
             widths=subparams.widths,
         )
         subplot = self.access_subplot(index=index)
-        _ = subplot.boxplot(datasets, positions=positions, tick_labels=tick_labels, **subparams.to_dict)
+        _ = subplot.boxplot(
+            datasets, positions=positions, tick_labels=tick_labels, **subparams.to_dict
+        )
 
     def violinplot(
         self: MakerCanvas,
@@ -223,7 +225,9 @@ class DistributionDrawMixin:
         return histogram[3]
 
 
-def _as_datasets(data: NumericArray | Sequence[NumericArray], name: str) -> list[NumericArray]:
+def _as_datasets(
+    data: NumericArray | Sequence[NumericArray], name: str
+) -> list[NumericArray]:
     if isinstance(data, np.ndarray):
         match data.ndim:
             case 1:
@@ -231,7 +235,9 @@ def _as_datasets(data: NumericArray | Sequence[NumericArray], name: str) -> list
             case 2:
                 datasets = list(data.T)
             case _:
-                raise ValueError(f"{name} must be a 1-D or 2-D array, given shape {data.shape}")
+                raise ValueError(
+                    f"{name} must be a 1-D or 2-D array, given shape {data.shape}"
+                )
     else:
         datasets = [np.asarray(dataset) for dataset in data]
     if len(datasets) == 0:
@@ -259,7 +265,11 @@ def _validate_per_dataset_arguments(
             )
 
 
-def _validate_point_count(x: NumericArray, y: NumericArray, c: NumericArray | None) -> None:
+def _validate_point_count(
+    x: NumericArray, y: NumericArray, c: NumericArray | None
+) -> None:
     ArgumentValidator.require_equal_length("x", x, "y", y)
     if c is not None and len(c) != len(x):
-        raise ValueError(f"c must hold one entry per point, given {len(c)} for {len(x)} points")
+        raise ValueError(
+            f"c must hold one entry per point, given {len(c)} for {len(x)} points"
+        )

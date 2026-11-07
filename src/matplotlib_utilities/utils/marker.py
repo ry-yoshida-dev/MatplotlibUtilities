@@ -1,10 +1,12 @@
 from .keyword_enum import KeywordEnum
 
+
 class Marker(KeywordEnum):
     """
     Marker is the marker for the scatter plot.
     Ref: https://matplotlib.org/stable/api/markers_api.html
     """
+
     # Points, lines, and shapes
     POINT = "."
     PIXEL = ","

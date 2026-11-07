@@ -7,7 +7,9 @@ class ArgumentValidator:
     """
 
     @staticmethod
-    def require_equal_length(first_name: str, first: Sized, second_name: str, second: Sized) -> None:
+    def require_equal_length(
+        first_name: str, first: Sized, second_name: str, second: Sized
+    ) -> None:
         """
         Require two arguments to hold the same number of entries.
 

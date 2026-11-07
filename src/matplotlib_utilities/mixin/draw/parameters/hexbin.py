@@ -49,6 +49,7 @@ class HexbinParameters(
     zorder: float | None
         The drawing order of the hexagons.
     """
+
     gridsize: int | tuple[int, int] | None = None
     mincnt: int | None = None
     extent: tuple[float, float, float, float] | None = None
@@ -66,7 +67,11 @@ class HexbinParameters(
                 pass
         if self.mincnt is not None and self.mincnt < 0:
             raise ValueError("mincnt must be non-negative")
-        if self.extent is not None and (self.extent[0] >= self.extent[1] or self.extent[2] >= self.extent[3]):
-            raise ValueError("extent must be (left, right, bottom, top) with left < right and bottom < top")
+        if self.extent is not None and (
+            self.extent[0] >= self.extent[1] or self.extent[2] >= self.extent[3]
+        ):
+            raise ValueError(
+                "extent must be (left, right, bottom, top) with left < right and bottom < top"
+            )
         if self.linewidths is not None and self.linewidths < 0:
             raise ValueError("linewidths must be non-negative")

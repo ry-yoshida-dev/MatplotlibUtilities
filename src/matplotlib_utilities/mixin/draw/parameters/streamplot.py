@@ -40,6 +40,7 @@ class StreamplotParameters(KeywordSubparameters[StreamplotKeywordArguments]):
     zorder: float | None
         The drawing order of the streamlines.
     """
+
     density: float | tuple[float, float] | None = None
     linewidth: float | None = None
     color: MplColor | None = None
@@ -69,7 +70,11 @@ class StreamplotParameters(KeywordSubparameters[StreamplotKeywordArguments]):
         ):
             if value is not None and value <= 0:
                 raise ValueError(f"{name} must be positive")
-        if self.minlength is not None and self.maxlength is not None and self.minlength > self.maxlength:
+        if (
+            self.minlength is not None
+            and self.maxlength is not None
+            and self.minlength > self.maxlength
+        ):
             raise ValueError("minlength must be less than or equal to maxlength")
         if self.zorder is not None and self.zorder < 0:
             raise ValueError("zorder must be non-negative")

@@ -10,7 +10,7 @@ from .types import SubplotAxesGrid
 from .utils import (
     SubplotIndex,
     RowColumnIndex,
-    )
+)
 from .layout import GraphLayout
 from .parameter import GraphParameters
 from .mixin.axis import AxisMixin
@@ -34,11 +34,12 @@ class MatplotGraphMaker(DrawMixin, AxisMixin):
     ax: SubplotAxesGrid
         The axes of the matplotlib graphs, indexed as ax[row][column].
     """
+
     def __init__(
         self,
         layout: GraphLayout | None = None,
-        parameters: GraphParameters | None = None
-        ) -> None:
+        parameters: GraphParameters | None = None,
+    ) -> None:
         """
         Initialize the MatplotGraphMaker.
 
@@ -51,15 +52,15 @@ class MatplotGraphMaker(DrawMixin, AxisMixin):
         """
         self.layout: GraphLayout = layout or GraphLayout(number=1, column=1, row=1)
         self.parameters: GraphParameters = parameters or GraphParameters()
-        self._original_style: dict[RcKeyType, object] = {key: plt.rcParams[key] for key in GLOBAL_STYLE_KEYS}
+        self._original_style: dict[RcKeyType, object] = {
+            key: plt.rcParams[key] for key in GLOBAL_STYLE_KEYS
+        }
         self.fig: Figure = self._create_figure()
         self.ax: SubplotAxesGrid = self._create_axes_grid()
 
     def finalize(
-        self,
-        save_path: str | None = None,
-        is_showing_result_enabled: bool = True
-        ) -> None:
+        self, save_path: str | None = None, is_showing_result_enabled: bool = True
+    ) -> None:
         """
         Finalize the matplotlib graphs.
 
@@ -110,10 +111,7 @@ class MatplotGraphMaker(DrawMixin, AxisMixin):
             row_index, column_index = divmod(number, self.layout.column)
             self.ax[row_index][column_index].set_axis_off()
 
-    def get_subplot_index_from_number(
-        self,
-        number: int
-        ) -> SubplotIndex:
+    def get_subplot_index_from_number(self, number: int) -> SubplotIndex:
         """
         Get the subplot index from the number.
 
@@ -122,17 +120,14 @@ class MatplotGraphMaker(DrawMixin, AxisMixin):
         number: int
             The number of the subplot.
         """
-        row_index, column_index = self.layout.from_number_to_row_column_index(number=number)
-        return RowColumnIndex(
-            row_index=row_index,
-            column_index=column_index
-            )
+        row_index, column_index = self.layout.from_number_to_row_column_index(
+            number=number
+        )
+        return RowColumnIndex(row_index=row_index, column_index=column_index)
 
     def get_subplot_index_from_row_column(
-        self,
-        row_index: int,
-        column_index: int
-        ) -> SubplotIndex:
+        self, row_index: int, column_index: int
+    ) -> SubplotIndex:
         """
         Get the subplot index from the row and column.
 
@@ -143,10 +138,7 @@ class MatplotGraphMaker(DrawMixin, AxisMixin):
         column_index: int
             The index of the column.
         """
-        return RowColumnIndex(
-            row_index=row_index,
-            column_index=column_index
-            )
+        return RowColumnIndex(row_index=row_index, column_index=column_index)
 
     def access_subplot(self, index: SubplotIndex) -> Axes:
         """
@@ -173,7 +165,9 @@ class MatplotGraphMaker(DrawMixin, AxisMixin):
                 )
                 row_index, column_index = index.tuple
             case int():
-                row_index, column_index = self.layout.from_number_to_row_column_index(number=index)
+                row_index, column_index = self.layout.from_number_to_row_column_index(
+                    number=index
+                )
         return self.ax[row_index][column_index]
 
     def _create_figure(self) -> Figure:
@@ -201,8 +195,13 @@ class MatplotGraphMaker(DrawMixin, AxisMixin):
         SubplotAxesGrid
             The Axes, indexed as grid[row][column].
         """
-        grid_spec = self.fig.add_gridspec(nrows=self.layout.row, ncols=self.layout.column)
+        grid_spec = self.fig.add_gridspec(
+            nrows=self.layout.row, ncols=self.layout.column
+        )
         return tuple(
-            tuple(self.fig.add_subplot(grid_spec[row_index, column_index]) for column_index in range(self.layout.column))
+            tuple(
+                self.fig.add_subplot(grid_spec[row_index, column_index])
+                for column_index in range(self.layout.column)
+            )
             for row_index in range(self.layout.row)
         )

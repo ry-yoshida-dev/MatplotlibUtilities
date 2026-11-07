@@ -57,7 +57,11 @@ def _subplot(maker: MatplotGraphMaker) -> Axes:
 
 
 def _contour_set(maker: MatplotGraphMaker) -> ContourSet:
-    contour_sets = [artist for artist in _subplot(maker).collections if isinstance(artist, ContourSet)]
+    contour_sets = [
+        artist
+        for artist in _subplot(maker).collections
+        if isinstance(artist, ContourSet)
+    ]
     assert len(contour_sets) == 1
     return contour_sets[0]
 
@@ -74,12 +78,21 @@ def test_contour_uses_the_given_levels(maker: MatplotGraphMaker) -> None:
 
 
 def test_contour_labels_the_lines_on_request(maker: MatplotGraphMaker) -> None:
-    maker.contour(z=GRID_Z, index=_index(maker), is_labeled=True, subparams=ContourParameters(levels=[0.5]))
+    maker.contour(
+        z=GRID_Z,
+        index=_index(maker),
+        is_labeled=True,
+        subparams=ContourParameters(levels=[0.5]),
+    )
     assert len(_subplot(maker).texts) > 0
 
 
 def test_contourf_fills_between_levels(maker: MatplotGraphMaker) -> None:
-    maker.contourf(z=GRID_Z, index=_index(maker), subparams=ContourfParameters(levels=[0.0, 1.0, 2.0]))
+    maker.contourf(
+        z=GRID_Z,
+        index=_index(maker),
+        subparams=ContourfParameters(levels=[0.0, 1.0, 2.0]),
+    )
     assert _contour_set(maker).filled
 
 
@@ -127,8 +140,12 @@ def test_streamplot_colors_by_data(maker: MatplotGraphMaker) -> None:
     assert _subplot(maker).collections[0].get_array() is not None
 
 
-def test_streamplot_rejects_color_values_with_a_fixed_color(maker: MatplotGraphMaker) -> None:
-    with pytest.raises(ValueError, match="color_values cannot be combined with a fixed color"):
+def test_streamplot_rejects_color_values_with_a_fixed_color(
+    maker: MatplotGraphMaker,
+) -> None:
+    with pytest.raises(
+        ValueError, match="color_values cannot be combined with a fixed color"
+    ):
         maker.streamplot(
             x=np.linspace(-1, 1, 10),
             y=np.linspace(-1, 1, 8),
@@ -141,7 +158,9 @@ def test_streamplot_rejects_color_values_with_a_fixed_color(maker: MatplotGraphM
 
 
 def test_streamplot_rejects_mismatched_components(maker: MatplotGraphMaker) -> None:
-    with pytest.raises(ValueError, match="u and v must be 2-D arrays of the same shape"):
+    with pytest.raises(
+        ValueError, match="u and v must be 2-D arrays of the same shape"
+    ):
         maker.streamplot(
             x=np.linspace(-1, 1, 10),
             y=np.linspace(-1, 1, 8),
@@ -152,10 +171,16 @@ def test_streamplot_rejects_mismatched_components(maker: MatplotGraphMaker) -> N
 
 
 def _image_boxes(maker: MatplotGraphMaker) -> list[AnnotationBbox]:
-    return [artist for artist in _subplot(maker).artists if isinstance(artist, AnnotationBbox)]
+    return [
+        artist
+        for artist in _subplot(maker).artists
+        if isinstance(artist, AnnotationBbox)
+    ]
 
 
-def test_imscatter_repeats_a_single_image_at_every_point(maker: MatplotGraphMaker) -> None:
+def test_imscatter_repeats_a_single_image_at_every_point(
+    maker: MatplotGraphMaker,
+) -> None:
     maker.imscatter(
         x=np.array([0.0, 5.0, 10.0]),
         y=np.array([0.0, 1.0, 2.0]),
@@ -181,8 +206,12 @@ def test_imscatter_accepts_pil_images(maker: MatplotGraphMaker) -> None:
     assert len(_image_boxes(maker)) == 2
 
 
-def test_imscatter_rejects_images_that_do_not_match_the_points(maker: MatplotGraphMaker) -> None:
-    with pytest.raises(ValueError, match="images must hold one image or one image per point"):
+def test_imscatter_rejects_images_that_do_not_match_the_points(
+    maker: MatplotGraphMaker,
+) -> None:
+    with pytest.raises(
+        ValueError, match="images must hold one image or one image per point"
+    ):
         maker.imscatter(
             x=np.arange(3.0),
             y=np.arange(3.0),
@@ -221,7 +250,9 @@ def test_span_shades_the_selected_range(
 
 def test_span_rejects_an_empty_range(maker: MatplotGraphMaker) -> None:
     with pytest.raises(ValueError, match="start must be less than end"):
-        maker.span(start=1.0, end=1.0, orientation=Orientation.VERTICAL, index=_index(maker))
+        maker.span(
+            start=1.0, end=1.0, orientation=Orientation.VERTICAL, index=_index(maker)
+        )
 
 
 @pytest.mark.parametrize(

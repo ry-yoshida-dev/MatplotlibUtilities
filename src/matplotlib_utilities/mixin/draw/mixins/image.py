@@ -75,7 +75,9 @@ class ImageDrawMixin:
             case ScalarMappable() if image is not None:
                 raise ValueError("image and mappable cannot both be given")
             case ScalarMappable() if subparams.is_scale_set:
-                raise ValueError("cmap, vmin and vmax cannot be set when a mappable is given; set them on the draw call")
+                raise ValueError(
+                    "cmap, vmin and vmax cannot be set when a mappable is given; set them on the draw call"
+                )
             case ScalarMappable():
                 scalar_mappable = mappable
             case None:
@@ -83,7 +85,9 @@ class ImageDrawMixin:
         ax: Axes = self.access_subplot(index=index)
         divider: AxesDivider = make_axes_locatable(ax)
         cax: Axes = subparams.create_cax(divider=divider)
-        return self.fig.colorbar(scalar_mappable, cax=cax, **subparams.colorbar_keyword_arguments)
+        return self.fig.colorbar(
+            scalar_mappable, cax=cax, **subparams.colorbar_keyword_arguments
+        )
 
     def imshow(
         self: MakerCanvas,
@@ -150,10 +154,14 @@ class ImageDrawMixin:
         images_per_point = images * len(x) if len(images) == 1 else images
         subplot = self.access_subplot(index=index)
         colormap = None if subparams.cmap is None else subparams.cmap.colormap_object
-        for x_value, y_value, image in zip(map(float, x), map(float, y), images_per_point):
+        for x_value, y_value, image in zip(
+            map(float, x), map(float, y), images_per_point
+        ):
             pixels = pil_to_array(image) if isinstance(image, PILImage) else image
             offset_image = OffsetImage(pixels, zoom=subparams.zoom, cmap=colormap)
-            image_box = AnnotationBbox(offset_image, (x_value, y_value), frameon=subparams.is_framed)
+            image_box = AnnotationBbox(
+                offset_image, (x_value, y_value), frameon=subparams.is_framed
+            )
             if subparams.zorder is not None:
                 image_box.set_zorder(subparams.zorder)
             _ = subplot.add_artist(image_box)
@@ -197,7 +205,9 @@ class ImageDrawMixin:
             If z is not two-dimensional, or if only one of x and y is given.
         """
         subplot = self.access_subplot(index=index)
-        contour_set = subplot.contour(*_grid_arguments(z=z, x=x, y=y), **subparams.to_dict)
+        contour_set = subplot.contour(
+            *_grid_arguments(z=z, x=x, y=y), **subparams.to_dict
+        )
         if is_labeled:
             _ = subplot.clabel(contour_set)
         return contour_set

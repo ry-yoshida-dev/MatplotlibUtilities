@@ -14,5 +14,6 @@ class ColorParameters:
     edgecolor: MplColor | None
         The color of the edge of the artist.
     """
+
     facecolor: MplColor | None = None
     edgecolor: MplColor | None = None

@@ -2,6 +2,7 @@ from dataclasses import dataclass, field
 
 from .font_family import FontFamily
 
+
 @dataclass(frozen=True)
 class GraphParameters:
     """
@@ -22,12 +23,13 @@ class GraphParameters:
     figsize: tuple[float, float]
         The size of the figure.
     """
+
     font_size: float = 10.0
     font_family: FontFamily = FontFamily.DEFAULT
     w_space: float = 0.2
     h_space: float = 0.2
     dpi: int = 250
-    figsize: tuple[float, float] = field(default_factory=lambda:(5.0, 3.0))
+    figsize: tuple[float, float] = field(default_factory=lambda: (5.0, 3.0))
 
     def __post_init__(self) -> None:
         if self.font_size <= 0:

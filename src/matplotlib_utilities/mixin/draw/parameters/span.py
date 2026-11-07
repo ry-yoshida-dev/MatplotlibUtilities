@@ -42,6 +42,7 @@ class SpanParameters(
     zorder: float | None
         The drawing order of the band.
     """
+
     color: MplColor | None = None
     linewidth: float | None = None
     linestyle: Linestyle | None = None

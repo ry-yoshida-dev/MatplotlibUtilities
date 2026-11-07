@@ -33,6 +33,7 @@ class StackplotParameters(
     zorder: float | None
         The drawing order of the layers.
     """
+
     colors: Sequence[MplColor] | None = None
     baseline: StackBaseline | None = None
     edgecolor: MplColor | None = None

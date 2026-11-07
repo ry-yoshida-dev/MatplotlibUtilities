@@ -45,6 +45,7 @@ class ContourParameters(
     zorder: float | None
         The drawing order of the lines.
     """
+
     linewidths: float | None = None
     linestyles: Linestyle | None = None
 

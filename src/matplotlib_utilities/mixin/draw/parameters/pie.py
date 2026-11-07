@@ -36,6 +36,7 @@ class PieParameters(KeywordSubparameters[PieKeywordArguments]):
     wedgeprops: WedgeStyle | None
         Styling applied to every wedge, including opacity and drawing order.
     """
+
     colors: Sequence[MplColor] | None = None
     explode: Sequence[float] | None = None
     autopct: str | None = None

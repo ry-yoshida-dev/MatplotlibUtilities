@@ -37,6 +37,7 @@ class BoxplotParameters(KeywordSubparameters[BoxplotKeywordArguments]):
     zorder: float | None
         The drawing order of the boxes.
     """
+
     orientation: Orientation | None = None
     notch: bool | None = None
     whis: float | tuple[float, float] | None = None
@@ -53,7 +54,9 @@ class BoxplotParameters(KeywordSubparameters[BoxplotKeywordArguments]):
         match self.whis:
             case (lower_percentile, upper_percentile):
                 if not (0.0 <= lower_percentile < upper_percentile <= 100.0):
-                    raise ValueError("whis percentiles must satisfy 0 <= lower < upper <= 100")
+                    raise ValueError(
+                        "whis percentiles must satisfy 0 <= lower < upper <= 100"
+                    )
             case float() | int() as whisker_reach if whisker_reach < 0:
                 raise ValueError("whis must be non-negative")
             case _:

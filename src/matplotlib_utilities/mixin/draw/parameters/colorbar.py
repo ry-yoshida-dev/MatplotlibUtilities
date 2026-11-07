@@ -96,11 +96,19 @@ class ColorbarParameters(
             raise ValueError("fraction must be between 0 and 1")
         if self.pad is not None and (self.pad <= 0 or self.pad > 1):
             raise ValueError("pad must be between 0 and 1")
-        if self.extendfrac is not None and isinstance(self.extendfrac, tuple) and len(self.extendfrac) != 2:
+        if (
+            self.extendfrac is not None
+            and isinstance(self.extendfrac, tuple)
+            and len(self.extendfrac) != 2
+        ):
             raise ValueError("extendfrac tuple must have 2 elements")
         if self.extendrect and self.extend == ColorbarExtend.NEITHER:
             raise ValueError("extendrect can only be True if extend is not NEITHER")
-        if self.boundaries is not None and self.values is not None and len(self.boundaries) != len(self.values) + 1:
+        if (
+            self.boundaries is not None
+            and self.values is not None
+            and len(self.boundaries) != len(self.values) + 1
+        ):
             raise ValueError("boundaries must have a length 1 greater than values")
 
     @property
@@ -157,10 +165,14 @@ class ColorbarParameters(
             if vmax is None:
                 vmax = float(image.max())
         if vmin is None or vmax is None:
-            raise ValueError("Either image must be provided, or both vmin and vmax must be specified.")
+            raise ValueError(
+                "Either image must be provided, or both vmin and vmax must be specified."
+            )
         return vmin, vmax
 
-    def create_scalar_mappable(self, image: NumericArray | None = None) -> ScalarMappable:
+    def create_scalar_mappable(
+        self, image: NumericArray | None = None
+    ) -> ScalarMappable:
         """
         Create a ScalarMappable for the colorbar without displaying the image.
         """

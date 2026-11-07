@@ -17,4 +17,5 @@ class MakerCanvas(Protocol):
 
     fig: Figure
     ax: SubplotAxesGrid
+
     def access_subplot(self, index: SubplotIndex) -> Axes: ...

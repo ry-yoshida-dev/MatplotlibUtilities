@@ -10,5 +10,6 @@ class Aspect(KeywordEnum):
     EQUAL: Ensures square pixels.
     AUTO: Adjusts to fit data.
     """
+
     EQUAL = "equal"
     AUTO = "auto"

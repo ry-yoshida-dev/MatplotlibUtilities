@@ -30,7 +30,11 @@ from matplotlib_utilities.utils import TableAxis
     ],
 )
 def test_from_number_accepts_a_partly_filled_last_row(
-    number: int, axis: TableAxis, axis_value: int, expected_row: int, expected_column: int
+    number: int,
+    axis: TableAxis,
+    axis_value: int,
+    expected_row: int,
+    expected_column: int,
 ) -> None:
     layout = GraphLayout.from_number(number=number, axis=axis, axis_value=axis_value)
     assert (layout.row, layout.column) == (expected_row, expected_column)
@@ -52,7 +56,10 @@ def test_drawing_without_index_uses_the_first_subplot() -> None:
 def test_an_integer_index_selects_the_subplot_in_row_major_order() -> None:
     maker = MatplotGraphMaker(layout=GraphLayout.from_row_column(row=2, column=2))
     assert maker.access_subplot(index=3) is maker.ax[1][1]
-    assert maker.access_subplot(index=RowColumnIndex(row_index=1, column_index=0)) is maker.ax[1][0]
+    assert (
+        maker.access_subplot(index=RowColumnIndex(row_index=1, column_index=0))
+        is maker.ax[1][0]
+    )
     plt.close(maker.fig)
 
 

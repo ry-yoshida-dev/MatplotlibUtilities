@@ -1,7 +1,14 @@
 from dataclasses import dataclass
 
 from ....keyword_subparameter import KeywordSubparameters
-from ....utils import CoordinateSystem, FontSize, FontWeight, HorizontalAlignment, RotationMode, VerticalAlignment
+from ....utils import (
+    CoordinateSystem,
+    FontSize,
+    FontWeight,
+    HorizontalAlignment,
+    RotationMode,
+    VerticalAlignment,
+)
 from ....utils.color import MplColor
 from ..keyword_arguments import AnnotateKeywordArguments
 from .arrow_properties import ArrowProperties
@@ -64,8 +71,12 @@ class AnnotateParameters(
     def __post_init__(self) -> None:
         super().__post_init__()
         if self.xycoords is not None and self.xycoords.is_offset:
-            raise ValueError("xycoords cannot be an offset system; offsets apply to textcoords only")
+            raise ValueError(
+                "xycoords cannot be an offset system; offsets apply to textcoords only"
+            )
         if isinstance(self.fontsize, (int, float)) and self.fontsize <= 0:
             raise ValueError("fontsize must be positive")
         if isinstance(self.fontweight, int) and not (0 <= self.fontweight <= 1000):
-            raise ValueError("fontweight must be between 0 and 1000 when given as a number")
+            raise ValueError(
+                "fontweight must be between 0 and 1000 when given as a number"
+            )

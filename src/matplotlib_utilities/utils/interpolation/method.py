@@ -7,6 +7,7 @@ class InterpolationMethod(KeywordEnum):
 
     These methods control how the image is resampled when displayed.
     """
+
     NONE = "none"
     NEAREST = "nearest"
     BILINEAR = "bilinear"

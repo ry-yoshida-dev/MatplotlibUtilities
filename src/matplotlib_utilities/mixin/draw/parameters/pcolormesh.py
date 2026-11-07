@@ -43,6 +43,7 @@ class PcolormeshParameters(
     zorder: float | None
         The drawing order of the mesh.
     """
+
     shading: Shading | None = None
     edgecolors: MplColor | None = None
     linewidth: float | None = None

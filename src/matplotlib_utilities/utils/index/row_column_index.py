@@ -1,6 +1,7 @@
 from __future__ import annotations
 from dataclasses import dataclass
 
+
 @dataclass(frozen=True)
 class RowColumnIndex:
     """
@@ -13,7 +14,8 @@ class RowColumnIndex:
     column: int
         The column of the subplot.
     """
-    row_index: int 
+
+    row_index: int
     column_index: int
 
     def __post_init__(self) -> None:

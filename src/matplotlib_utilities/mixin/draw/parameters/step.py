@@ -3,7 +3,12 @@ from dataclasses import dataclass
 from ....keyword_subparameter import KeywordSubparameters
 from ....utils import StepWhere
 from ..keyword_arguments import StepKeywordArguments
-from .base import ArtistParameters, LabelParameters, LineStyleParameters, MarkerLineParameters
+from .base import (
+    ArtistParameters,
+    LabelParameters,
+    LineStyleParameters,
+    MarkerLineParameters,
+)
 
 
 @dataclass(frozen=True)

@@ -44,4 +44,5 @@ class ContourfParameters(
     zorder: float | None
         The drawing order of the bands.
     """
+
     hatches: Sequence[Hatch | None] | None = None

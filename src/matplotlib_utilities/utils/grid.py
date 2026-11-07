@@ -22,7 +22,7 @@ class GridWhich(KeywordEnum):
     MAJOR = "major"
     MINOR = "minor"
     BOTH = "both"
-    
+
 
 class GridAxis(KeywordEnum):
     """

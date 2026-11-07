@@ -1,4 +1,3 @@
-
 from .parameter import GraphParameters
 from .font_family import FontFamily
 from .maker import MatplotGraphMaker
@@ -31,13 +30,13 @@ from .utils import (
     SubplotIndex,
     TableAxis,
     VerticalAlignment,
-    )
+)
 from .subparameter import Subparameters
 from .keyword_subparameter import KeywordSubparameters
 from .mixin.axis.parameters import (
     GridParameters,
     TickParamsParameters,
-    )
+)
 from .mixin.draw.parameters import (
     # Parameters (Draw)
     AnnotateParameters,
@@ -69,7 +68,6 @@ from .mixin.draw.parameters import (
     StepParameters,
     StreamplotParameters,
     ViolinplotParameters,
-
     # Enums
     Aspect,
     Linestyle,
@@ -89,7 +87,8 @@ from .mixin.draw.parameters import (
     Shading,
     StackBaseline,
     StepWhere,
-    )
+)
+
 __all__ = [
     "GraphLayout",
     "TableAxis",
@@ -108,7 +107,6 @@ __all__ = [
     "KeywordSubparameters",
     "KeywordEnum",
     "MplColor",
-
     # draw.parameters: Subparameters subclasses
     "AnnotateParameters",
     "ArrowProperties",
@@ -139,13 +137,11 @@ __all__ = [
     "StepParameters",
     "StreamplotParameters",
     "ViolinplotParameters",
-
     # axis.parameters
     "GridAxis",
     "GridParameters",
     "GridWhich",
     "TickParamsParameters",
-
     # Enums (imshow / colorbar / line styling, etc.)
     "Aspect",
     "Marker",
@@ -180,4 +176,4 @@ __all__ = [
     "LegendLocation",
     "RotationMode",
     "VerticalAlignment",
-    ]
+]

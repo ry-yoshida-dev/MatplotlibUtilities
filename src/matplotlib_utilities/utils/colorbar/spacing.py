@@ -10,5 +10,6 @@ class ColorbarSpacing(KeywordEnum):
     UNIFORM: Each color gets the same space.
     PROPORTIONAL: Space is proportional to the data interval.
     """
+
     UNIFORM = "uniform"
     PROPORTIONAL = "proportional"

@@ -70,4 +70,6 @@ class ImshowParameters(
         if self.filterrad <= 0:
             raise ValueError("filterrad must be greater than 0")
         if self.extent is not None and len(self.extent) != 4:
-            raise ValueError("extent must be a tuple of 4 floats: (left, right, bottom, top)")
+            raise ValueError(
+                "extent must be a tuple of 4 floats: (left, right, bottom, top)"
+            )

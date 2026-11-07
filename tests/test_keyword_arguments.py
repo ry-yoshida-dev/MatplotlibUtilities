@@ -30,7 +30,9 @@ def _keyword_parameter_classes() -> list[type]:
     for module in (draw_parameters, axis_parameters):
         for name in module.__all__:
             candidate: object = getattr(module, name)
-            if isinstance(candidate, type) and issubclass(candidate, KeywordSubparameters):
+            if isinstance(candidate, type) and issubclass(
+                candidate, KeywordSubparameters
+            ):
                 classes.append(candidate)
     return classes
 
@@ -40,7 +42,9 @@ def _typed_dict_of(parameters_class: type) -> type:
         if typing.get_origin(base) is KeywordSubparameters:
             typed_dict: type = typing.get_args(base)[0]
             return typed_dict
-    raise TypeError(f"{parameters_class.__name__} does not parametrize KeywordSubparameters directly")
+    raise TypeError(
+        f"{parameters_class.__name__} does not parametrize KeywordSubparameters directly"
+    )
 
 
 def _union_members(annotation: object) -> Iterator[object]:
@@ -58,14 +62,18 @@ def test_every_keyword_parameter_class_is_collected() -> None:
     assert len(KEYWORD_PARAMETER_CLASSES) == 29
 
 
-@pytest.mark.parametrize("parameters_class", KEYWORD_PARAMETER_CLASSES, ids=lambda cls: cls.__name__)
+@pytest.mark.parametrize(
+    "parameters_class", KEYWORD_PARAMETER_CLASSES, ids=lambda cls: cls.__name__
+)
 def test_typed_dict_keys_match_dataclass_fields(parameters_class: type) -> None:
     typed_dict = _typed_dict_of(parameters_class)
     keys: frozenset[str] = typed_dict.__required_keys__ | typed_dict.__optional_keys__
     assert keys == {field.name for field in dataclasses.fields(parameters_class)}
 
 
-@pytest.mark.parametrize("parameters_class", KEYWORD_PARAMETER_CLASSES, ids=lambda cls: cls.__name__)
+@pytest.mark.parametrize(
+    "parameters_class", KEYWORD_PARAMETER_CLASSES, ids=lambda cls: cls.__name__
+)
 def test_typed_dict_literals_cover_enum_values(parameters_class: type) -> None:
     field_types = typing.get_type_hints(parameters_class)
     keyword_types = typing.get_type_hints(_typed_dict_of(parameters_class))
@@ -84,7 +92,9 @@ def test_typed_dict_literals_cover_enum_values(parameters_class: type) -> None:
         if not enum_classes or not literal_values:
             continue
         for enum_class in enum_classes:
-            assert {member.value for member in enum_class} <= literal_values, f"{parameters_class.__name__}.{name}"
+            assert {member.value for member in enum_class} <= literal_values, (
+                f"{parameters_class.__name__}.{name}"
+            )
 
 
 def test_parameters_are_immutable() -> None:

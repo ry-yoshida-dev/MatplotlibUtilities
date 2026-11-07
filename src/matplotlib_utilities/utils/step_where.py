@@ -11,6 +11,7 @@ class StepWhere(KeywordEnum):
     POST: The level changes at the right of each x position.
     MID: The level changes halfway between neighboring x positions.
     """
+
     PRE = "pre"
     POST = "post"
     MID = "mid"

@@ -12,6 +12,7 @@ class HistType(KeywordEnum):
     STEP: An unfilled outline.
     STEP_FILLED: A filled outline.
     """
+
     BAR = "bar"
     BAR_STACKED = "barstacked"
     STEP = "step"

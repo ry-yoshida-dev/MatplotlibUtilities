@@ -45,7 +45,11 @@ def test_pie_draws_one_wedge_per_value() -> None:
 def test_pie_wedge_angles_follow_the_shares() -> None:
     maker = _maker()
     index = maker.get_subplot_index_from_number(number=0)
-    maker.pie(values=np.array([1.0, 3.0]), index=index, subparams=PieParameters(startangle=0.0))
+    maker.pie(
+        values=np.array([1.0, 3.0]),
+        index=index,
+        subparams=PieParameters(startangle=0.0),
+    )
     spans = [wedge.theta2 - wedge.theta1 for wedge in _wedges(maker)]
     assert spans == pytest.approx([90.0, 270.0])
     plt.close(maker.fig)
@@ -72,7 +76,9 @@ def test_wedge_style_reaches_matplotlib_as_wedgeprops() -> None:
         values=np.array([1.0, 1.0]),
         index=index,
         subparams=PieParameters(
-            wedgeprops=WedgeStyle(edgecolor="white", linewidth=2.0, width=0.4, alpha=0.5, zorder=3.0)
+            wedgeprops=WedgeStyle(
+                edgecolor="white", linewidth=2.0, width=0.4, alpha=0.5, zorder=3.0
+            )
         ),
     )
     wedge = _wedges(maker)[0]
@@ -90,7 +96,12 @@ def test_wedge_style_nests_in_to_dict() -> None:
 
 @pytest.mark.parametrize(
     "values",
-    [np.array([1.0, -1.0]), np.array([0.0, 0.0]), np.array([1.0, np.nan]), np.ones((2, 2))],
+    [
+        np.array([1.0, -1.0]),
+        np.array([0.0, 0.0]),
+        np.array([1.0, np.nan]),
+        np.ones((2, 2)),
+    ],
 )
 def test_pie_rejects_invalid_values(values: np.ndarray) -> None:
     maker = _maker()
@@ -112,7 +123,11 @@ def test_pie_rejects_colors_that_do_not_match_the_values() -> None:
     maker = _maker()
     index = maker.get_subplot_index_from_number(number=0)
     with pytest.raises(ValueError, match="colors must hold one entry per value"):
-        maker.pie(values=np.array([1.0, 2.0]), index=index, subparams=PieParameters(colors=["red"]))
+        maker.pie(
+            values=np.array([1.0, 2.0]),
+            index=index,
+            subparams=PieParameters(colors=["red"]),
+        )
     plt.close(maker.fig)
 
 

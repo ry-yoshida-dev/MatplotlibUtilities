@@ -43,6 +43,7 @@ class Hist2dParameters(
     zorder: float | None
         The drawing order of the cells.
     """
+
     bins: int | tuple[int, int] | None = None
     range: tuple[tuple[float, float], tuple[float, float]] | None = None
     density: bool | None = None
@@ -58,7 +59,11 @@ class Hist2dParameters(
                 raise ValueError("bins must be positive")
             case _:
                 pass
-        if self.range is not None and any(lower >= upper for lower, upper in self.range):
-            raise ValueError("range must be ((xmin, xmax), (ymin, ymax)) with each min < max")
+        if self.range is not None and any(
+            lower >= upper for lower, upper in self.range
+        ):
+            raise ValueError(
+                "range must be ((xmin, xmax), (ymin, ymax)) with each min < max"
+            )
         if self.cmin is not None and self.cmax is not None and self.cmin > self.cmax:
             raise ValueError("cmin must be less than or equal to cmax")

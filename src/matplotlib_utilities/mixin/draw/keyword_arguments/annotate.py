@@ -48,9 +48,32 @@ class AnnotateKeywordArguments(TypedDict, total=False):
     annotation_clip: bool
     color: MplColor
     fontsize: (
-        float | Literal["xx-small", "x-small", "small", "medium", "large", "x-large", "xx-large", "smaller", "larger"]
+        float
+        | Literal[
+            "xx-small",
+            "x-small",
+            "small",
+            "medium",
+            "large",
+            "x-large",
+            "xx-large",
+            "smaller",
+            "larger",
+        ]
     )
-    fontweight: Literal["ultralight", "light", "normal", "medium", "semibold", "bold", "heavy", "black"] | int
+    fontweight: (
+        Literal[
+            "ultralight",
+            "light",
+            "normal",
+            "medium",
+            "semibold",
+            "bold",
+            "heavy",
+            "black",
+        ]
+        | int
+    )
     ha: Literal["left", "center", "right"]
     va: Literal["top", "center", "center_baseline", "baseline", "bottom"]
     rotation: float

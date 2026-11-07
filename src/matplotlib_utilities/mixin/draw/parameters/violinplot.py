@@ -33,6 +33,7 @@ class ViolinplotParameters(KeywordSubparameters[ViolinplotKeywordArguments]):
     linecolor: MplColor | Sequence[MplColor] | None
         The color of the mean, median and extrema lines.
     """
+
     orientation: Orientation | None = None
     widths: float | Sequence[float] | None = None
     showmeans: bool | None = None
@@ -47,7 +48,9 @@ class ViolinplotParameters(KeywordSubparameters[ViolinplotKeywordArguments]):
         match self.widths:
             case float() | int() as violin_width if violin_width <= 0:
                 raise ValueError("widths must be positive")
-            case Sequence() as violin_widths if any(width <= 0 for width in violin_widths):
+            case Sequence() as violin_widths if any(
+                width <= 0 for width in violin_widths
+            ):
                 raise ValueError("widths must be positive")
             case _:
                 pass

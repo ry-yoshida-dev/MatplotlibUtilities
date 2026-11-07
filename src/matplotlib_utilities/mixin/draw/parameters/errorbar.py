@@ -50,6 +50,7 @@ class ErrorbarParameters(
     zorder: float | None
         The drawing order of the series.
     """
+
     color: MplColor | None = None
     marker: Marker | None = None
     markersize: float | None = None

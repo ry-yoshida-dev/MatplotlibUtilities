@@ -10,5 +10,6 @@ class BandwidthMethod(KeywordEnum):
     SCOTT: Scott's rule of thumb.
     SILVERMAN: Silverman's rule of thumb.
     """
+
     SCOTT = "scott"
     SILVERMAN = "silverman"

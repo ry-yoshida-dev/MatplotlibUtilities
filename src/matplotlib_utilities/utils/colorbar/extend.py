@@ -12,6 +12,7 @@ class ColorbarExtend(KeywordEnum):
     MIN: Extend on minimum end.
     MAX: Extend on maximum end.
     """
+
     NEITHER = "neither"
     BOTH = "both"
     MIN = "min"

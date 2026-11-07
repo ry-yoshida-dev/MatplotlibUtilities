@@ -36,7 +36,9 @@ class ContourLevelParameters(NormParameters):
                 raise ValueError("levels must be positive when given as a count")
             case int() | None:
                 pass
-            case level_values if bool(np.any(np.diff(np.asarray(level_values, dtype=float)) <= 0)):
+            case level_values if bool(
+                np.any(np.diff(np.asarray(level_values, dtype=float)) <= 0)
+            ):
                 raise ValueError("levels must be strictly increasing")
             case _:
                 pass

@@ -6,6 +6,7 @@ from dataclasses import dataclass
 
 from .utils import TableAxis
 
+
 @dataclass(frozen=True)
 class GraphLayout:
     """
@@ -20,6 +21,7 @@ class GraphLayout:
     row: int
         The number of rows in the subplots.
     """
+
     number: int
     column: int
     row: int
@@ -66,14 +68,14 @@ class GraphLayout:
 
     @classmethod
     def from_number(
-        cls, 
-        number: int, 
+        cls,
+        number: int,
         axis: TableAxis = TableAxis.COLUMN,
         axis_value: int = 1,
-        ) -> GraphLayout:
+    ) -> GraphLayout:
         """
         Create a layout from the number and axis.
-        
+
         Parameters
         ----------
         number: int
@@ -88,27 +90,19 @@ class GraphLayout:
         Layout:
             The layout of matplotlib graphs.
         """
-        other_axis_value = math.ceil(number/axis_value)
+        other_axis_value = math.ceil(number / axis_value)
         match axis:
             case TableAxis.COLUMN:
-                return cls(
-                    number=number, 
-                    column=axis_value, 
-                    row=other_axis_value
-                    )
+                return cls(number=number, column=axis_value, row=other_axis_value)
             case TableAxis.ROW:
-                return cls(
-                    number=number, 
-                    column=other_axis_value, 
-                    row=axis_value
-                    )
+                return cls(number=number, column=other_axis_value, row=axis_value)
 
     @classmethod
     def from_row_column(
-        cls, 
-        row: int, 
+        cls,
+        row: int,
         column: int,
-        ) -> GraphLayout:
+    ) -> GraphLayout:
         """
         Create a layout from the row and column.
 
@@ -124,17 +118,13 @@ class GraphLayout:
         Layout:
             The layout of matplotlib graphs.
         """
-        return cls(
-            number=row * column, 
-            column=column, 
-            row=row
-            )
+        return cls(number=row * column, column=column, row=row)
 
     def from_row_column_to_number(
         self,
         row_index: int,
         column_index: int,
-        ) -> int:
+    ) -> int:
         """
         Create a number from the row and column.
 
@@ -150,10 +140,7 @@ class GraphLayout:
         int:
             The number of the subplot.
         """
-        self._validate_row_column_index(
-            row_index=row_index, 
-            column_index=column_index
-            )
+        self._validate_row_column_index(row_index=row_index, column_index=column_index)
         number = row_index * self.column + column_index
         self._validate_number(number=number)
         return number
@@ -161,7 +148,7 @@ class GraphLayout:
     def from_number_to_row_column_index(
         self,
         number: int,
-        ) -> tuple[int, int]:
+    ) -> tuple[int, int]:
         """
         Create a row and column from the number.
 
@@ -180,10 +167,7 @@ class GraphLayout:
         column = number % self.column
         return row, column
 
-    def _validate_number(
-        self, 
-        number: int
-        ) -> None:
+    def _validate_number(self, number: int) -> None:
         """
         Validate the number.
 
@@ -196,12 +180,8 @@ class GraphLayout:
             raise ValueError(f"input number is out of range, got {number}")
         if number >= self.number:
             raise ValueError(f"input number is out of range, got {number}")
-    
-    def _validate_row_column_index(
-        self, 
-        row_index: int, 
-        column_index: int
-        ) -> None:
+
+    def _validate_row_column_index(self, row_index: int, column_index: int) -> None:
         """
         Validate the row and column index.
 

@@ -13,7 +13,20 @@ class ArrowPropertiesKeywordArguments(TypedDict, total=False):
     """
 
     arrowstyle: Literal[
-        "-", "->", "<-", "<->", "-|>", "<|-", "<|-|>", "-[", "]-", "]-[", "|-|", "simple", "fancy", "wedge"
+        "-",
+        "->",
+        "<-",
+        "<->",
+        "-|>",
+        "<|-",
+        "<|-|>",
+        "-[",
+        "]-",
+        "]-[",
+        "|-|",
+        "simple",
+        "fancy",
+        "wedge",
     ]
     color: MplColor
     linewidth: float
