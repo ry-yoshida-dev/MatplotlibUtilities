@@ -24,14 +24,6 @@ dependencies = [
     "color @ git+https://github.com/ry-yoshida-dev/Color.git",
 ]
 
-[project.optional-dependencies]
-dev = [
-    "basedpyright",
-    "mypy",
-    "pytest",
-    "ruff",
-]
-
 [project.urls]
 Homepage = "https://github.com/ry-yoshida-dev/MatplotlibUtilities"
 "Bug Tracker" = "https://github.com/ry-yoshida-dev/MatplotlibUtilities/issues"
@@ -45,7 +37,7 @@ matplotlib_utilities = ["py.typed"]
 [tool.mypy]
 mypy_path = "typings"
 strict = true
-files = ["src"]
+files = ["src", "tests"]
 
 [tool.basedpyright]
 include = ["src"]
@@ -57,5 +49,62 @@ testpaths = ["tests"]
 pythonpath = ["src"]
 python_files = ["test.py", "test_*.py", "*_test.py"]
 
+[dependency-groups]
+dev = [
+    "basedpyright",
+    "mypy",
+    "pytest",
+    "ruff",
+]
+
 [tool.uv]
 exclude-newer = "7 days"
+
+[tool.ruff]
+target-version = "py312"
+extend-exclude = ["typings"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "D"]
+# Only public classes, methods, and functions need docstrings, and multi-line ones are the local style.
+ignore = ["E501", "D100", "D104", "D105", "D200"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["D"]
+
+[tool.ruff.lint.flake8-bugbear]
+# Subparameter defaults are frozen dataclasses, so sharing one instance across calls is safe.
+extend-immutable-calls = [
+    "matplotlib_utilities.mixin.draw.parameters.AnnotateParameters",
+    "matplotlib_utilities.mixin.draw.parameters.ArrowParameters",
+    "matplotlib_utilities.mixin.draw.parameters.BarParameters",
+    "matplotlib_utilities.mixin.draw.parameters.BarhParameters",
+    "matplotlib_utilities.mixin.draw.parameters.BoxplotParameters",
+    "matplotlib_utilities.mixin.draw.parameters.ColorbarParameters",
+    "matplotlib_utilities.mixin.draw.parameters.ContourParameters",
+    "matplotlib_utilities.mixin.draw.parameters.ContourfParameters",
+    "matplotlib_utilities.mixin.draw.parameters.ErrorbarParameters",
+    "matplotlib_utilities.mixin.draw.parameters.FillBetweenParameters",
+    "matplotlib_utilities.mixin.axis.parameters.GridParameters",
+    "matplotlib_utilities.mixin.draw.parameters.HexbinParameters",
+    "matplotlib_utilities.mixin.draw.parameters.Hist2dParameters",
+    "matplotlib_utilities.mixin.draw.parameters.HistParameters",
+    "matplotlib_utilities.mixin.draw.parameters.ImscatterParameters",
+    "matplotlib_utilities.mixin.draw.parameters.ImshowParameters",
+    "matplotlib_utilities.mixin.draw.parameters.LegendParameters",
+    "matplotlib_utilities.mixin.draw.parameters.LineParameters",
+    "matplotlib_utilities.mixin.draw.parameters.PcolormeshParameters",
+    "matplotlib_utilities.mixin.draw.parameters.PieParameters",
+    "matplotlib_utilities.mixin.draw.parameters.PlotParameters",
+    "matplotlib_utilities.mixin.draw.parameters.QuiverParameters",
+    "matplotlib_utilities.mixin.draw.parameters.ScatterParameters",
+    "matplotlib_utilities.mixin.draw.parameters.SpanParameters",
+    "matplotlib_utilities.mixin.draw.parameters.StackplotParameters",
+    "matplotlib_utilities.mixin.draw.parameters.StepParameters",
+    "matplotlib_utilities.mixin.draw.parameters.StreamplotParameters",
+    "matplotlib_utilities.mixin.axis.parameters.TickParamsParameters",
+    "matplotlib_utilities.mixin.draw.parameters.ViolinplotParameters",
+]

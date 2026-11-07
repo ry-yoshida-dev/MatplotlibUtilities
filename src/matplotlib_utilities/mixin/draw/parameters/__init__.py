@@ -1,4 +1,25 @@
 from ....subparameter import Subparameters
+from ....utils import (
+    ArrowShape,
+    Aspect,
+    BandwidthMethod,
+    ColorbarExtend,
+    ColorbarSpacing,
+    HistType,
+    IntegrationDirection,
+    InterpolationMethod,
+    InterpolationStage,
+    Linestyle,
+    Location,
+    Orientation,
+    Origin,
+    QuiverAngles,
+    QuiverPivot,
+    QuiverUnits,
+    Shading,
+    StackBaseline,
+    StepWhere,
+)
 from .annotate import AnnotateParameters
 from .arrow import ArrowParameters
 from .arrow_properties import ArrowProperties
@@ -28,27 +49,6 @@ from .step import StepParameters
 from .streamplot import StreamplotParameters
 from .violinplot import ViolinplotParameters
 from .wedge_style import WedgeStyle
-from ....utils import (
-    Aspect,
-    ArrowShape,
-    Linestyle,
-    InterpolationMethod,
-    InterpolationStage,
-    Origin,
-    Location,
-    Orientation,
-    QuiverAngles,
-    QuiverPivot,
-    QuiverUnits,
-    ColorbarExtend,
-    ColorbarSpacing,
-    BandwidthMethod,
-    HistType,
-    IntegrationDirection,
-    Shading,
-    StackBaseline,
-    StepWhere,
-)
 
 __all__ = [
     "AnnotateParameters",

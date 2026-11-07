@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 
 from ....keyword_subparameter import KeywordSubparameters
-from ..keyword_arguments import ArrowKeywordArguments
 from ....utils import ArrowShape
 from ....utils.color import MplColor
+from ..keyword_arguments import ArrowKeywordArguments
 from .base import (
     ArtistParameters,
     ColorParameters,
@@ -23,7 +23,7 @@ class ArrowParameters(
     """
     Optional keyword arguments for matplotlib.axes.Axes.arrow.
 
-    Attributes:
+    Attributes
     ----------
     # own
     width: float | None

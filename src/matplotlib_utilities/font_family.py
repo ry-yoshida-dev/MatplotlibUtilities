@@ -11,7 +11,7 @@ class FontFamily(Enum):
     Japanese is drawn as tofu boxes unless a font that holds them is
     registered first. Selecting JAPANESE registers a bundled one.
 
-    Attributes:
+    Attributes
     ----------
     DEFAULT: str
         Leaves the font family in the rcParams untouched.

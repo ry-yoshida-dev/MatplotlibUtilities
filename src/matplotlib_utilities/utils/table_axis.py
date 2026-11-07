@@ -7,7 +7,7 @@ class TableAxis(Enum):
     """
     Table axis.
 
-    Attributes:
+    Attributes
     ----------
     ROW: str
         Row axis.

@@ -9,7 +9,7 @@ class GridWhich(KeywordEnum):
     """
     Which grid lines :meth:`matplotlib.axes.Axes.grid` affects.
 
-    Attributes:
+    Attributes
     ----------
     MAJOR: str
         Major grid lines.
@@ -28,7 +28,7 @@ class GridAxis(KeywordEnum):
     """
     Which axis :meth:`matplotlib.axes.Axes.grid` draws grid lines for.
 
-    Attributes:
+    Attributes
     ----------
     BOTH: str
         Both x and y axes.

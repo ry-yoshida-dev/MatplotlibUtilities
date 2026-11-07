@@ -21,41 +21,42 @@ from PIL import Image
 
 from matplotlib_utilities import (
     AnnotateParameters,
+    ArrowParameters,
     ArrowProperties,
-    ColorMap,
+    BarhParameters,
     BoxplotParameters,
+    ColorbarParameters,
+    ColorMap,
     ContourfParameters,
     ContourParameters,
     ErrorbarParameters,
     FillBetweenParameters,
+    GraphLayout,
+    GraphParameters,
     HexbinParameters,
     Hist2dParameters,
     HistParameters,
     ImscatterParameters,
+    ImshowParameters,
+    LineParameters,
     Marker,
+    MatplotGraphMaker,
+    Orientation,
     PcolormeshParameters,
+    PieParameters,
+    PlotParameters,
+    QuiverAngles,
+    QuiverParameters,
+    ScatterParameters,
     Shading,
     SpanParameters,
     StackplotParameters,
     StepParameters,
     StepWhere,
     StreamplotParameters,
-    ViolinplotParameters,
-    ArrowParameters,
-    BarhParameters,
-    ColorbarParameters,
-    GraphLayout,
-    GraphParameters,
-    ImshowParameters,
-    LineParameters,
-    MatplotGraphMaker,
-    Orientation,
-    PieParameters,
-    PlotParameters,
-    QuiverAngles,
-    QuiverParameters,
-    ScatterParameters,
+    SubplotIndex,
     TableAxis,
+    ViolinplotParameters,
     WedgeStyle,
 )
 from matplotlib_utilities.mixin.draw.parameters import BarParameters
@@ -110,7 +111,7 @@ def _maker() -> MatplotGraphMaker:
     return MatplotGraphMaker(layout=layout, parameters=README_GRAPH_PARAMETERS)
 
 
-def _index(maker: MatplotGraphMaker):
+def _index(maker: MatplotGraphMaker) -> SubplotIndex:
     return maker.get_subplot_index_from_number(number=0)
 
 

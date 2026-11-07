@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 
 from ....keyword_subparameter import KeywordSubparameters
-from ..keyword_arguments import ErrorbarKeywordArguments
 from ....utils import Linestyle, Marker
 from ....utils.color import MplColor
+from ..keyword_arguments import ErrorbarKeywordArguments
 from .base import ArtistParameters, LabelParameters
 
 
@@ -16,7 +16,7 @@ class ErrorbarParameters(
     """
     Parameters for the error bar plot.
 
-    Attributes:
+    Attributes
     ----------
     # own
     color: MplColor | None

@@ -2,8 +2,8 @@ from collections.abc import Sequence
 from dataclasses import dataclass
 
 from ....keyword_subparameter import KeywordSubparameters
-from ..keyword_arguments import BoxplotKeywordArguments
 from ....utils import Orientation
+from ..keyword_arguments import BoxplotKeywordArguments
 
 
 @dataclass(frozen=True)
@@ -11,7 +11,7 @@ class BoxplotParameters(KeywordSubparameters[BoxplotKeywordArguments]):
     """
     Parameters for the box plot.
 
-    Attributes:
+    Attributes
     ----------
     orientation: Orientation | None
         Whether the boxes stand vertically or run horizontally.

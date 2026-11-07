@@ -8,7 +8,6 @@ from matplotlib.axes import Axes
 from matplotlib.figure import Figure
 
 from .types import SubplotAxesGrid
-
 from .utils import SubplotIndex
 
 
@@ -18,4 +17,13 @@ class MakerCanvas(Protocol):
     fig: Figure
     ax: SubplotAxesGrid
 
-    def access_subplot(self, index: SubplotIndex) -> Axes: ...
+    def access_subplot(self, index: SubplotIndex) -> Axes:
+        """
+        Return the Axes at the given subplot index.
+
+        Parameters
+        ----------
+        index: SubplotIndex
+            The subplot number in row-major order, or its row and column.
+        """
+        ...

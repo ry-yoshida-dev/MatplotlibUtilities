@@ -1,10 +1,16 @@
-from ..keyword_enum import KeywordEnum
-
-from matplotlib.colors import Colormap
 from matplotlib import colormaps
+from matplotlib.colors import Colormap
+
+from ..keyword_enum import KeywordEnum
 
 
 class ColorMap(KeywordEnum):
+    """
+    Named Matplotlib colormaps.
+
+    Ref: https://matplotlib.org/stable/users/explain/colors/colormaps.html
+    """
+
     # --- Perceptually Uniform Sequential ---
     VIRIDIS = "viridis"
     PLASMA = "plasma"

@@ -9,7 +9,7 @@ class ImscatterParameters(Subparameters):
     """
     Parameters for the image scatter plot.
 
-    Attributes:
+    Attributes
     ----------
     zoom: float
         The scale of each image relative to its pixel size.

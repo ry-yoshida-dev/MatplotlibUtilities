@@ -67,7 +67,7 @@ def test_every_keyword_parameter_class_is_collected() -> None:
 )
 def test_typed_dict_keys_match_dataclass_fields(parameters_class: type) -> None:
     typed_dict = _typed_dict_of(parameters_class)
-    keys: frozenset[str] = typed_dict.__required_keys__ | typed_dict.__optional_keys__
+    keys = frozenset(typing.get_type_hints(typed_dict))
     assert keys == {field.name for field in dataclasses.fields(parameters_class)}
 
 
@@ -113,12 +113,12 @@ def test_nested_arrow_properties_become_a_dict() -> None:
 
 def test_enums_inside_a_sequence_are_unwrapped() -> None:
     parameters = ContourfParameters(hatches=[Hatch.DOT, None])
-    assert parameters.to_dict["hatches"] == [".", None]
+    assert parameters.to_dict.get("hatches") == [".", None]
 
 
 def test_dash_pattern_linestyle_is_passed_as_a_tuple() -> None:
     parameters = LineParameters(linestyle=Linestyle.LOOSELY_DOTTED)
-    assert parameters.to_dict["linestyle"] == (0, (1, 10))
+    assert parameters.to_dict.get("linestyle") == (0, (1, 10))
 
 
 def test_annotation_point_rejects_an_offset_system() -> None:

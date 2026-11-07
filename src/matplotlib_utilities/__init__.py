@@ -1,10 +1,67 @@
-from .parameter import GraphParameters
 from .font_family import FontFamily
-from .maker import MatplotGraphMaker
-from .protocols import MakerCanvas
-from .mixin.axis import AxisMixin
-from .mixin.draw import DrawMixin
+from .keyword_subparameter import KeywordSubparameters
 from .layout import GraphLayout
+from .maker import MatplotGraphMaker
+from .mixin.axis import AxisMixin
+from .mixin.axis.parameters import (
+    GridParameters,
+    TickParamsParameters,
+)
+from .mixin.draw import DrawMixin
+from .mixin.draw.parameters import (
+    # Parameters (Draw)
+    AnnotateParameters,
+    ArrowParameters,
+    ArrowProperties,
+    # Enums
+    Aspect,
+    BandwidthMethod,
+    BarhParameters,
+    BarParameters,
+    BoxplotParameters,
+    ColorbarExtend,
+    ColorbarParameters,
+    ColorbarSpacing,
+    ContourfParameters,
+    ContourParameters,
+    ErrorbarParameters,
+    FillBetweenParameters,
+    HexbinParameters,
+    Hist2dParameters,
+    HistParameters,
+    HistType,
+    ImscatterParameters,
+    ImshowParameters,
+    IntegrationDirection,
+    InterpolationMethod,
+    InterpolationStage,
+    LegendParameters,
+    LineParameters,
+    Linestyle,
+    Location,
+    Orientation,
+    Origin,
+    PcolormeshParameters,
+    PieParameters,
+    PlotParameters,
+    QuiverAngles,
+    QuiverParameters,
+    QuiverPivot,
+    QuiverUnits,
+    ScatterParameters,
+    Shading,
+    SpanParameters,
+    StackBaseline,
+    StackplotParameters,
+    StepParameters,
+    StepWhere,
+    StreamplotParameters,
+    ViolinplotParameters,
+    WedgeStyle,
+)
+from .parameter import GraphParameters
+from .protocols import MakerCanvas
+from .subparameter import Subparameters
 from .types import NumericArray, SubplotAxesGrid
 from .utils import (
     ArrowStyle,
@@ -30,63 +87,6 @@ from .utils import (
     SubplotIndex,
     TableAxis,
     VerticalAlignment,
-)
-from .subparameter import Subparameters
-from .keyword_subparameter import KeywordSubparameters
-from .mixin.axis.parameters import (
-    GridParameters,
-    TickParamsParameters,
-)
-from .mixin.draw.parameters import (
-    # Parameters (Draw)
-    AnnotateParameters,
-    ArrowProperties,
-    BarParameters,
-    BarhParameters,
-    PieParameters,
-    PlotParameters,
-    WedgeStyle,
-    ScatterParameters,
-    ImshowParameters,
-    ColorbarParameters,
-    LegendParameters,
-    LineParameters,
-    ArrowParameters,
-    QuiverParameters,
-    BoxplotParameters,
-    ContourParameters,
-    ContourfParameters,
-    ErrorbarParameters,
-    FillBetweenParameters,
-    HexbinParameters,
-    HistParameters,
-    Hist2dParameters,
-    ImscatterParameters,
-    PcolormeshParameters,
-    SpanParameters,
-    StackplotParameters,
-    StepParameters,
-    StreamplotParameters,
-    ViolinplotParameters,
-    # Enums
-    Aspect,
-    Linestyle,
-    InterpolationMethod,
-    InterpolationStage,
-    Origin,
-    Location,
-    Orientation,
-    ColorbarExtend,
-    ColorbarSpacing,
-    QuiverAngles,
-    QuiverPivot,
-    QuiverUnits,
-    BandwidthMethod,
-    HistType,
-    IntegrationDirection,
-    Shading,
-    StackBaseline,
-    StepWhere,
 )
 
 __all__ = [

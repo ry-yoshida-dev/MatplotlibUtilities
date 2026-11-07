@@ -6,9 +6,10 @@ import matplotlib
 
 matplotlib.use("Agg")
 
+from pathlib import Path
+
 import numpy as np
 import pytest
-from pathlib import Path
 
 from matplotlib_utilities import (
     AnnotateParameters,
@@ -95,7 +96,7 @@ def test_import_package() -> None:
 
 def test_scatter_parameters_label_in_to_dict() -> None:
     """Scatter includes matplotlib ``label`` in ``to_dict`` like ``Axes.scatter``."""
-    assert ScatterParameters(label="series A").to_dict["label"] == "series A"
+    assert ScatterParameters(label="series A").to_dict.get("label") == "series A"
 
 
 def test_quiver_parameters_enum_values_in_to_dict() -> None:
@@ -105,9 +106,9 @@ def test_quiver_parameters_enum_values_in_to_dict() -> None:
         scale=10.0,
     )
     d = params.to_dict
-    assert d["angles"] == "xy"
-    assert d["label"] == "flow"
-    assert d["scale"] == 10.0
+    assert d.get("angles") == "xy"
+    assert d.get("label") == "flow"
+    assert d.get("scale") == 10.0
 
 
 def test_graph_maker_quiver_smoke(tmp_path: Path) -> None:

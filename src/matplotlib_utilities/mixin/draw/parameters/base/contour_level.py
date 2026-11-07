@@ -14,7 +14,7 @@ class ContourLevelParameters(NormParameters):
     """
     Level and coloring options shared by line and filled contours.
 
-    Attributes:
+    Attributes
     ----------
     levels: int | Sequence[float] | NumericArray | None
         The number of contour levels, or the levels themselves in increasing

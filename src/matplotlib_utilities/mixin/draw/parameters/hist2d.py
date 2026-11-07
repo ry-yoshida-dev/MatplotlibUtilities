@@ -14,7 +14,7 @@ class Hist2dParameters(
     """
     Parameters for the two-dimensional histogram.
 
-    Attributes:
+    Attributes
     ----------
     # own
     bins: int | tuple[int, int] | None

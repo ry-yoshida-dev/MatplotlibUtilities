@@ -3,9 +3,9 @@ from dataclasses import dataclass
 from matplotlib.colors import Normalize
 
 from ....keyword_subparameter import KeywordSubparameters
-from ..keyword_arguments import StreamplotKeywordArguments
 from ....utils import ArrowStyle, ColorMap, IntegrationDirection
 from ....utils.color import MplColor
+from ..keyword_arguments import StreamplotKeywordArguments
 
 
 @dataclass(frozen=True)
@@ -13,7 +13,7 @@ class StreamplotParameters(KeywordSubparameters[StreamplotKeywordArguments]):
     """
     Parameters for the streamline plot.
 
-    Attributes:
+    Attributes
     ----------
     density: float | tuple[float, float] | None
         How closely the streamlines are packed, along both axes or along (x, y).

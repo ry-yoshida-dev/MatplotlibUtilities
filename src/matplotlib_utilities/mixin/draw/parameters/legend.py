@@ -14,7 +14,7 @@ class LegendParameters(
     """
     Parameters for the legend.
 
-    Attributes:
+    Attributes
     ----------
     # own
     loc: LegendLocation | None

@@ -24,6 +24,7 @@ from matplotlib_utilities import (
     GraphLayout,
     GraphParameters,
     MatplotGraphMaker,
+    SubplotIndex,
     TableAxis,
 )
 from matplotlib_utilities.mixin.axis.parameters import (
@@ -61,7 +62,7 @@ def _maker() -> MatplotGraphMaker:
     return MatplotGraphMaker(layout=layout, parameters=README_GRAPH_PARAMETERS)
 
 
-def _index(maker: MatplotGraphMaker):
+def _index(maker: MatplotGraphMaker) -> SubplotIndex:
     return maker.get_subplot_index_from_number(number=0)
 
 
@@ -78,7 +79,7 @@ def _save(maker: MatplotGraphMaker, rel_path: str) -> Path:
     return out
 
 
-def _base_plot(maker: MatplotGraphMaker, idx) -> None:
+def _base_plot(maker: MatplotGraphMaker, idx: SubplotIndex) -> None:
     x = np.linspace(0, 2 * np.pi, 40)
     maker.plot(x=x, y=np.sin(x), index=idx)
 

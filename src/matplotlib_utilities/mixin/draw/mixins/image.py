@@ -3,18 +3,20 @@
 from __future__ import annotations
 
 import numpy as np
-from PIL.Image import Image as PILImage
 from matplotlib.axes import Axes
 from matplotlib.cm import ScalarMappable
 from matplotlib.collections import QuadMesh
 from matplotlib.colorbar import Colorbar
 from matplotlib.contour import QuadContourSet
-from matplotlib.image import AxesImage
-from matplotlib.image import pil_to_array
+from matplotlib.image import AxesImage, pil_to_array
 from matplotlib.offsetbox import AnnotationBbox, OffsetImage
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 from mpl_toolkits.axes_grid1.axes_divider import AxesDivider
+from PIL.Image import Image as PILImage
 
+from ....protocols import MakerCanvas
+from ....types import NumericArray
+from ....utils import SubplotIndex
 from ..parameters import (
     ColorbarParameters,
     ContourfParameters,
@@ -23,10 +25,7 @@ from ..parameters import (
     ImshowParameters,
     PcolormeshParameters,
 )
-from ....protocols import MakerCanvas
 from .argument_validator import ArgumentValidator
-from ....types import NumericArray
-from ....utils import SubplotIndex
 
 
 class ImageDrawMixin:
@@ -155,7 +154,7 @@ class ImageDrawMixin:
         subplot = self.access_subplot(index=index)
         colormap = None if subparams.cmap is None else subparams.cmap.colormap_object
         for x_value, y_value, image in zip(
-            map(float, x), map(float, y), images_per_point
+            map(float, x), map(float, y), images_per_point, strict=True
         ):
             pixels = pil_to_array(image) if isinstance(image, PILImage) else image
             offset_image = OffsetImage(pixels, zoom=subparams.zoom, cmap=colormap)

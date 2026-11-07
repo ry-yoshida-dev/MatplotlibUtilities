@@ -4,11 +4,11 @@ from __future__ import annotations
 
 import numpy as np
 
-from ..parameters import ArrowParameters, QuiverParameters, StreamplotParameters
 from ....protocols import MakerCanvas
-from .argument_validator import ArgumentValidator
 from ....types import NumericArray
 from ....utils import SubplotIndex
+from ..parameters import ArrowParameters, QuiverParameters, StreamplotParameters
+from .argument_validator import ArgumentValidator
 
 
 class VectorDrawMixin:

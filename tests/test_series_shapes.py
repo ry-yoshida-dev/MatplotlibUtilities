@@ -64,7 +64,8 @@ def test_step_rejects_mismatched_data(maker: MatplotGraphMaker) -> None:
 
 def test_step_parameters_have_no_drawstyle() -> None:
     with pytest.raises(TypeError, match="drawstyle"):
-        _ = StepParameters(**{"drawstyle": "default"})
+        # The unknown keyword is the point of this test.
+        _ = StepParameters(drawstyle="default")  # type: ignore[call-arg]  # pyright: ignore[reportCallIssue]
 
 
 def test_errorbar_draws_one_bar_per_point(maker: MatplotGraphMaker) -> None:

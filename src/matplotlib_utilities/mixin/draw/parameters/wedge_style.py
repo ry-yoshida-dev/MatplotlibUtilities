@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 
 from ....keyword_subparameter import KeywordSubparameters
-from ..keyword_arguments import WedgeStyleKeywordArguments
 from ....utils.color import MplColor
+from ..keyword_arguments import WedgeStyleKeywordArguments
 
 
 @dataclass(frozen=True)
@@ -10,7 +10,7 @@ class WedgeStyle(KeywordSubparameters[WedgeStyleKeywordArguments]):
     """
     Styling applied to every wedge of a pie chart (matplotlib wedgeprops).
 
-    Attributes:
+    Attributes
     ----------
     edgecolor: MplColor | None
         The color of the wedge outlines. A background color such as white

@@ -5,7 +5,7 @@ class Aspect(KeywordEnum):
     """
     Aspect ratio options for matplotlib imshow.
 
-    Attributes:
+    Attributes
     ----------
     EQUAL: Ensures square pixels.
     AUTO: Adjusts to fit data.

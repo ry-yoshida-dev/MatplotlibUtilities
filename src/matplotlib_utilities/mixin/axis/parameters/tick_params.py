@@ -9,7 +9,7 @@ class TickParamsParameters(KeywordSubparameters[TickParamsKeywordArguments]):
     """
     Parameters for configuring tick marks and labels on matplotlib axes.
 
-    Attributes:
+    Attributes
     ----------
     bottom: bool = False
         Whether to show tick marks on the bottom axis.

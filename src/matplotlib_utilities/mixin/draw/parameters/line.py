@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 
 from ....keyword_subparameter import KeywordSubparameters
-from ..keyword_arguments import LineKeywordArguments
 from ....utils.color import MplColor
+from ..keyword_arguments import LineKeywordArguments
 from .base import ArtistParameters, LabelParameters, LineStyleParameters
 
 
@@ -16,7 +16,7 @@ class LineParameters(
     """
     Parameters for the line.
 
-    Attributes:
+    Attributes
     ----------
     color: MplColor | None
         Line color (matplotlib ``color`` for ``axhline`` / ``axvline``).

@@ -5,7 +5,7 @@ class HistType(KeywordEnum):
     """
     Histogram drawing styles (matplotlib ``histtype``).
 
-    Attributes:
+    Attributes
     ----------
     BAR: One bar per bin; several datasets sit side by side.
     BAR_STACKED: One bar per bin; several datasets are stacked.

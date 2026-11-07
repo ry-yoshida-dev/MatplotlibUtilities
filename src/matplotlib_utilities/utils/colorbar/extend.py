@@ -5,7 +5,7 @@ class ColorbarExtend(KeywordEnum):
     """
     Extend options for matplotlib colorbar.
 
-    Attributes:
+    Attributes
     ----------
     NEITHER: No extensions.
     BOTH: Extend on both ends.

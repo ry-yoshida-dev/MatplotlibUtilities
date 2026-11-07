@@ -5,7 +5,7 @@ class Shading(KeywordEnum):
     """
     Fill style of a pseudocolor mesh (matplotlib ``shading``).
 
-    Attributes:
+    Attributes
     ----------
     FLAT: One solid color per cell; coordinates mark the cell corners.
     NEAREST: One solid color per cell; coordinates mark the cell centers.

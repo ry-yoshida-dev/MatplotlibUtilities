@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 
 from ....keyword_subparameter import KeywordSubparameters
-from ..keyword_arguments import HexbinKeywordArguments
 from ....utils.color import MplColor
+from ..keyword_arguments import HexbinKeywordArguments
 from .base import ArtistParameters, LabelParameters, NormParameters
 
 
@@ -16,7 +16,7 @@ class HexbinParameters(
     """
     Parameters for the hexagonal binning plot.
 
-    Attributes:
+    Attributes
     ----------
     # own
     gridsize: int | tuple[int, int] | None

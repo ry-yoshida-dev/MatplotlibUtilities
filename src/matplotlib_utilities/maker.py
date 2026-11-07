@@ -1,20 +1,19 @@
 # pyright: reportUnknownMemberType=false
 
 import matplotlib.pyplot as plt
-from matplotlib.figure import Figure
 from matplotlib.axes import Axes
+from matplotlib.figure import Figure
 from matplotlib.typing import RcKeyType
 
-from .types import SubplotAxesGrid
-
-from .utils import (
-    SubplotIndex,
-    RowColumnIndex,
-)
 from .layout import GraphLayout
-from .parameter import GraphParameters
 from .mixin.axis import AxisMixin
 from .mixin.draw import DrawMixin
+from .parameter import GraphParameters
+from .types import SubplotAxesGrid
+from .utils import (
+    RowColumnIndex,
+    SubplotIndex,
+)
 
 GLOBAL_STYLE_KEYS: tuple[RcKeyType, ...] = ("font.size", "font.family")
 
@@ -23,7 +22,7 @@ class MatplotGraphMaker(DrawMixin, AxisMixin):
     """
     A class for making matplotlib graphs.
 
-    Attributes:
+    Attributes
     ----------
     layout: GraphLayout
         The layout of the matplotlib graphs.

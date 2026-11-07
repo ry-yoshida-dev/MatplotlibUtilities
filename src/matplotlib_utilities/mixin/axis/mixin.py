@@ -4,8 +4,8 @@ from __future__ import annotations
 
 from collections.abc import Sequence
 
-from ...protocols import MakerCanvas
 from ...graph_axis import GraphAxis
+from ...protocols import MakerCanvas
 from ...utils import SubplotIndex
 from .parameters import GridParameters, TickParamsParameters
 

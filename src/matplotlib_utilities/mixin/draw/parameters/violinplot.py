@@ -2,9 +2,9 @@ from collections.abc import Sequence
 from dataclasses import dataclass
 
 from ....keyword_subparameter import KeywordSubparameters
-from ..keyword_arguments import ViolinplotKeywordArguments
 from ....utils import BandwidthMethod, Orientation
 from ....utils.color import MplColor
+from ..keyword_arguments import ViolinplotKeywordArguments
 
 
 @dataclass(frozen=True)
@@ -12,7 +12,7 @@ class ViolinplotParameters(KeywordSubparameters[ViolinplotKeywordArguments]):
     """
     Parameters for the violin plot.
 
-    Attributes:
+    Attributes
     ----------
     orientation: Orientation | None
         Whether the violins stand vertically or run horizontally.

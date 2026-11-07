@@ -5,7 +5,7 @@ class BandwidthMethod(KeywordEnum):
     """
     Rule that picks the kernel density bandwidth of a violin plot.
 
-    Attributes:
+    Attributes
     ----------
     SCOTT: Scott's rule of thumb.
     SILVERMAN: Silverman's rule of thumb.

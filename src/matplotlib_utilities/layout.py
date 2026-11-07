@@ -12,7 +12,7 @@ class GraphLayout:
     """
     A class for layouting the matplotlib graphs.
 
-    Attributes:
+    Attributes
     ----------
     number: int
         The number of subplots.

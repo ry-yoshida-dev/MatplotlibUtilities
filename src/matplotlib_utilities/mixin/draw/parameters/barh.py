@@ -17,7 +17,7 @@ class BarhParameters(
     """
     Parameters for the horizontal bar plot.
 
-    Attributes:
+    Attributes
     ----------
     # own
     height: float | None

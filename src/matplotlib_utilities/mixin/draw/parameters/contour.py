@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 
 from ....keyword_subparameter import KeywordSubparameters
-from ..keyword_arguments import ContourKeywordArguments
 from ....utils import Linestyle
+from ..keyword_arguments import ContourKeywordArguments
 from .base import ArtistParameters, ContourLevelParameters
 
 
@@ -15,7 +15,7 @@ class ContourParameters(
     """
     Parameters for the contour line plot.
 
-    Attributes:
+    Attributes
     ----------
     # own
     linewidths: float | None

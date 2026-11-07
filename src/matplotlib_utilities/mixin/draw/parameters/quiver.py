@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 
 from ....keyword_subparameter import KeywordSubparameters
-from ..keyword_arguments import QuiverKeywordArguments
 from ....utils import QuiverAngles, QuiverPivot, QuiverUnits
 from ....utils.color import MplColor
+from ..keyword_arguments import QuiverKeywordArguments
 from .base import (
     ArtistParameters,
     CmapParameters,
@@ -25,7 +25,7 @@ class QuiverParameters(
     """
     Parameters for :meth:`matplotlib.axes.Axes.quiver`.
 
-    Attributes:
+    Attributes
     ----------
     # own
     scale: float | None

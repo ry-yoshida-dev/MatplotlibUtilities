@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 from dataclasses import dataclass
 
 
@@ -7,7 +8,7 @@ class RowColumnIndex:
     """
     A class for accessing the row and column of the subplot.
 
-    Attributes:
+    Attributes
     ----------
     row: int
         The row of the subplot.

@@ -3,8 +3,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from ....keyword_subparameter import KeywordSubparameters
-from ..keyword_arguments import GridKeywordArguments
 from ....utils import GridAxis, GridWhich
+from ..keyword_arguments import GridKeywordArguments
 
 
 @dataclass(frozen=True)
@@ -12,7 +12,7 @@ class GridParameters(KeywordSubparameters[GridKeywordArguments]):
     """
     Parameters for :meth:`matplotlib.axes.Axes.grid`.
 
-    Attributes:
+    Attributes
     ----------
     visible: bool
         Whether to show the grid.

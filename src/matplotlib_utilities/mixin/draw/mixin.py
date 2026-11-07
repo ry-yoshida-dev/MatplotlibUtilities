@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from ...protocols import MakerCanvas
+from ...utils import SubplotIndex
 from .mixins import (
     DistributionDrawMixin,
     ImageDrawMixin,
@@ -16,8 +18,6 @@ from .parameters import (
     Orientation,
     SpanParameters,
 )
-from ...protocols import MakerCanvas
-from ...utils import SubplotIndex
 
 
 class DrawMixin(

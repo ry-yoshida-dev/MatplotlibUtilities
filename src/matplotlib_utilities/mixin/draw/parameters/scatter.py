@@ -5,9 +5,9 @@ import numpy as np
 from numpy.typing import ArrayLike
 
 from ....keyword_subparameter import KeywordSubparameters
-from ..keyword_arguments import ScatterKeywordArguments
 from ....utils import Marker
 from ....utils.color import MplColor, ScatterColorArg
+from ..keyword_arguments import ScatterKeywordArguments
 from .base import ArtistParameters, CmapParameters, LabelParameters
 
 
@@ -21,7 +21,7 @@ class ScatterParameters(
     """
     Parameters for the scatter plot.
 
-    Attributes:
+    Attributes
     ----------
     # own
     s: float | ArrayLike | None

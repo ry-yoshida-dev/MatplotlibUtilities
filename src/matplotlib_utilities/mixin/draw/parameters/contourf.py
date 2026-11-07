@@ -16,7 +16,7 @@ class ContourfParameters(
     """
     Parameters for the filled contour plot.
 
-    Attributes:
+    Attributes
     ----------
     # own
     hatches: Sequence[Hatch | None] | None

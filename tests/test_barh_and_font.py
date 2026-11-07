@@ -9,6 +9,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 import pytest
+from matplotlib.patches import Rectangle
 
 from matplotlib_utilities import (
     BarhParameters,
@@ -17,6 +18,7 @@ from matplotlib_utilities import (
     GraphLayout,
     GraphParameters,
     MatplotGraphMaker,
+    SubplotIndex,
 )
 
 JAPANESE_LABELS = ["市区町村道", "主要地方道・都道府県道", "一般国道"]
@@ -33,6 +35,13 @@ def _close(maker: MatplotGraphMaker) -> None:
     plt.close(maker.fig)
 
 
+def _bars(maker: MatplotGraphMaker, index: SubplotIndex) -> list[Rectangle]:
+    patches = maker.access_subplot(index=index).patches
+    bars = [patch for patch in patches if isinstance(patch, Rectangle)]
+    assert len(bars) == len(patches)
+    return bars
+
+
 def test_barh_draws_one_bar_per_value() -> None:
     maker = _maker()
     index = maker.get_subplot_index_from_number(number=0)
@@ -45,7 +54,7 @@ def test_barh_bars_run_along_the_x_axis() -> None:
     maker = _maker()
     index = maker.get_subplot_index_from_number(number=0)
     maker.barh(y=np.arange(2), width=np.array([4.0, 8.0]), index=index)
-    widths = [patch.get_width() for patch in maker.access_subplot(index=index).patches]
+    widths = [patch.get_width() for patch in _bars(maker, index)]
     assert widths == [4.0, 8.0]
     _close(maker)
 
@@ -59,7 +68,7 @@ def test_barh_applies_its_subparameters() -> None:
         index=index,
         subparams=BarhParameters(height=0.25, facecolor="#2a78d6"),
     )
-    patch = maker.access_subplot(index=index).patches[0]
+    patch = _bars(maker, index)[0]
     assert patch.get_height() == pytest.approx(0.25)
     _close(maker)
 

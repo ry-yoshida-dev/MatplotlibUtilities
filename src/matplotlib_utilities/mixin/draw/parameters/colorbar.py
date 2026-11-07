@@ -28,7 +28,7 @@ class ColorbarParameters(
     size is set by fraction and pad rather than by Matplotlib's shrink or
     aspect options.
 
-    Attributes:
+    Attributes
     ----------
     # own
     location: Location | None = None

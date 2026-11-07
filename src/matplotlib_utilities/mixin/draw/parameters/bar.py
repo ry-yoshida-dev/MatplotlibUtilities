@@ -17,7 +17,7 @@ class BarParameters(
     """
     Parameters for the bar plot.
 
-    Attributes:
+    Attributes
     ----------
     # own
     width: float | None

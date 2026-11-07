@@ -5,7 +5,7 @@ class ColorbarSpacing(KeywordEnum):
     """
     Spacing options for matplotlib colorbar.
 
-    Attributes:
+    Attributes
     ----------
     UNIFORM: Each color gets the same space.
     PROPORTIONAL: Space is proportional to the data interval.

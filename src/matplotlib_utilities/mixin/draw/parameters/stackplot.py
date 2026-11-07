@@ -2,9 +2,9 @@ from collections.abc import Sequence
 from dataclasses import dataclass
 
 from ....keyword_subparameter import KeywordSubparameters
-from ..keyword_arguments import StackplotKeywordArguments
 from ....utils import StackBaseline
 from ....utils.color import MplColor
+from ..keyword_arguments import StackplotKeywordArguments
 from .base import ArtistParameters
 
 
@@ -16,7 +16,7 @@ class StackplotParameters(
     """
     Parameters for the stacked area plot.
 
-    Attributes:
+    Attributes
     ----------
     # own
     colors: Sequence[MplColor] | None

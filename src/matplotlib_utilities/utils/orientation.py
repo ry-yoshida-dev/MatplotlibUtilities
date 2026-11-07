@@ -5,7 +5,7 @@ class Orientation(KeywordEnum):
     """
     Orientation options for matplotlib elements (e.g., colorbar, legend).
 
-    Attributes:
+    Attributes
     ----------
     VERTICAL: Vertical orientation.
     HORIZONTAL: Horizontal orientation.

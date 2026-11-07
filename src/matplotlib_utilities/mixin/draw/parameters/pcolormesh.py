@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 
 from ....keyword_subparameter import KeywordSubparameters
-from ..keyword_arguments import PcolormeshKeywordArguments
 from ....utils import Shading
 from ....utils.color import MplColor
+from ..keyword_arguments import PcolormeshKeywordArguments
 from .base import ArtistParameters, NormParameters
 
 
@@ -16,7 +16,7 @@ class PcolormeshParameters(
     """
     Parameters for the pseudocolor mesh.
 
-    Attributes:
+    Attributes
     ----------
     # own
     shading: Shading | None

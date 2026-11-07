@@ -8,7 +8,7 @@ class GraphParameters:
     """
     Parameters for the Matplotlib utilities.
 
-    Attributes:
+    Attributes
     ----------
     font_size: float
         The size of the font.

@@ -129,8 +129,8 @@ def test_line_parameters_have_no_face_or_edge_color(parameters_class: type) -> N
 
 def test_quiver_parameters_keep_face_and_edge_color() -> None:
     keyword_arguments = QuiverParameters(facecolor="red", edgecolor="blue").to_dict
-    assert keyword_arguments["facecolor"] == "red"
-    assert keyword_arguments["edgecolor"] == "blue"
+    assert keyword_arguments.get("facecolor") == "red"
+    assert keyword_arguments.get("edgecolor") == "blue"
 
 
 @pytest.mark.parametrize("parameters_class", [ContourParameters, ContourfParameters])

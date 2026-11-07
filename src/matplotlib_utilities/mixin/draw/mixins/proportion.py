@@ -6,10 +6,10 @@ from collections.abc import Sequence
 
 import numpy as np
 
-from ..parameters import PieParameters
 from ....protocols import MakerCanvas
 from ....types import NumericArray
 from ....utils import SubplotIndex
+from ..parameters import PieParameters
 
 
 class ProportionDrawMixin:

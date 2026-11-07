@@ -5,7 +5,7 @@ class Location(KeywordEnum):
     """
     Location options for matplotlib elements (e.g., colorbar, legend).
 
-    Attributes:
+    Attributes
     ----------
     LEFT: Place element on the left side of the axes.
     RIGHT: Place element on the right side of the axes.

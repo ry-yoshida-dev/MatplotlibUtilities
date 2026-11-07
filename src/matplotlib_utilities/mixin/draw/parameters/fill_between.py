@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 
 from ....keyword_subparameter import KeywordSubparameters
-from ..keyword_arguments import FillBetweenKeywordArguments
 from ....utils import Hatch, Linestyle, StepWhere
 from ....utils.color import MplColor
+from ..keyword_arguments import FillBetweenKeywordArguments
 from .base import ArtistParameters, ColorParameters, LabelParameters
 
 
@@ -17,7 +17,7 @@ class FillBetweenParameters(
     """
     Parameters for the area filled between two curves.
 
-    Attributes:
+    Attributes
     ----------
     # own
     color: MplColor | None

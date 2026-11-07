@@ -2,9 +2,9 @@ from collections.abc import Sequence
 from dataclasses import dataclass
 
 from ....keyword_subparameter import KeywordSubparameters
-from ..keyword_arguments import HistKeywordArguments
 from ....utils import HistType, Orientation
 from ....utils.color import MplColor
+from ..keyword_arguments import HistKeywordArguments
 from .base import ArtistParameters, LabelParameters
 
 
@@ -17,7 +17,7 @@ class HistParameters(
     """
     Parameters for the histogram.
 
-    Attributes:
+    Attributes
     ----------
     # own
     bins: int | Sequence[float] | None

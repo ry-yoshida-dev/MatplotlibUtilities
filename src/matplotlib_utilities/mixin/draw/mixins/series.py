@@ -8,6 +8,9 @@ import numpy as np
 from matplotlib.collections import PathCollection
 from numpy.typing import NDArray
 
+from ....protocols import MakerCanvas
+from ....types import NumericArray
+from ....utils import SubplotIndex
 from ..parameters import (
     BarhParameters,
     BarParameters,
@@ -18,10 +21,7 @@ from ..parameters import (
     StackplotParameters,
     StepParameters,
 )
-from ....protocols import MakerCanvas
 from .argument_validator import ArgumentValidator
-from ....types import NumericArray
-from ....utils import SubplotIndex
 
 
 class SeriesDrawMixin:

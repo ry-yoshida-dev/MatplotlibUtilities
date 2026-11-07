@@ -10,7 +10,7 @@ class NormParameters(CmapParameters):
     """
     Colormap scaling that also accepts an explicit normalization.
 
-    Attributes:
+    Attributes
     ----------
     norm: Normalize | None
         The normalization applied before colormap mapping, for example a

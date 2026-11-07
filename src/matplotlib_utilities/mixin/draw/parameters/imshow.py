@@ -3,8 +3,8 @@ from dataclasses import dataclass
 from matplotlib.colors import Normalize
 
 from ....keyword_subparameter import KeywordSubparameters
-from ..keyword_arguments import ImshowKeywordArguments
 from ....utils import Aspect, InterpolationMethod, InterpolationStage, Origin
+from ..keyword_arguments import ImshowKeywordArguments
 from .base import ArtistParameters, CmapParameters
 
 
@@ -17,7 +17,7 @@ class ImshowParameters(
     """
     Parameters for the imshow plot.
 
-    Attributes:
+    Attributes
     ----------
     # own
     norm: Normalize | None

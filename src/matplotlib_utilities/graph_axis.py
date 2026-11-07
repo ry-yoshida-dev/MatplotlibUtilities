@@ -7,7 +7,7 @@ class GraphAxis(Enum):
     """
     Graph axis.
 
-    Attributes:
+    Attributes
     ----------
     X: str
         X axis.

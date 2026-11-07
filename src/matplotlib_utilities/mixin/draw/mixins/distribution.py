@@ -7,6 +7,9 @@ from collections.abc import Sequence
 import numpy as np
 from matplotlib.collections import PolyCollection, QuadMesh
 
+from ....protocols import MakerCanvas
+from ....types import NumericArray
+from ....utils import SubplotIndex
 from ..parameters import (
     BoxplotParameters,
     HexbinParameters,
@@ -14,10 +17,7 @@ from ..parameters import (
     HistParameters,
     ViolinplotParameters,
 )
-from ....protocols import MakerCanvas
 from .argument_validator import ArgumentValidator
-from ....types import NumericArray
-from ....utils import SubplotIndex
 
 
 class DistributionDrawMixin:

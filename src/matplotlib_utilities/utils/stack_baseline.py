@@ -5,7 +5,7 @@ class StackBaseline(KeywordEnum):
     """
     Baseline of a stacked area plot (matplotlib ``baseline``).
 
-    Attributes:
+    Attributes
     ----------
     ZERO: Stack upward from zero.
     SYMMETRIC: Stack symmetrically around zero.

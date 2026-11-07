@@ -4,9 +4,9 @@ from .color_types import (
     HexType,
     HsvFloatType,
     MplColor,
+    RgbaIntType,
     RgbFloatType,
     RgbIntType,
-    RgbaIntType,
     ScatterColorArg,
 )
 

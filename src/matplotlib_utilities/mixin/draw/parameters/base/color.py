@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+
 from .....utils.color import MplColor
 
 
@@ -7,7 +8,7 @@ class ColorParameters:
     """
     Base color parameters shared by patch-like artists.
 
-    Attributes:
+    Attributes
     ----------
     facecolor: MplColor | None
         The color of the face of the artist.

@@ -2,8 +2,8 @@ from collections.abc import Sequence
 from dataclasses import dataclass
 
 from ....keyword_subparameter import KeywordSubparameters
-from ..keyword_arguments import PieKeywordArguments
 from ....utils.color import MplColor
+from ..keyword_arguments import PieKeywordArguments
 from .wedge_style import WedgeStyle
 
 
@@ -12,7 +12,7 @@ class PieParameters(KeywordSubparameters[PieKeywordArguments]):
     """
     Parameters for the pie chart.
 
-    Attributes:
+    Attributes
     ----------
     colors: Sequence[MplColor] | None
         One color per wedge. The property cycle is used when unset.

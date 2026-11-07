@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 
 from ....keyword_subparameter import KeywordSubparameters
-from ..keyword_arguments import SpanKeywordArguments
 from ....utils import Hatch, Linestyle
 from ....utils.color import MplColor
+from ..keyword_arguments import SpanKeywordArguments
 from .base import ArtistParameters, ColorParameters, LabelParameters
 
 
@@ -17,7 +17,7 @@ class SpanParameters(
     """
     Parameters for a shaded band across the subplot.
 
-    Attributes:
+    Attributes
     ----------
     # own
     color: MplColor | None
