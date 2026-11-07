@@ -56,3 +56,6 @@ reportCallInDefaultInitializer = false
 testpaths = ["tests"]
 pythonpath = ["src"]
 python_files = ["test.py", "test_*.py", "*_test.py"]
+
+[tool.uv]
+exclude-newer = "7 days"
