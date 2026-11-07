@@ -1,8 +1,8 @@
-# utils.index
+# index
 
 ## Overview
 
-Types for **addressing subplots** inside a flattened axes array. `MatplotGraphMaker` accepts a `SubplotIndex`, which is either a zero-based subplot number in row-major order (an `int`) or an explicit row/column pair. Every drawing and axis method defaults to subplot `0`. Import `SubplotIndex` from `matplotlib_utilities` (re-exported from `utils`).
+Types that address a subplot: a zero-based subplot number in row-major order, or a row and column pair. Every drawing and axis method defaults to subplot `0`.
 
 ## Components
 

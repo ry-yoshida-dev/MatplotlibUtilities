@@ -2,50 +2,20 @@
 
 ## Overview
 
-| Layer | Types | Role |
-| ----- | ----- | ---- |
-| Layout | `GraphLayout`, `TableAxis` | Subplot grid; helpers to build layout from a count |
-| Global style | `GraphParameters` | Font, spacing, DPI, figure size |
-| Per-plot kwargs | `*Parameters` dataclasses | Frozen, typed kwargs → `to_dict` returns a TypedDict checked against Matplotlib |
-| Coordinator | `MatplotGraphMaker` | Builds `Figure` / `Axes`; drawing methods on the maker; see **`axis`** below |
-
-**Mixin API:** [`mixin/`](./mixin/) — `DrawMixin` and `AxisMixin` on `MatplotGraphMaker` (e.g. `maker.scatter`, `maker.set_label`). Draw examples: [`mixin/draw/README.md`](./mixin/draw/README.md).
-
-Exported names: [`__init__.py`](./__init__.py). Utilities and subplot index types: [`utils/README.md`](./utils/README.md).
-
-## `MatplotGraphMaker` (cheat sheet)
-
-| Attribute | Role |
-| --------- | ---- |
-| `layout`, `parameters` | Grid + figure defaults (applied when the figure is created) |
-| `fig`, `ax` | Raw Matplotlib objects (`ax[row][column]` is an `Axes`) |
-| `axis` | Axis helpers; drawing uses flat methods on the maker (`scatter`, `plot`, …) |
-
-| Method | Role |
-| ------ | ---- |
-| `access_subplot(index)` | `Axes` for a `SubplotIndex` |
-| `get_subplot_index_from_number` / `..._row_column` | Build indices |
-| `set_figure_title(title)` | Title above every subplot (`Figure.suptitle`) |
-| `hide_unused_subplots()` | Hide grid cells beyond `layout.number` |
-| `finalize(...)` | `subplots_adjust`, optional save / show / close |
-
-## Layout and indices (minimal)
-
-| Type | Note |
-| ---- | ---- |
-| `GraphLayout` | `number`, `row`, `column`; factories in [`layout.py`](./layout.py) |
-| `SubplotIndex` | `RowColumnIndex` or a subplot number (`int`) — see [`utils/index`](./utils/index/subplot_index.py) |
-| `GraphAxis` | `X` / `Y` for axis helpers — [`graph_axis.py`](./graph_axis.py) |
+`MatplotGraphMaker` and what it is built from: the subplot layout, figure-wide `GraphParameters`, the frozen parameter base classes, and the drawing and axis mixins. Public names are re-exported from the package root.
 
 ## Components
 
-| Path | Contents |
-| ---- | -------- |
-| [`maker.py`](./maker.py) | `MatplotGraphMaker` |
-| [`layout.py`](./layout.py); enums in [`utils/table_axis.py`](./utils/table_axis.py), [`graph_axis.py`](./graph_axis.py) | Layout / table vs graph axis |
-| [`parameter.py`](./parameter.py), [`subparameter.py`](./subparameter.py), [`keyword_subparameter.py`](./keyword_subparameter.py) | `GraphParameters`; `Subparameters` (frozen base with `rebuild`); `KeywordSubparameters` (adds the typed `to_dict`) |
-| [`font_family.py`](./font_family.py) | `FontFamily` — the font family a figure is drawn in, including a Japanese one |
-| [`types/`](./types/) | `NumericArray`, `SubplotAxesGrid` — shared type aliases |
-| [`mixin/`](./mixin/) | `DrawMixin`, `AxisMixin`, and per-feature `*Parameters` — see [`mixin/README.md`](./mixin/README.md) |
-
-Install and a short example: [../../README.md](../../README.md).
+| Component | Description |
+| --------- | ----------- |
+| [`maker.py`](./maker.py) | `MatplotGraphMaker`, which creates the figure and subplots and finalizes them |
+| [`layout.py`](./layout.py) | `GraphLayout`, the number of subplots and their rows and columns |
+| [`parameter.py`](./parameter.py) | `GraphParameters`, figure-wide font, spacing, DPI and size |
+| [`subparameter.py`](./subparameter.py) | `Subparameters`, the frozen base of parameter dataclasses, with `rebuild` |
+| [`keyword_subparameter.py`](./keyword_subparameter.py) | `KeywordSubparameters`, parameters unpacked into Matplotlib through a typed `to_dict` |
+| [`font_family.py`](./font_family.py) | `FontFamily`, the font family a figure is drawn in, including a Japanese one |
+| [`graph_axis.py`](./graph_axis.py) | `GraphAxis`, the x or y axis of a subplot |
+| [`protocols.py`](./protocols.py) | `MakerCanvas`, the structural type of the maker the mixins draw on |
+| [`types/`](./types/README.md) | Shared type aliases |
+| [`mixin/`](./mixin/README.md) | Drawing and axis methods of `MatplotGraphMaker` and their parameters |
+| [`utils/`](./utils/README.md) | Enums, color types and subplot indices used in parameters |

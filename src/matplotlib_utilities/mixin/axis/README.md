@@ -2,204 +2,26 @@
 
 ## Overview
 
-Axis helpers on `MatplotGraphMaker` (`maker.set_label`, `maker.set_grid`, …). Optional kwargs use dataclasses under [`parameters/`](./parameters/).
+`AxisMixin`, the axis methods of `MatplotGraphMaker`: labels, limits, ticks, axis direction, titles and grids.
 
-[`AxisMixin`](./mixin.py) is mixed into `MatplotGraphMaker` together with [`DrawMixin`](../draw/mixin.py).
+## Components
 
-This page covers how to call those helpers through this library. For argument semantics and behavior not described here, see the [Matplotlib documentation](https://matplotlib.org/stable/api/index.html) for the underlying `Axes` methods (e.g. [`Axes.set_xlabel`](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_xlabel.html), [`Axes.grid`](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.grid.html)).
+| Component | Description |
+| --------- | ----------- |
+| [`mixin.py`](./mixin.py) | `AxisMixin` |
+| [`parameters/`](./parameters/README.md) | Parameter dataclasses of `set_grid` and tick styling |
+| [`keyword_arguments/`](./keyword_arguments/README.md) | TypedDicts the parameters' `to_dict` returns |
+| [`readme_figures/`](./readme_figures) | An example figure of every axis method, checked by `tests/test_readme_axis_figures.py` |
 
-If something you need is missing from this package, open an [issue](https://github.com/ry-yoshida-private/MatplotlibUtilities/issues).
-
-## API map
-
-<table>
-<thead>
-<tr>
-<th>Mixin</th>
-<th>Methods on <code>MatplotGraphMaker</code></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="./mixin.py"><code>AxisMixin</code></a></td>
-<td>
-<ul>
-<li><code>set_label</code></li>
-<li><code>set_lim</code></li>
-<li><code>set_ticks</code></li>
-<li><code>invert</code></li>
-<li><code>set_title</code></li>
-<li><code>set_grid</code></li>
-<li><code>set_grid_below</code></li>
-<li><code>delete_axis_label</code></li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-
-## set_label
-
-<img src="readme_figures/set_label.png" width="400" height="250" alt="set_label"/>
-
-<details>
-<summary>Code</summary>
+## Examples
 
 ```python
-import numpy as np
-from matplotlib_utilities import GraphAxis, GraphLayout, GraphParameters, MatplotGraphMaker, TableAxis
+from matplotlib_utilities import GraphAxis, MatplotGraphMaker
 
-layout = GraphLayout.from_number(number=1, axis=TableAxis.COLUMN, axis_value=1)
-maker = MatplotGraphMaker(layout=layout, parameters=GraphParameters())
-x = np.linspace(0, 2 * np.pi, 40)
-idx = maker.get_subplot_index_from_number(number=0)
-maker.plot(x=x, y=np.sin(x), index=idx)
-maker.set_label(label="x", index=idx, axis=GraphAxis.X)
-maker.set_label(label="y", index=idx, axis=GraphAxis.Y)
-maker.finalize(save_path="out.png", is_showing_result_enabled=False)
+maker = MatplotGraphMaker()
+maker.plot(x=x, y=y)
+maker.set_label(label="time [s]", axis=GraphAxis.X)
+maker.set_lim(lower=0.0, upper=1.0, axis=GraphAxis.Y)
+maker.set_title(title="Response")
+maker.finalize()
 ```
-
-</details>
-
-## set_lim
-
-<img src="readme_figures/set_lim.png" width="400" height="250" alt="set_lim"/>
-
-<details>
-<summary>Code</summary>
-
-```python
-import numpy as np
-from matplotlib_utilities import GraphAxis, GraphLayout, GraphParameters, MatplotGraphMaker, TableAxis
-
-layout = GraphLayout.from_number(number=1, axis=TableAxis.COLUMN, axis_value=1)
-maker = MatplotGraphMaker(layout=layout, parameters=GraphParameters())
-x = np.linspace(0, 2 * np.pi, 40)
-idx = maker.get_subplot_index_from_number(number=0)
-maker.plot(x=x, y=np.sin(x), index=idx)
-maker.set_lim(lower=-1.0, upper=1.0, index=idx, axis=GraphAxis.Y)
-maker.finalize(save_path="out.png", is_showing_result_enabled=False)
-```
-
-</details>
-
-## set_ticks
-
-<img src="readme_figures/set_ticks.png" width="400" height="250" alt="set_ticks"/>
-
-<details>
-<summary>Code</summary>
-
-```python
-import numpy as np
-from matplotlib_utilities import GraphAxis, GraphLayout, GraphParameters, MatplotGraphMaker, TableAxis
-
-layout = GraphLayout.from_number(number=1, axis=TableAxis.COLUMN, axis_value=1)
-maker = MatplotGraphMaker(layout=layout, parameters=GraphParameters())
-x = np.linspace(0, 2 * np.pi, 40)
-idx = maker.get_subplot_index_from_number(number=0)
-maker.plot(x=x, y=np.sin(x), index=idx)
-maker.set_ticks(
-    positions=[0.0, np.pi, 2 * np.pi],
-    index=idx,
-    axis=GraphAxis.X,
-    labels=["0", "π", "2π"],
-)
-maker.finalize(save_path="out.png", is_showing_result_enabled=False)
-```
-
-</details>
-
-## invert
-
-<img src="readme_figures/invert.png" width="400" height="250" alt="invert"/>
-
-<details>
-<summary>Code</summary>
-
-```python
-import numpy as np
-from matplotlib_utilities import GraphAxis, GraphLayout, GraphParameters, MatplotGraphMaker, TableAxis
-
-layout = GraphLayout.from_number(number=1, axis=TableAxis.COLUMN, axis_value=1)
-maker = MatplotGraphMaker(layout=layout, parameters=GraphParameters())
-x = np.linspace(0, 2 * np.pi, 40)
-idx = maker.get_subplot_index_from_number(number=0)
-maker.plot(x=x, y=np.sin(x), index=idx)
-maker.invert(index=idx, axis=GraphAxis.Y)
-maker.finalize(save_path="out.png", is_showing_result_enabled=False)
-```
-
-</details>
-
-## set_title
-
-<img src="readme_figures/set_title.png" width="400" height="250" alt="set_title"/>
-
-<details>
-<summary>Code</summary>
-
-```python
-import numpy as np
-from matplotlib_utilities import GraphLayout, GraphParameters, MatplotGraphMaker, TableAxis
-
-layout = GraphLayout.from_number(number=1, axis=TableAxis.COLUMN, axis_value=1)
-maker = MatplotGraphMaker(layout=layout, parameters=GraphParameters())
-x = np.linspace(0, 2 * np.pi, 40)
-idx = maker.get_subplot_index_from_number(number=0)
-maker.plot(x=x, y=np.sin(x), index=idx)
-maker.set_title(title="sin(x)", index=idx)
-maker.finalize(save_path="out.png", is_showing_result_enabled=False)
-```
-
-</details>
-
-## set_grid
-
-<img src="readme_figures/set_grid.png" width="400" height="250" alt="set_grid"/>
-
-<details>
-<summary>Code</summary>
-
-```python
-import numpy as np
-from matplotlib_utilities import GraphLayout, GraphParameters, MatplotGraphMaker, TableAxis
-from matplotlib_utilities.mixin.axis.parameters import GridParameters
-
-layout = GraphLayout.from_number(number=1, axis=TableAxis.COLUMN, axis_value=1)
-maker = MatplotGraphMaker(layout=layout, parameters=GraphParameters())
-x = np.linspace(0, 2 * np.pi, 40)
-idx = maker.get_subplot_index_from_number(number=0)
-maker.plot(x=x, y=np.sin(x), index=idx)
-maker.set_grid(index=idx, subparams=GridParameters(alpha=0.4))
-maker.finalize(save_path="out.png", is_showing_result_enabled=False)
-```
-
-</details>
-
-## delete_axis_label
-
-<img src="readme_figures/delete_axis_label.png" width="400" height="250" alt="delete_axis_label"/>
-
-<details>
-<summary>Code</summary>
-
-```python
-import numpy as np
-from matplotlib_utilities import GraphLayout, GraphParameters, MatplotGraphMaker, TableAxis
-from matplotlib_utilities.mixin.axis.parameters import TickParamsParameters
-
-layout = GraphLayout.from_number(number=1, axis=TableAxis.COLUMN, axis_value=1)
-maker = MatplotGraphMaker(layout=layout, parameters=GraphParameters())
-x = np.linspace(0, 2 * np.pi, 40)
-idx = maker.get_subplot_index_from_number(number=0)
-maker.plot(x=x, y=np.sin(x), index=idx)
-maker.delete_axis_label(
-    index=idx,
-    subparams=TickParamsParameters(labelbottom=False, labelleft=False),
-)
-maker.finalize(save_path="out.png", is_showing_result_enabled=False)
-```
-
-</details>
-

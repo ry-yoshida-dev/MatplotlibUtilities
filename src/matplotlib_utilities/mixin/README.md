@@ -2,18 +2,11 @@
 
 ## Overview
 
-Mixins add methods to [`MatplotGraphMaker`](../maker.py) without growing a single giant class file. `MatplotGraphMaker` inherits [`DrawMixin`](./draw/mixin.py) and [`AxisMixin`](./axis/mixin.py); callers use flat methods on the maker (`maker.scatter`, `maker.set_label`, …).
-
-| Mixin | Role |
-| ----- | ---- |
-| [`DrawMixin`](./draw/mixin.py) | Plot data and decorations on subplots |
-| [`AxisMixin`](./axis/mixin.py) | Labels, limits, title, grid, tick visibility |
-
-Detailed examples and API maps: [`draw/README.md`](./draw/README.md), [`axis/README.md`](./axis/README.md).
+Methods of `MatplotGraphMaker`, split into mixins it inherits; callers use them as flat methods on the maker (`maker.scatter`, `maker.set_label`).
 
 ## Components
 
-| Path | Contents |
-| ---- | -------- |
-| [`draw/`](./draw/) | [`DrawMixin`](./draw/mixin.py), [`draw/mixins/`](./draw/mixins/) (distribution / image / proportion / series / vector), [`draw/parameters/`](./draw/parameters/) (`*Parameters` → `to_dict`), [`draw/keyword_arguments/`](./draw/keyword_arguments/) (TypedDicts `to_dict` returns) |
-| [`axis/`](./axis/) | [`AxisMixin`](./axis/mixin.py); [`axis/parameters/`](./axis/parameters/) (`GridParameters`, `TickParamsParameters`), [`axis/keyword_arguments/`](./axis/keyword_arguments/) |
+| Component | Description |
+| --------- | ----------- |
+| [`draw/`](./draw/README.md) | `DrawMixin`, which plots data and decorations on subplots |
+| [`axis/`](./axis/README.md) | `AxisMixin`, which sets labels, limits, ticks, titles and grids |

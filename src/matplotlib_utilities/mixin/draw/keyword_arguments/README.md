@@ -2,7 +2,7 @@
 
 ## Overview
 
-TypedDicts describing the keyword arguments each draw parameter dataclass produces. `to_dict` returns them, so mypy and basedpyright check every unpacked argument against the Matplotlib signature. Keys must match the dataclass fields; `tests/test_keyword_arguments.py` enforces this.
+TypedDicts describing the keyword arguments each draw parameter dataclass produces. `to_dict` returns them, so mypy and basedpyright check every unpacked argument against the Matplotlib signature.
 
 ## Components
 

@@ -1,4 +1,9 @@
-"""Re-export palette types from the color package and define the color types Matplotlib accepts."""
+"""
+Re-export palette types from the color package and define the color types Matplotlib accepts.
+
+MplColor is Matplotlib's ColorType: a color name, a hex string, or an RGB(A)
+tuple of floats in 0-1. ScatterColorArg also accepts one value per point.
+"""
 
 from __future__ import annotations
 
