@@ -144,4 +144,4 @@ def test_pie_rejects_colors_that_do_not_match_the_values() -> None:
 )
 def test_parameters_reject_invalid_settings(build: Callable[[], object]) -> None:
     with pytest.raises(ValueError):
-        build()
+        _ = build()

@@ -164,4 +164,4 @@ def test_bar_accepts_a_zero_dimensional_bottom() -> None:
 )
 def test_invalid_bar_parameters_are_rejected(build: Callable[[], object]) -> None:
     with pytest.raises(ValueError):
-        build()
+        _ = build()

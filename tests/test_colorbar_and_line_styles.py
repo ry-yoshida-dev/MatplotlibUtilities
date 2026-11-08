@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from collections.abc import Iterator
+from collections.abc import Callable, Iterator
 
 import matplotlib
 
@@ -122,7 +122,9 @@ def test_colorbar_rejects_a_scale_that_would_be_ignored(
 @pytest.mark.parametrize(
     "parameters_class", [LineParameters, PlotParameters, StepParameters]
 )
-def test_line_parameters_have_no_face_or_edge_color(parameters_class: type) -> None:
+def test_line_parameters_have_no_face_or_edge_color(
+    parameters_class: Callable[..., object],
+) -> None:
     with pytest.raises(TypeError):
         _ = parameters_class(facecolor="red")
 
@@ -134,7 +136,9 @@ def test_quiver_parameters_keep_face_and_edge_color() -> None:
 
 
 @pytest.mark.parametrize("parameters_class", [ContourParameters, ContourfParameters])
-def test_contour_levels_given_as_an_array_must_increase(parameters_class: type) -> None:
+def test_contour_levels_given_as_an_array_must_increase(
+    parameters_class: type[ContourParameters] | type[ContourfParameters],
+) -> None:
     with pytest.raises(ValueError, match="strictly increasing"):
         _ = parameters_class(levels=np.array([3.0, 2.0, 1.0]))
 

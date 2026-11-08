@@ -6,6 +6,7 @@ import dataclasses
 import types
 import typing
 from collections.abc import Iterator
+from typing import cast
 
 import pytest
 
@@ -24,12 +25,21 @@ from matplotlib_utilities import (
     PlotParameters,
 )
 
+# Unions of typing special forms such as Literal are typing.Union rather than
+# types.UnionType before Python 3.14, so both origins are derived at runtime.
+UNION_ORIGINS: frozenset[object] = frozenset(
+    {types.UnionType, typing.get_origin(typing.Literal[0] | None)}
+)
+
 
 def _keyword_parameter_classes() -> list[type]:
     classes: list[type] = []
-    for module in (draw_parameters, axis_parameters):
-        for name in module.__all__:
-            candidate: object = getattr(module, name)
+    for module, names in (
+        (draw_parameters, draw_parameters.__all__),
+        (axis_parameters, axis_parameters.__all__),
+    ):
+        for name in names:
+            candidate = cast(object, getattr(module, name))
             if isinstance(candidate, type) and issubclass(
                 candidate, KeywordSubparameters
             ):
@@ -37,19 +47,33 @@ def _keyword_parameter_classes() -> list[type]:
     return classes
 
 
+def _type_arguments(annotation: object) -> tuple[object, ...]:
+    return cast(tuple[object, ...], typing.get_args(annotation))
+
+
+def _type_hints(annotated: type) -> dict[str, object]:
+    return cast(dict[str, object], typing.get_type_hints(annotated))
+
+
+def _class_name(parameters_class: type) -> str:
+    return parameters_class.__name__
+
+
 def _typed_dict_of(parameters_class: type) -> type:
-    for base in types.get_original_bases(parameters_class):
+    bases = cast(tuple[object, ...], types.get_original_bases(parameters_class))
+    for base in bases:
         if typing.get_origin(base) is KeywordSubparameters:
-            typed_dict: type = typing.get_args(base)[0]
-            return typed_dict
+            typed_dict = _type_arguments(base)[0]
+            if isinstance(typed_dict, type):
+                return typed_dict
     raise TypeError(
         f"{parameters_class.__name__} does not parametrize KeywordSubparameters directly"
     )
 
 
 def _union_members(annotation: object) -> Iterator[object]:
-    if typing.get_origin(annotation) in (typing.Union, types.UnionType):
-        for member in typing.get_args(annotation):
+    if typing.get_origin(annotation) in UNION_ORIGINS:
+        for member in _type_arguments(annotation):
             yield from _union_members(member)
     else:
         yield annotation
@@ -62,21 +86,17 @@ def test_every_keyword_parameter_class_is_collected() -> None:
     assert len(KEYWORD_PARAMETER_CLASSES) == 29
 
 
-@pytest.mark.parametrize(
-    "parameters_class", KEYWORD_PARAMETER_CLASSES, ids=lambda cls: cls.__name__
-)
+@pytest.mark.parametrize("parameters_class", KEYWORD_PARAMETER_CLASSES, ids=_class_name)
 def test_typed_dict_keys_match_dataclass_fields(parameters_class: type) -> None:
     typed_dict = _typed_dict_of(parameters_class)
-    keys = frozenset(typing.get_type_hints(typed_dict))
+    keys = frozenset(_type_hints(typed_dict))
     assert keys == {field.name for field in dataclasses.fields(parameters_class)}
 
 
-@pytest.mark.parametrize(
-    "parameters_class", KEYWORD_PARAMETER_CLASSES, ids=lambda cls: cls.__name__
-)
+@pytest.mark.parametrize("parameters_class", KEYWORD_PARAMETER_CLASSES, ids=_class_name)
 def test_typed_dict_literals_cover_enum_values(parameters_class: type) -> None:
-    field_types = typing.get_type_hints(parameters_class)
-    keyword_types = typing.get_type_hints(_typed_dict_of(parameters_class))
+    field_types = _type_hints(parameters_class)
+    keyword_types = _type_hints(_typed_dict_of(parameters_class))
     for name, field_type in field_types.items():
         enum_classes = [
             member
@@ -87,14 +107,14 @@ def test_typed_dict_literals_cover_enum_values(parameters_class: type) -> None:
             value
             for member in _union_members(keyword_types[name])
             if typing.get_origin(member) is typing.Literal
-            for value in typing.get_args(member)
+            for value in _type_arguments(member)
         }
         if not enum_classes or not literal_values:
             continue
         for enum_class in enum_classes:
-            assert {member.value for member in enum_class} <= literal_values, (
-                f"{parameters_class.__name__}.{name}"
-            )
+            assert {
+                cast(object, member.value) for member in enum_class
+            } <= literal_values, f"{parameters_class.__name__}.{name}"
 
 
 def test_parameters_are_immutable() -> None:

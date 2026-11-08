@@ -87,9 +87,10 @@ def test_errorbar_accepts_asymmetric_errors(maker: MatplotGraphMaker) -> None:
         yerr=np.array([[0.1, 0.2, 0.3], [1.0, 1.0, 1.0]]),
         index=_index(maker),
     )
-    lower_end = np.asarray(_subplot(maker).collections[0].get_paths()[2].vertices)[
-        :, 1
-    ].min()
+    vertices = np.asarray(
+        _subplot(maker).collections[0].get_paths()[2].vertices, dtype=np.float64
+    )
+    lower_end = float(vertices[:, 1].min())
     assert lower_end == pytest.approx(-0.3)
 
 
@@ -185,4 +186,4 @@ def test_stackplot_rejects_invalid_series(
 )
 def test_parameters_reject_invalid_settings(build: Callable[[], object]) -> None:
     with pytest.raises(ValueError):
-        build()
+        _ = build()

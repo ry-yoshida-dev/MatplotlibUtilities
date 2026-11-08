@@ -203,7 +203,7 @@ def test_violinplot_rejects_positions_that_do_not_match_the_data(
 
 
 def test_hexbin_hides_empty_hexagons_with_mincnt(maker: MatplotGraphMaker) -> None:
-    maker.hexbin(
+    _ = maker.hexbin(
         x=np.array([0.0, 0.0, 1.0]),
         y=np.array([0.0, 0.0, 1.0]),
         index=_index(maker),
@@ -211,18 +211,20 @@ def test_hexbin_hides_empty_hexagons_with_mincnt(maker: MatplotGraphMaker) -> No
     )
     counts = _subplot(maker).collections[0].get_array()
     assert counts is not None
-    assert sorted(np.asarray(counts).tolist()) == [1.0, 2.0]
+    np.testing.assert_array_equal(np.sort(np.asarray(counts)), [1.0, 2.0])
 
 
 def test_hexbin_rejects_c_that_does_not_match_the_points(
     maker: MatplotGraphMaker,
 ) -> None:
     with pytest.raises(ValueError, match="c must hold one entry per point"):
-        maker.hexbin(x=np.zeros(3), y=np.zeros(3), c=np.zeros(2), index=_index(maker))
+        _ = maker.hexbin(
+            x=np.zeros(3), y=np.zeros(3), c=np.zeros(2), index=_index(maker)
+        )
 
 
 def test_hist2d_draws_a_mesh_with_the_requested_bins(maker: MatplotGraphMaker) -> None:
-    maker.hist2d(
+    _ = maker.hist2d(
         x=RNG.normal(size=200),
         y=RNG.normal(size=200),
         index=_index(maker),
@@ -230,15 +232,15 @@ def test_hist2d_draws_a_mesh_with_the_requested_bins(maker: MatplotGraphMaker) -
     )
     mesh = _subplot(maker).collections[0]
     assert isinstance(mesh, QuadMesh)
-    y_edge_count, x_edge_count = np.asarray(mesh.get_coordinates()).shape[:2]
-    assert (x_edge_count, y_edge_count) == (5, 7)
+    coordinate_shape: tuple[int, ...] = np.shape(mesh.get_coordinates())
+    assert coordinate_shape[:2] == (7, 5)
 
 
 def test_hist2d_rejects_mismatched_points(maker: MatplotGraphMaker) -> None:
     with pytest.raises(
         ValueError, match="x and y must hold the same number of entries"
     ):
-        maker.hist2d(x=np.zeros(3), y=np.zeros(2), index=_index(maker))
+        _ = maker.hist2d(x=np.zeros(3), y=np.zeros(2), index=_index(maker))
 
 
 @pytest.mark.parametrize(
@@ -260,4 +262,4 @@ def test_hist2d_rejects_mismatched_points(maker: MatplotGraphMaker) -> None:
 )
 def test_parameters_reject_invalid_settings(build: Callable[[], object]) -> None:
     with pytest.raises(ValueError):
-        build()
+        _ = build()

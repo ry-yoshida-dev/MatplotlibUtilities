@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import os
 from pathlib import Path
+from typing import Protocol, cast
 
 import matplotlib
 
@@ -60,6 +61,13 @@ from matplotlib_utilities import (
     WedgeStyle,
 )
 from matplotlib_utilities.mixin.draw.parameters import BarParameters
+
+
+class SavableFigure(Protocol):
+    """The part of a Matplotlib figure the tests use, typed precisely."""
+
+    def savefig(self, fname: str, *, dpi: float) -> None: ...
+
 
 DRAW_README = (
     Path(__file__).resolve().parents[1] / "src/matplotlib_utilities/mixin/draw"
@@ -123,7 +131,7 @@ def _save(maker: MatplotGraphMaker, rel_path: str) -> Path:
         wspace=maker.parameters.w_space,
         hspace=maker.parameters.h_space,
     )
-    maker.fig.savefig(str(out), dpi=maker.parameters.dpi)
+    cast(SavableFigure, maker.fig).savefig(str(out), dpi=maker.parameters.dpi)
     plt.close(maker.fig)
     return out
 
@@ -147,8 +155,8 @@ class TestUpdateReadmeFigures:
     def test_imshow(self) -> None:
         maker = _maker()
         data = np.linspace(0, 1, 64 * 64).reshape(64, 64)
-        maker.imshow(image=data, index=_index(maker), subparams=ImshowParameters())
-        _save(maker, "image/imshow.png")
+        _ = maker.imshow(image=data, index=_index(maker), subparams=ImshowParameters())
+        _ = _save(maker, "image/imshow.png")
 
     def test_colorbar(self) -> None:
         maker = _maker()
@@ -160,26 +168,26 @@ class TestUpdateReadmeFigures:
             mappable=image,
             subparams=ColorbarParameters(label="value"),
         )
-        _save(maker, "image/colorbar.png")
+        _ = _save(maker, "image/colorbar.png")
 
     def test_plot(self) -> None:
         maker = _maker()
         x = np.linspace(0, 2 * np.pi, 50)
         maker.plot(x=x, y=np.sin(x), index=_index(maker), subparams=PlotParameters())
-        _save(maker, "series/plot.png")
+        _ = _save(maker, "series/plot.png")
 
     def test_scatter(self) -> None:
         maker = _maker()
         rng = np.random.default_rng(0)
         x = rng.standard_normal(40)
         y = rng.standard_normal(40)
-        maker.scatter(
+        _ = maker.scatter(
             x=x,
             y=y,
             index=_index(maker),
             subparams=ScatterParameters(s=40),
         )
-        _save(maker, "series/scatter.png")
+        _ = _save(maker, "series/scatter.png")
 
     def test_bar(self) -> None:
         maker = _maker()
@@ -189,7 +197,7 @@ class TestUpdateReadmeFigures:
             index=_index(maker),
             subparams=BarParameters(width=0.6),
         )
-        _save(maker, "series/bar.png")
+        _ = _save(maker, "series/bar.png")
 
     def test_barh(self) -> None:
         maker = _maker()
@@ -199,7 +207,7 @@ class TestUpdateReadmeFigures:
             index=_index(maker),
             subparams=BarhParameters(height=0.6),
         )
-        _save(maker, "series/barh.png")
+        _ = _save(maker, "series/barh.png")
 
     def test_pie(self) -> None:
         maker = _maker()
@@ -214,7 +222,7 @@ class TestUpdateReadmeFigures:
                 wedgeprops=WedgeStyle(edgecolor="white", linewidth=1.5),
             ),
         )
-        _save(maker, "proportion/pie.png")
+        _ = _save(maker, "proportion/pie.png")
 
     def test_quiver(self) -> None:
         maker = _maker()
@@ -229,7 +237,7 @@ class TestUpdateReadmeFigures:
             index=_index(maker),
             subparams=QuiverParameters(angles=QuiverAngles.XY, scale=20.0),
         )
-        _save(maker, "vector/quiver.png")
+        _ = _save(maker, "vector/quiver.png")
 
     def test_arrow(self) -> None:
         maker = _maker()
@@ -241,7 +249,7 @@ class TestUpdateReadmeFigures:
             index=_index(maker),
             subparams=ArrowParameters(width=0.05, color="C0"),
         )
-        _save(maker, "vector/arrow.png")
+        _ = _save(maker, "vector/arrow.png")
 
     def test_legend(self) -> None:
         maker = _maker()
@@ -250,7 +258,7 @@ class TestUpdateReadmeFigures:
         maker.plot(x=x, y=x, index=idx, subparams=PlotParameters(label="a"))
         maker.plot(x=x, y=1 - x, index=idx, subparams=PlotParameters(label="b"))
         maker.legend(index=idx)
-        _save(maker, "misc/legend.png")
+        _ = _save(maker, "misc/legend.png")
 
     def test_line(self) -> None:
         maker = _maker()
@@ -263,7 +271,7 @@ class TestUpdateReadmeFigures:
             index=idx,
             subparams=LineParameters(color="red"),
         )
-        _save(maker, "misc/line.png")
+        _ = _save(maker, "misc/line.png")
 
     def test_annotate(self) -> None:
         maker = _maker()
@@ -271,7 +279,7 @@ class TestUpdateReadmeFigures:
         x = rng.standard_normal(30)
         y = rng.standard_normal(30)
         idx = _index(maker)
-        maker.scatter(x=x, y=y, index=idx)
+        _ = maker.scatter(x=x, y=y, index=idx)
         maker.annotate(
             text="mean",
             xy=(float(np.mean(x)), float(np.mean(y))),
@@ -279,7 +287,7 @@ class TestUpdateReadmeFigures:
             xytext=(float(np.mean(x)) + 0.5, float(np.mean(y)) + 0.5),
             subparams=AnnotateParameters(arrowprops=ArrowProperties()),
         )
-        _save(maker, "misc/annotate.png")
+        _ = _save(maker, "misc/annotate.png")
 
     def test_span(self) -> None:
         maker = _maker()
@@ -293,7 +301,7 @@ class TestUpdateReadmeFigures:
             index=idx,
             subparams=SpanParameters(color="orange", alpha=0.3),
         )
-        _save(maker, "misc/span.png")
+        _ = _save(maker, "misc/span.png")
 
     def test_step(self) -> None:
         maker = _maker()
@@ -303,7 +311,7 @@ class TestUpdateReadmeFigures:
             index=_index(maker),
             subparams=StepParameters(where=StepWhere.MID),
         )
-        _save(maker, "series/step.png")
+        _ = _save(maker, "series/step.png")
 
     def test_errorbar(self) -> None:
         maker = _maker()
@@ -315,7 +323,7 @@ class TestUpdateReadmeFigures:
             index=_index(maker),
             subparams=ErrorbarParameters(marker=Marker.CIRCLE, capsize=3.0),
         )
-        _save(maker, "series/errorbar.png")
+        _ = _save(maker, "series/errorbar.png")
 
     def test_fill_between(self) -> None:
         maker = _maker()
@@ -329,7 +337,7 @@ class TestUpdateReadmeFigures:
             subparams=FillBetweenParameters(alpha=0.3),
         )
         maker.plot(x=x, y=np.sin(x), index=idx)
-        _save(maker, "series/fill_between.png")
+        _ = _save(maker, "series/fill_between.png")
 
     def test_stackplot(self) -> None:
         maker = _maker()
@@ -344,7 +352,7 @@ class TestUpdateReadmeFigures:
             labels=["a", "b"],
             subparams=StackplotParameters(alpha=0.8),
         )
-        _save(maker, "series/stackplot.png")
+        _ = _save(maker, "series/stackplot.png")
 
     def test_hist(self) -> None:
         maker = _maker()
@@ -354,7 +362,7 @@ class TestUpdateReadmeFigures:
             index=_index(maker),
             subparams=HistParameters(bins=20, edgecolor="white"),
         )
-        _save(maker, "distribution/hist.png")
+        _ = _save(maker, "distribution/hist.png")
 
     def test_boxplot(self) -> None:
         maker = _maker()
@@ -365,7 +373,7 @@ class TestUpdateReadmeFigures:
             tick_labels=["A", "B", "C"],
             subparams=BoxplotParameters(showmeans=True),
         )
-        _save(maker, "distribution/boxplot.png")
+        _ = _save(maker, "distribution/boxplot.png")
 
     def test_violinplot(self) -> None:
         maker = _maker()
@@ -375,34 +383,34 @@ class TestUpdateReadmeFigures:
             index=_index(maker),
             subparams=ViolinplotParameters(showmedians=True),
         )
-        _save(maker, "distribution/violinplot.png")
+        _ = _save(maker, "distribution/violinplot.png")
 
     def test_hexbin(self) -> None:
         maker = _maker()
         rng = np.random.default_rng(0)
-        maker.hexbin(
+        _ = maker.hexbin(
             x=rng.standard_normal(2000),
             y=rng.standard_normal(2000),
             index=_index(maker),
             subparams=HexbinParameters(gridsize=20, mincnt=1, cmap=ColorMap.VIRIDIS),
         )
-        _save(maker, "distribution/hexbin.png")
+        _ = _save(maker, "distribution/hexbin.png")
 
     def test_hist2d(self) -> None:
         maker = _maker()
         rng = np.random.default_rng(0)
-        maker.hist2d(
+        _ = maker.hist2d(
             x=rng.standard_normal(2000),
             y=rng.standard_normal(2000),
             index=_index(maker),
             subparams=Hist2dParameters(bins=20, cmap=ColorMap.VIRIDIS),
         )
-        _save(maker, "distribution/hist2d.png")
+        _ = _save(maker, "distribution/hist2d.png")
 
     def test_contour(self) -> None:
         maker = _maker()
         xx, yy = np.meshgrid(np.linspace(-2, 2, 50), np.linspace(-2, 2, 50))
-        maker.contour(
+        _ = maker.contour(
             z=np.exp(-(xx**2) - yy**2),
             x=xx,
             y=yy,
@@ -410,7 +418,7 @@ class TestUpdateReadmeFigures:
             is_labeled=True,
             subparams=ContourParameters(levels=5, cmap=ColorMap.VIRIDIS),
         )
-        _save(maker, "image/contour.png")
+        _ = _save(maker, "image/contour.png")
 
     def test_contourf(self) -> None:
         maker = _maker()
@@ -425,13 +433,13 @@ class TestUpdateReadmeFigures:
             subparams=ContourfParameters(levels=8, cmap=ColorMap.VIRIDIS),
         )
         _ = maker.set_colorbar(index=idx, mappable=bands)
-        _save(maker, "image/contourf.png")
+        _ = _save(maker, "image/contourf.png")
 
     def test_pcolormesh(self) -> None:
         maker = _maker()
         x = np.array([0.0, 1.0, 3.0, 6.0, 10.0])
         y = np.array([0.0, 1.0, 2.0, 4.0])
-        maker.pcolormesh(
+        _ = maker.pcolormesh(
             z=np.arange(12.0).reshape(3, 4),
             x=x,
             y=y,
@@ -440,7 +448,7 @@ class TestUpdateReadmeFigures:
                 shading=Shading.FLAT, edgecolors="white", cmap=ColorMap.VIRIDIS
             ),
         )
-        _save(maker, "image/pcolormesh.png")
+        _ = _save(maker, "image/pcolormesh.png")
 
     def test_imscatter(self) -> None:
         maker = _maker()
@@ -452,7 +460,7 @@ class TestUpdateReadmeFigures:
             index=_index(maker),
             subparams=ImscatterParameters(zoom=1.0, cmap=ColorMap.VIRIDIS),
         )
-        _save(maker, "image/imscatter.png")
+        _ = _save(maker, "image/imscatter.png")
 
     def test_streamplot(self) -> None:
         maker = _maker()
@@ -468,4 +476,4 @@ class TestUpdateReadmeFigures:
             index=_index(maker),
             subparams=StreamplotParameters(cmap=ColorMap.VIRIDIS),
         )
-        _save(maker, "vector/streamplot.png")
+        _ = _save(maker, "vector/streamplot.png")

@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import cast
+
 import matplotlib
 
 matplotlib.use("Agg")
@@ -79,15 +81,18 @@ def test_finalize_hides_unused_cells_and_closes_the_figure() -> None:
     assert not plt.fignum_exists(maker.fig.number)
 
 
-def test_finalize_restores_the_global_font_settings() -> None:
-    with plt.rc_context({"font.family": ["sans-serif"], "font.size": 10.0}):
-        maker = MatplotGraphMaker(
-            parameters=GraphParameters(font_family=FontFamily.JAPANESE, font_size=15.0)
-        )
-        assert list(plt.rcParams["font.family"]) != ["sans-serif"]
-        maker.finalize(is_showing_result_enabled=False)
-        assert list(plt.rcParams["font.family"]) == ["sans-serif"]
-        assert plt.rcParams["font.size"] == 10.0
+def test_finalize_restores_the_global_font_settings(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setitem(plt.rcParams, "font.family", ["sans-serif"])
+    monkeypatch.setitem(plt.rcParams, "font.size", 10.0)
+    maker = MatplotGraphMaker(
+        parameters=GraphParameters(font_family=FontFamily.JAPANESE, font_size=15.0)
+    )
+    assert cast(list[str], plt.rcParams["font.family"]) != ["sans-serif"]
+    maker.finalize(is_showing_result_enabled=False)
+    assert cast(list[str], plt.rcParams["font.family"]) == ["sans-serif"]
+    assert cast(float, plt.rcParams["font.size"]) == 10.0
 
 
 def test_zero_is_rejected_for_sizes() -> None:

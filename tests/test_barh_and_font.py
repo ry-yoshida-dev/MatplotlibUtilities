@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Protocol, cast
+
 import matplotlib
 
 matplotlib.use("Agg")
@@ -20,6 +22,13 @@ from matplotlib_utilities import (
     MatplotGraphMaker,
     SubplotIndex,
 )
+
+
+class DrawableCanvas(Protocol):
+    """The part of a Matplotlib canvas the tests use, typed precisely."""
+
+    def draw(self) -> None: ...
+
 
 JAPANESE_LABELS = ["市区町村道", "主要地方道・都道府県道", "一般国道"]
 
@@ -124,7 +133,7 @@ def test_invert_turns_the_axis_around() -> None:
 
 def test_the_japanese_family_registers_a_font_holding_japanese_glyphs() -> None:
     maker = _maker(font_family=FontFamily.JAPANESE)
-    family = plt.rcParams["font.family"]
+    family = cast(list[str], plt.rcParams["font.family"])
     assert family != ["sans-serif"]
     _close(maker)
 
@@ -136,7 +145,7 @@ def test_japanese_labels_are_drawn_rather_than_dropped() -> None:
     maker.set_ticks(
         positions=[0.0, 1.0, 2.0], index=index, axis=GraphAxis.Y, labels=JAPANESE_LABELS
     )
-    maker.fig.canvas.draw()
+    cast(DrawableCanvas, maker.fig.canvas).draw()
     drawn = [
         text.get_text() for text in maker.access_subplot(index=index).get_yticklabels()
     ]
@@ -145,7 +154,7 @@ def test_japanese_labels_are_drawn_rather_than_dropped() -> None:
 
 
 def test_the_default_family_leaves_matplotlib_alone() -> None:
-    before = list(plt.rcParams["font.family"])
+    before = cast(list[str], plt.rcParams["font.family"])
     maker = _maker(font_family=FontFamily.DEFAULT)
-    assert list(plt.rcParams["font.family"]) == before
+    assert cast(list[str], plt.rcParams["font.family"]) == before
     _close(maker)

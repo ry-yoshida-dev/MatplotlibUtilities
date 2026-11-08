@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import os
 from pathlib import Path
+from typing import Protocol, cast
 
 import matplotlib
 
@@ -31,6 +32,13 @@ from matplotlib_utilities.mixin.axis.parameters import (
     GridParameters,
     TickParamsParameters,
 )
+
+
+class SavableFigure(Protocol):
+    """The part of a Matplotlib figure the tests use, typed precisely."""
+
+    def savefig(self, fname: str, *, dpi: float) -> None: ...
+
 
 AXIS_README = (
     Path(__file__).resolve().parents[1] / "src/matplotlib_utilities/mixin/axis"
@@ -74,7 +82,7 @@ def _save(maker: MatplotGraphMaker, rel_path: str) -> Path:
         wspace=maker.parameters.w_space,
         hspace=maker.parameters.h_space,
     )
-    maker.fig.savefig(str(out), dpi=maker.parameters.dpi)
+    cast(SavableFigure, maker.fig).savefig(str(out), dpi=maker.parameters.dpi)
     plt.close(maker.fig)
     return out
 
@@ -106,14 +114,14 @@ class TestUpdateReadmeAxisFigures:
         _base_plot(maker, idx)
         maker.set_label(label="x", index=idx, axis=GraphAxis.X)
         maker.set_label(label="y", index=idx, axis=GraphAxis.Y)
-        _save(maker, "set_label.png")
+        _ = _save(maker, "set_label.png")
 
     def test_set_lim(self) -> None:
         maker = _maker()
         idx = _index(maker)
         _base_plot(maker, idx)
         maker.set_lim(lower=-1.0, upper=1.0, index=idx, axis=GraphAxis.Y)
-        _save(maker, "set_lim.png")
+        _ = _save(maker, "set_lim.png")
 
     def test_set_ticks(self) -> None:
         maker = _maker()
@@ -125,28 +133,28 @@ class TestUpdateReadmeAxisFigures:
             axis=GraphAxis.X,
             labels=["0", "π", "2π"],
         )
-        _save(maker, "set_ticks.png")
+        _ = _save(maker, "set_ticks.png")
 
     def test_invert(self) -> None:
         maker = _maker()
         idx = _index(maker)
         _base_plot(maker, idx)
         maker.invert(index=idx, axis=GraphAxis.Y)
-        _save(maker, "invert.png")
+        _ = _save(maker, "invert.png")
 
     def test_set_title(self) -> None:
         maker = _maker()
         idx = _index(maker)
         _base_plot(maker, idx)
         maker.set_title(title="sin(x)", index=idx)
-        _save(maker, "set_title.png")
+        _ = _save(maker, "set_title.png")
 
     def test_set_grid(self) -> None:
         maker = _maker()
         idx = _index(maker)
         _base_plot(maker, idx)
         maker.set_grid(index=idx, subparams=GridParameters(alpha=0.4))
-        _save(maker, "set_grid.png")
+        _ = _save(maker, "set_grid.png")
 
     def test_delete_axis_label(self) -> None:
         maker = _maker()
@@ -156,4 +164,4 @@ class TestUpdateReadmeAxisFigures:
             index=idx,
             subparams=TickParamsParameters(labelbottom=False, labelleft=False),
         )
-        _save(maker, "delete_axis_label.png")
+        _ = _save(maker, "delete_axis_label.png")

@@ -45,7 +45,7 @@ def build_demo_graph_maker() -> MatplotGraphMaker:
     index = graph_maker.get_subplot_index_from_number(number=0)
     # Per-point marker area (matplotlib *s*); map e.g. confidences to visible sizes.
     sizes = 20.0 + confidences * 80.0
-    graph_maker.scatter(
+    _ = graph_maker.scatter(
         index=index,
         x=x1,
         y=y1,

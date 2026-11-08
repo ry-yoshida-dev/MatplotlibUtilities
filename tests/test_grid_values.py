@@ -67,7 +67,7 @@ def _contour_set(maker: MatplotGraphMaker) -> ContourSet:
 
 
 def test_contour_uses_the_given_levels(maker: MatplotGraphMaker) -> None:
-    maker.contour(
+    _ = maker.contour(
         z=GRID_Z,
         x=GRID_X,
         y=GRID_Y,
@@ -78,7 +78,7 @@ def test_contour_uses_the_given_levels(maker: MatplotGraphMaker) -> None:
 
 
 def test_contour_labels_the_lines_on_request(maker: MatplotGraphMaker) -> None:
-    maker.contour(
+    _ = maker.contour(
         z=GRID_Z,
         index=_index(maker),
         is_labeled=True,
@@ -88,7 +88,7 @@ def test_contour_labels_the_lines_on_request(maker: MatplotGraphMaker) -> None:
 
 
 def test_contourf_fills_between_levels(maker: MatplotGraphMaker) -> None:
-    maker.contourf(
+    _ = maker.contourf(
         z=GRID_Z,
         index=_index(maker),
         subparams=ContourfParameters(levels=[0.0, 1.0, 2.0]),
@@ -111,11 +111,11 @@ def test_contour_rejects_invalid_grids(
     message: str,
 ) -> None:
     with pytest.raises(ValueError, match=message):
-        maker.contour(z=z, x=x, y=y, index=_index(maker))
+        _ = maker.contour(z=z, x=x, y=y, index=_index(maker))
 
 
 def test_pcolormesh_draws_one_cell_per_value(maker: MatplotGraphMaker) -> None:
-    maker.pcolormesh(
+    _ = maker.pcolormesh(
         z=GRID_Z,
         x=GRID_X,
         y=GRID_Y,
@@ -271,4 +271,4 @@ def test_span_rejects_an_empty_range(maker: MatplotGraphMaker) -> None:
 )
 def test_parameters_reject_invalid_settings(build: Callable[[], object]) -> None:
     with pytest.raises(ValueError):
-        build()
+        _ = build()
